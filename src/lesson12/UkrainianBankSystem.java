@@ -41,7 +41,8 @@ public class UkrainianBankSystem implements BankSystem {
         // поповняємо toUser
         if (!checkWithdraw(fromUser, amount))
             return;
-        // TODO check fund rules
+        if(fromUser.getBank().getCurrency() == toUser.getBank().getCurrency())
+            return;
         fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
         if(!checkLimitsOfFunding(toUser, amount))
             return;
