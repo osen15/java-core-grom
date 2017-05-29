@@ -29,7 +29,7 @@ public class UkrainianBankSystem implements BankSystem {
 
     @Override
     public void fund(User user, int amount) {
-        if(!checkLimitsOfFunding(user, amount))
+        if (!checkLimitsOfFunding(user, amount))
             return;
         user.setBalance(user.getBalance() + amount);
 
@@ -37,15 +37,14 @@ public class UkrainianBankSystem implements BankSystem {
 
     @Override
     public void transferMoney(User fromUser, User toUser, int amount) {
-        // знімамо гроші з fromUser
-        // поповняємо toUser
+        if (!checkCurrency(fromUser, toUser))
+            return;
         if (!checkWithdraw(fromUser, amount))
             return;
         fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
-        if(!checkLimitsOfFunding(toUser, amount) && fromUser.getBank().getCurrency() == toUser.getBank().getCurrency())
+        if (!checkLimitsOfFunding(toUser, amount))
             return;
         toUser.setBalance(toUser.getBalance() + amount);
-
 
 
     }
@@ -53,7 +52,7 @@ public class UkrainianBankSystem implements BankSystem {
     @Override
     public void paySalary(User user) {
 
-        if(!checkLimitsOfFunding(user, user.getSalary()))
+        if (!checkLimitsOfFunding(user, user.getSalary()))
             return;
         user.setBalance(user.getBalance() + user.getSalary());
 
@@ -72,6 +71,7 @@ public class UkrainianBankSystem implements BankSystem {
 
 
     }
+
     private boolean checkLimitsOfFunding(User user, int amount) {
         if (amount > user.getBank().getLimitOfFunding()) {
             printWithdrawErrorMsg(amount, user);
@@ -82,13 +82,16 @@ public class UkrainianBankSystem implements BankSystem {
 
     }
 
+    public boolean checkCurrency(User fromUser, User toUser) {
+        return fromUser.getBank().getCurrency() == toUser.getBank().getCurrency();
+
+
+    }
+
 
     private void printWithdrawErrorMsg(int amount, User user) {
         System.err.println("Can't withdraw money " + amount + " from user " + user.toString());
     }
-
-
-
 
 
 }
