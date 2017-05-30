@@ -22,8 +22,9 @@ public class Controller {
         int index = 0;
 
         for (API api : apis) {
+            if(api != null)
 
-            for (Room room : api.findRooms(price, persons, city, hotel)) {
+                for (Room room : api.findRooms(price, persons, city, hotel)) {
 
                 rooms[index] = room;
 
@@ -52,7 +53,7 @@ public class Controller {
         int count = 0;
 
         for (API api : apis) {
-
+            if(api != null)
             count += api.findRooms(price, persons, city, hotel).length;
 
         }
