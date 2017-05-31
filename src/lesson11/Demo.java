@@ -14,28 +14,38 @@ public class Demo {
         Room room4 = new Room(4l, 50, 2, new Date(), "B", "B");
         Room room5 = new Room(5l, 350, 3, new Date(), "E", "E");
         Room[] rooms = {room1, room2, room3, room4, room5};
-        TripAdvisorAPI tripAdvisorAPI = new TripAdvisorAPI(rooms);
-        GoogleAPI googleAPI = new GoogleAPI(rooms);
-        System.out.println(Arrays.toString(googleAPI.findRooms(50,2,"B","B")));
-
-
 
         BookingComAPI bookingComAPI = new BookingComAPI(rooms);
-        TripAdvisorAPI tripAdvisorAPI1 = new TripAdvisorAPI(rooms);
-        GoogleAPI googleAPI1 = new GoogleAPI(rooms);
-        API[] apis =new API[3];
-        Controller controller = new Controller(apis);
-        System.out.println(Arrays.toString(controller.requestRooms(50,2, "B", "B")));
+        System.out.println(Arrays.deepToString(bookingComAPI.findRooms(50, 2, "B", "B")));
+        // Перевірка масиву кімнат(rooms)  на null
+        // Перевірка ціни (price) на допустиме значення (>0)
+        // Перевірка персон (persons) на допустиме значення (>0)
 
 
+        TripAdvisorAPI tripAdvisorAPI = new TripAdvisorAPI(rooms);
+        System.out.println(Arrays.deepToString(tripAdvisorAPI.findRooms(50, 2, "B", "B")));
+        // Перевірка масиву кімнат(rooms)  на null
+        // Перевірка ціни (price) на допустиме значення (>0)
+        // Перевірка персон (persons) на допустиме значення (>0)
 
 
+        GoogleAPI googleAPI = new GoogleAPI(rooms);
+        System.out.println(Arrays.deepToString(googleAPI.findRooms(50, 2, "B", "B")));
+        // Перевірка масиву кімнат(rooms)  на null
+        // Перевірка ціни (price) на допустиме значення (>0)
+        // Перевірка персон (persons) на допустиме значення (>0)
 
 
-
-
-
-
+        API[] apis = new API[3];
+        Controller controller = new Controller(null);
+        controller.requestRooms(50, 2, "B", "B");
+        System.out.println(Arrays.deepToString(controller.requestRooms(50, 2, "B", "B")));
+        // Завантаження null масиву (apis)
+        // Завантаження null-елемента масиву (apis)
+        // Перевірка коли prise і persons (<0)
+        System.out.println(Arrays.deepToString(controller.check(googleAPI, bookingComAPI)));
+        // Завантаження null - API api1
+        // Завантаження null - API api2
 
     }
 }

@@ -1,6 +1,6 @@
 package lesson11;
 
-public class TripAdvisorAPI implements  API {
+public class TripAdvisorAPI implements API {
     private Room[] rooms;
 
     public TripAdvisorAPI(Room[] rooms) {
@@ -9,14 +9,16 @@ public class TripAdvisorAPI implements  API {
 
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {
-        Room[] rooms1 = new Room[sizeArray(price, persons, city, hotel)];
+        checkOnLegalValue(price, persons);
         int index = 0;
-        for (Room room : rooms) {
-            if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName() == city && room.getHotelName() == hotel)
-                rooms1[index++] = room;
+        Room[] rooms1 = new Room[sizeArray(price, persons, city, hotel)];
+        if (rooms != null && checkOnLegalValue(price, persons) == true)
+            for (Room room : rooms) {
+                if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName() == city && room.getHotelName() == hotel)
+                    rooms1[index++] = room;
 
 
-        }
+            }
         return rooms1;
 
     }
@@ -28,12 +30,26 @@ public class TripAdvisorAPI implements  API {
 
     private int sizeArray(int price, int persons, String city, String hotel) {
         int count = 0;
-        for (Room room : rooms) {
-            if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName() == city && room.getHotelName() == hotel)
+        if (rooms != null)
+            for (Room room : rooms) {
+                if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName() == city && room.getHotelName() == hotel)
 
 
-                count++;
-        }
+                    count++;
+            }
         return count;
     }
+
+    private boolean checkOnLegalValue(int price, int persons) {
+        if (price < 0 || persons < 0) {
+            printIllegalValueMsg();
+
+        }
+        return true;
+    }
+
+    private void printIllegalValueMsg() {
+        System.err.println("illegal value");
+    }
+
 }

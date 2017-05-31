@@ -21,7 +21,7 @@ public class UkrainianBankSystem implements BankSystem {
             return;
 
 
-        //double balanceAfterWithdraw = user.getBalance() - amount - user.getBank().getCommission(amount);
+        if (amount >= 0)
         user.setBalance(user.getBalance() - amount - amount * user.getBank().getCommission(amount));
 
     }
@@ -29,8 +29,10 @@ public class UkrainianBankSystem implements BankSystem {
 
     @Override
     public void fund(User user, int amount) {
+
         if (!checkLimitsOfFunding(user, amount))
             return;
+
         user.setBalance(user.getBalance() + amount);
 
     }
@@ -51,16 +53,19 @@ public class UkrainianBankSystem implements BankSystem {
 
     @Override
     public void paySalary(User user) {
-
-        if (!checkLimitsOfFunding(user, user.getSalary()))
-            return;
+         if (userNotNull(user) == true && !checkLimitsOfFunding(user, user.getSalary()))
+             return;
         user.setBalance(user.getBalance() + user.getSalary());
 
     }
 
     private boolean checkWithdraw(User user, int amount) {
-        return checkWithdrawLimits(user, amount, user.getBank().getLimitOfWithdrawal()) && checkWithdrawLimits(user, amount, user.getBalance());
+
+        return userNotNull(user) == true &&  checkWithdrawLimits(user, amount, user.getBank().getLimitOfWithdrawal()) && checkWithdrawLimits(user, amount, user.getBalance());
+
+
     }
+
 
     private boolean checkWithdrawLimits(User user, int amount, double limit) {
         if (amount + user.getBank().getCommission(amount) > limit) {
@@ -73,21 +78,27 @@ public class UkrainianBankSystem implements BankSystem {
     }
 
     private boolean checkLimitsOfFunding(User user, int amount) {
-        if (amount > user.getBank().getLimitOfFunding()) {
-            printWithdrawErrorMsg(amount, user);
+        if (userNotNull(user) == false)
+            return  false;
+        if (amount > user.getBank().getLimitOfFunding())
             return false;
-        }
+
         return true;
 
 
     }
 
-    public boolean checkCurrency(User fromUser, User toUser) {
+    private boolean checkCurrency(User fromUser, User toUser) {
+        if (userNotNull(fromUser) == false || userNotNull(toUser) == false)
+            return false;
         return fromUser.getBank().getCurrency() == toUser.getBank().getCurrency();
 
 
     }
 
+    private boolean userNotNull(User user){
+        return user == null ? false : true;
+    }
 
     private void printWithdrawErrorMsg(int amount, User user) {
         System.err.println("Can't withdraw money " + amount + " from user " + user.toString());

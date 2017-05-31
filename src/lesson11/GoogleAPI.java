@@ -10,14 +10,16 @@ public class GoogleAPI implements API {
 
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {
-        Room[] rooms1 = new Room[sizeArray(price, persons, city, hotel)];
+        checkOnLegalValue(price, persons);
         int index = 0;
-        for (Room room : rooms) {
-            if (room.getPersons() == persons && room.getPrice() == price && room.getCityName() == city && room.getHotelName() == hotel) {
-                rooms1[index++] = room;
-            }
+        Room[] rooms1 = new Room[sizeArray(price, persons, city, hotel)];
+        if (rooms != null && checkOnLegalValue(price, persons) == true)
+            for (Room room : rooms) {
+                if (room.getPersons() == persons && room.getPrice() == price && room.getCityName() == city && room.getHotelName() == hotel) {
+                    rooms1[index++] = room;
+                }
 
-        }
+            }
         return rooms1;
     }
 
@@ -29,12 +31,24 @@ public class GoogleAPI implements API {
 
     private int sizeArray(int price, int persons, String city, String hotel) {
         int count = 0;
-
-        for (Room room : rooms) {
-            if (room.getPersons() == persons && room.getPrice() == price && room.getCityName() == city && room.getHotelName() == hotel)
-                count++;
-        }
+        if (rooms != null)
+            for (Room room : rooms) {
+                if (room.getPersons() == persons && room.getPrice() == price && room.getCityName() == city && room.getHotelName() == hotel)
+                    count++;
+            }
         return count;
+    }
+
+    private boolean checkOnLegalValue(int price, int persons) {
+        if (price < 0 || persons < 0) {
+            printIllegalValueMsg();
+
+        }
+        return true;
+    }
+
+    private void printIllegalValueMsg() {
+        System.err.println("illegal value");
     }
 
 }
