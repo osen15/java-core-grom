@@ -53,7 +53,9 @@ public class UkrainianBankSystem implements BankSystem {
 
     @Override
     public void paySalary(User user) {
-         if (userNotNull(user) == true && !checkLimitsOfFunding(user, user.getSalary()))
+         if (userNotNull(user) != true)
+             return;
+        if (!checkLimitsOfFunding(user, user.getSalary()))
              return;
         user.setBalance(user.getBalance() + user.getSalary());
 
@@ -61,7 +63,7 @@ public class UkrainianBankSystem implements BankSystem {
 
     private boolean checkWithdraw(User user, int amount) {
 
-        return userNotNull(user) == true &&  checkWithdrawLimits(user, amount, user.getBank().getLimitOfWithdrawal()) && checkWithdrawLimits(user, amount, user.getBalance());
+        return userNotNull(user)  &&  checkWithdrawLimits(user, amount, user.getBank().getLimitOfWithdrawal()) && checkWithdrawLimits(user, amount, user.getBalance());
 
 
     }

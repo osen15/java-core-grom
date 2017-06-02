@@ -13,35 +13,48 @@ public class Main {
         User user5 = new User(1005, "Denis", 12200, 40, "GMD", 1500, chinaBank);
         User user6 = new User(1006, "Denis", 12200, 40, "GMD", 1500, chinaBank);
 
+
         BankSystem bankSystem = new UkrainianBankSystem();
-       bankSystem.withdraw(null, 100);
+
         //Завантаження null - юзера
+        bankSystem.withdraw(null, 100);
         //Коли значення amount < 0
+        bankSystem.withdraw(user1, -100);
         // Перевірка, коли баланс < 0
+        User user7 = new User(1004, "Denis", -12200, 40, "GMD", 1500, euBank);
+        bankSystem.withdraw(user7, 100);
         System.out.println(user1.getBalance());
 
 
-        bankSystem.fund(user2, 100);
-         //Завантаження null - юзера
+        //Завантаження null - юзера
+        bankSystem.fund(null, 100);
+
         // Коли значення amount < 0
+        bankSystem.fund(null, -100);
         // Перевірка, коли баланс < 0
-        System.out.println(user2.getBalance());
+        User user8 = new User(1004, "Denis", -12200, 40, "GMD", 1500, euBank);
+        bankSystem.withdraw(user8, 100);
+        System.out.println(user8.getBalance());
 
 
-       bankSystem.transferMoney(user5, user2, 50);
         //Завантаження null - юзера1
+        bankSystem.transferMoney(null, user2, 50);
         //Завантаження null - юзера2
+        bankSystem.transferMoney(null, user2, 50);
         // Коли значення amount < 0
+        bankSystem.transferMoney(user5, user2, 50);
         System.out.println(user5.getBalance() + " " + user2.getBalance());
 
-        bankSystem.paySalary(user3);
+
         //Завантаження null - юзера
+        bankSystem.paySalary(null);
         //Завантаження коли значення salary < 0
-        // Тест на ліміт відправлення
-
-        System.out.println(user3.getBalance());
-
-
+        User user9 = new User(1006, "Denis", 12200, 40, "GMD", -1500, chinaBank);
+        System.out.println(user9.getBalance());
+        // Тест коли баланс менший від нуля
+        User user10 = new User(1006, "Denis", -12200, 40, "GMD", -1500, chinaBank);
+        System.out.println(user10.getBalance());
+       
 
 
 
