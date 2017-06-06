@@ -54,7 +54,7 @@ public class Main {
         // Тест коли баланс менший від нуля
         User user10 = new User(1006, "Denis", -12200, 40, "GMD", -1500, chinaBank);
         System.out.println(user10.getBalance());
-       
+
 
 
 
