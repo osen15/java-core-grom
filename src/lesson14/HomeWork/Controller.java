@@ -1,21 +1,21 @@
 package lesson14.HomeWork;
 
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Controller {
     UserRepository userRepository = new UserRepository();
+    BookRepository bookRepository = new BookRepository();
 
 
-    private static Controller controller;
+    private static Controller controller = new Controller();
 
     private Controller() {
     }
 
-    public static  Controller getController() {
-        if (getController() == null)
-            controller = new Controller();
-        return controller;
+    public static Controller getController() {
+        return Controller.controller;
     }
 
 
@@ -56,8 +56,6 @@ public class Controller {
             index++;
         }
         return userRepository.getUsers();
-
-
     }
 
     public User[] delLibrarian(User admin, User librarian, long id) {
@@ -84,13 +82,56 @@ public class Controller {
                 else System.err.println("Немає");
                 break;
             }
+        }
+    }
+
+    public void addBook(User librarian, Book nullBook, Book addBook) {
+        if (loggedIn(librarian, librarian.getId(), librarian.getPassword())) {
+            nullBook = addBook;
+            System.out.println(nullBook);
+        } else System.err.println("помилка");
+    }
+
+    public void delBook(User librarian, Book book, long id) {
+        if (loggedIn(librarian, librarian.getId(), librarian.getPassword()) && book.getBookId() == id) {
+            book = null;
+            System.out.println(book);
+        } else System.err.println("   ");
+
+    }
+
+    public void viewBook(User librarian, Book book, long id) {
+        if (loggedIn(librarian, librarian.getId(), librarian.getPassword()) && book.getBookId() == id) {
+            System.out.println(book);
+        } else System.err.println(" ");
+    }
+
+    public void issuedBook(User librarian, Book book) {
+        if (loggedIn(librarian, librarian.getId(), librarian.getPassword()))
+            System.out.println(book.isIssue());
+        else System.err.println("   ");
+    }
 
 
+    public void vievIssuedBooks(User librarian) {
+        if (loggedIn(librarian, librarian.getId(), librarian.getPassword())) {
+            for (Book book : bookRepository.getBooks()) {
+                if (book != null && book.isIssue()) {
+                    System.out.println(book);
+                }
+
+            }
+            System.err.println(" Немає ");
         }
 
 
     }
 
+    public void getAllBooks(User librarian) {
+        if (loggedIn(librarian, librarian.getId(), librarian.getPassword())) {
+            System.out.println(Arrays.deepToString(bookRepository.getBooks()));
+        }
+        else System.err.println("неправильний id  чи пароль");
 
-
+    }
 }
