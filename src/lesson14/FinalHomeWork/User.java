@@ -11,6 +11,7 @@ public class User {
     String password;
 
     TypeOfUser typeOfUser;
+    User user;
 
 
     public User(String name, String lastName, long id, String password, TypeOfUser typeOfUser) {
@@ -58,6 +59,9 @@ public class User {
         this.password = password;
     }
 
+    public User getUser() {
+        return user;
+    }
 
     @Override
     public String toString() {

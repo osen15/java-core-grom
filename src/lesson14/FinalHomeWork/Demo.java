@@ -12,33 +12,33 @@ public class Demo {
 
 
         // Адмін залогінився і додав бібліотекаря
-        System.out.println(Arrays.deepToString(Controller.getController().addLibrarian(admin, TypeOfUser.ADMIN,librarian )));
+        Controller.getController().addLibrarian(1001,librarian);
 
 
         // Адмін залогінився і шукає бібліотекаря по id
-        Controller.getController().viewLibrarian(admin,TypeOfUser.ADMIN, 1005);
+        Controller.getController().viewLibrarian(1001,1002);
 
 
         // Адмін залогінився і видаляє бібліотекаря
-        Controller.getController().deleteLibrarian(admin, TypeOfUser.ADMIN, 1005);
+       // Controller.getController().deleteLibrarian(1001,1002);
 
         // Бібліотекар залогінився і додав книгу в список
-        Controller.getController().addBook(librarian, TypeOfUser.LIBRARIAN, book );
+        Controller.getController().addBook(1002, book );
 
 
         // Бібліотекар залогінився і шукае книгу по id, якщо є то true
-        Controller.getController().viewBook(librarian, TypeOfUser.LIBRARIAN, 1111);
+        Controller.getController().viewBook(1002, 1111);
 
         // Бібліотекар залогінився  видав книжку
-        Controller.getController().issuedBook(librarian, TypeOfUser.LIBRARIAN, 1111);
+        Controller.getController().issuedBook(1002, 1111);
 
 
         // Бібліотекар залогінився і виводить всі видані книжки
-        Controller.getController().allIssuedBooks(librarian,TypeOfUser.LIBRARIAN);
+        Controller.getController().allIssuedBooks(1002);
 
 
         // Return books
-        System.out.println(Arrays.deepToString(Controller.getController().bookRepository.getBooks()));
+      //  System.out.println(Arrays.deepToString(Controller.getController().bookRepository.getBooks()));
 
 
 

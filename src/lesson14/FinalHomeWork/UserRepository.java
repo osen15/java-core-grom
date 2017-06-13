@@ -54,9 +54,9 @@ public class UserRepository {
     }
 
 
-    public boolean login(long id, String password) {
+    public boolean login(long id) {
         for (User user : users) {
-            if (user != null && user.getId() == id && user.getPassword() == password)
+            if (user != null && user.getId() == id)
                 return true;
         }
         return false;
@@ -64,7 +64,7 @@ public class UserRepository {
 
 
     public boolean logout(User user) {
-        return login(user.getId(), user.getPassword())? false : true;
+        return login(user.getId())? false : true;
     }
 
 

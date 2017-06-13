@@ -51,14 +51,16 @@ public class BookRepository {
         for (Book book : books) {
             if (book != null && book.getIssue() == "Видана")
                 System.out.println(book);
+            break;
         }
     }
 
 
-    public boolean findById(long id) {
+    public boolean findById(long bookId) {
         for (Book book : books) {
-            if (book != null && id == book.getBookId())
+            if (book != null && book.getBookId() == bookId)
                 return true;
+
         }
         return false;
     }
