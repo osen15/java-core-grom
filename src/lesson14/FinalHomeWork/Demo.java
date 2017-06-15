@@ -6,13 +6,18 @@ import java.util.Arrays;
 
 public class Demo {
     public static void main(String[] args) {
-        User admin = new User("A","C", 1001, "123",TypeOfUser.ADMIN);
-        User librarian = new User("Q", "W", 1005,"123",TypeOfUser.LIBRARIAN);
+        User admin = new User("A","C", 1001, "123",false, TypeOfUser.ADMIN);
+        User librarian = new User("Q", "W", 1005,"123", false, TypeOfUser.LIBRARIAN);
         Book book = new Book("W",1234, 1111,"W","R",null);
 
 
+        // login
+        UserRepository userRepository = new UserRepository();
+        System.out.println(userRepository.login(1001));
+
         // Адмін залогінився і додав бібліотекаря
         Controller.getController().addLibrarian(1001,librarian);
+
 
 
         // Адмін залогінився і шукає бібліотекаря по id

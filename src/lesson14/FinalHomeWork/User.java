@@ -5,23 +5,25 @@ import java.util.Date;
 
 public class User {
 
-    String name;
-    String lastName;
-    long id;
-    String password;
+    private String name;
+    private String lastName;
+    private long id;
+    private String password;
+    private boolean login;
+    private TypeOfUser typeOfUser;
+    private User user;
 
-    TypeOfUser typeOfUser;
-    User user;
 
-
-    public User(String name, String lastName, long id, String password, TypeOfUser typeOfUser) {
+    public User(String name, String lastName, long id, String password, boolean login, TypeOfUser typeOfUser) {
         this.name = name;
         this.lastName = lastName;
         this.id = id;
         this.password = password;
-
+        this.login = login;
         this.typeOfUser = typeOfUser;
     }
+
+
 
     public TypeOfUser getTypeOfUser() {
         return typeOfUser;
@@ -57,6 +59,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
     }
 
     public User getUser() {

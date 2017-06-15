@@ -4,9 +4,9 @@ package lesson14.FinalHomeWork;
 import java.util.Date;
 
 public class UserRepository {
-  private   User user1 = new User("A","Q",1001,"123",TypeOfUser.ADMIN);
-  private   User user2 = new User("A","Q",1002,"123",TypeOfUser.LIBRARIAN);
-  private   User user3 = new User("A","Q",1003,"123",null);
+  private   User user1 = new User("A","Q",1001,"123",false, TypeOfUser.ADMIN);
+  private   User user2 = new User("A","Q",1002,"123",false, TypeOfUser.LIBRARIAN);
+  private   User user3 = new User("A","Q",1003,"123",false, null);
   private   User user4 = null;
   private   User user5 = null;
   private   User[] users = {user1, user2, user3, user4, user5};
@@ -57,14 +57,18 @@ public class UserRepository {
     public boolean login(long id) {
         for (User user : users) {
             if (user != null && user.getId() == id)
-                return true;
+                user.setLogin(true);
+
+                return user.isLogin();
         }
         return false;
     }
 
 
-    public boolean logout(User user) {
-        return login(user.getId())? false : true;
+    public void logout(User user) {
+        if (login(user.getId()))
+            user.setLogin(false);
+
     }
 
 
