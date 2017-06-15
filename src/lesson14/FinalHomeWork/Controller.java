@@ -57,6 +57,7 @@ public class Controller {
     public void viewBook(long librarianId, long bookId, String pass ) {
         if (userRepository.checkAndTypeOfUser(librarianId)) {
             userRepository.login(pass);
+            bookRepository.findById(bookId);
             System.out.println("OK");
 
         } else System.out.println("  ");

@@ -59,7 +59,7 @@ public class UserRepository {
         if (user.isLogin())
             user.setLogin(false);
             System.out.println(user.isLogin());
-        
+
     }
 
     public boolean checkAndTypeOfUser(long id){
