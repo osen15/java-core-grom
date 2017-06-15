@@ -13,7 +13,7 @@ public class Demo {
 
         // login
         UserRepository userRepository = new UserRepository();
-        System.out.println(userRepository.login("123"));
+        System.out.println(userRepository.login(1001, "123"));
 
 
 

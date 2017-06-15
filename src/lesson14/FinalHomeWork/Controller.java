@@ -17,9 +17,9 @@ public class Controller {
         return Controller.controller;
     }
 
-    public void addLibrarian(long adminId, User user,String pass) {
+    public void addLibrarian(long adminId, User user, String pass) {
         if (userRepository.checkAndTypeOfUser(adminId)) {
-            userRepository.login(pass);
+            userRepository.login(adminId, pass);
             userRepository.addUser(user);
             System.out.println(Arrays.deepToString(userRepository.getUsers()));
         } else System.out.println(" ");
@@ -28,7 +28,7 @@ public class Controller {
 
     public void viewLibrarian(long adminId, long libralianId, String pass) {
         if (userRepository.checkAndTypeOfUser(adminId)) {
-            userRepository.login(pass);
+            userRepository.login(adminId, pass);
             userRepository.checkAndTypeOfUser(libralianId);
             System.out.println("OK");
         } else System.out.println(" ");
@@ -36,7 +36,7 @@ public class Controller {
 
     public void deleteLibrarian(long adminId, long libralianId, String pass) {
         if (userRepository.checkAndTypeOfUser(adminId)) {
-            userRepository.login(pass);
+            userRepository.login(adminId, pass);
             userRepository.delete(libralianId);
             System.out.println(Arrays.deepToString(userRepository.getUsers()));
 
@@ -46,7 +46,7 @@ public class Controller {
 
     public void addBook(long librarianId, Book book, String pass) {
         if (userRepository.checkAndTypeOfUser(librarianId)) {
-            userRepository.login(pass);
+            userRepository.login(librarianId, pass);
             bookRepository.addBook(book);
             System.out.println(Arrays.deepToString(bookRepository.getBooks()));
 
@@ -54,9 +54,9 @@ public class Controller {
     }
 
 
-    public void viewBook(long librarianId, long bookId, String pass ) {
+    public void viewBook(long librarianId, long bookId, String pass) {
         if (userRepository.checkAndTypeOfUser(librarianId)) {
-            userRepository.login(pass);
+            userRepository.login(librarianId, pass);
             bookRepository.findById(bookId);
             System.out.println("OK");
 
@@ -65,16 +65,16 @@ public class Controller {
 
     public void issuedBook(long librarianId, long id, String pass) {
         if (userRepository.checkAndTypeOfUser(librarianId)) {
-            userRepository.login(pass);
+            userRepository.login(librarianId, pass);
             bookRepository.issuedBook(id);
             System.out.println("OK");
         } else System.out.println("  ");
 
     }
 
-    public void allIssuedBooks(long librarianId, String pass ) {
+    public void allIssuedBooks(long librarianId, String pass) {
         if (userRepository.checkAndTypeOfUser(librarianId)) {
-            userRepository.login(pass);
+            userRepository.login(librarianId, pass);
             bookRepository.viewIssuedBooks();
 
 

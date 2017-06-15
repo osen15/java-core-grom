@@ -4,12 +4,12 @@ package lesson14.FinalHomeWork;
 import java.util.Date;
 
 public class UserRepository {
-  private   User user1 = new User("A","Q",1001,"123",false, TypeOfUser.ADMIN);
-  private   User user2 = new User("A","Q",1002,"123",false, TypeOfUser.LIBRARIAN);
-  private   User user3 = new User("A","Q",1003,"123",false, null);
-  private   User user4 = null;
-  private   User user5 = null;
-  private   User[] users = {user1, user2, user3, user4, user5};
+    private User user1 = new User("A", "Q", 1001, "123", false, TypeOfUser.ADMIN);
+    private User user2 = new User("A", "Q", 1002, "123", false, TypeOfUser.LIBRARIAN);
+    private User user3 = new User("A", "Q", 1003, "123", false, null);
+    private User user4 = null;
+    private User user5 = null;
+    private User[] users = {user1, user2, user3, user4, user5};
 
 
     public void regUser(User user, User user1) {
@@ -46,27 +46,34 @@ public class UserRepository {
     }
 
 
-    public boolean login(String pass) {
-        for (User user : getUsers()){
-            if (user.getPassword() == pass)
-                user.setLogin(true);
-                return user.isLogin();
+    public boolean login(long id, String pass) {
+        if (checkLogin(id)) {
+            for (User user : getUsers()) {
+                if (user.getPassword() == pass) {
+                    user.setLogin(true);
+                    return user.isLogin();
+                }
             }
-            return false;
 
         }
-    public void logout(User user) {
-        if (user.isLogin())
-            user.setLogin(false);
-            System.out.println(user.isLogin());
+        return  false;
 
     }
 
-    public boolean checkAndTypeOfUser(long id){
-        for (User user : getUsers()){
-            if(checkUser(id) && user.getTypeOfUser() == TypeOfUser.ADMIN)
+
+
+    public void logout(User user) {
+        if (checkLogin(user.getId())) {
+            System.err.println("");
+        }  else  user.setLogin(false);
+        System.out.println(user.isLogin());
+    }
+
+    public boolean checkAndTypeOfUser(long id) {
+        for (User user : getUsers()) {
+            if (checkUser(id) && user.getTypeOfUser() == TypeOfUser.ADMIN)
                 return true;
-            else  if (checkUser(id) && user.getTypeOfUser() == TypeOfUser.LIBRARIAN);
+            else if (checkUser(id) && user.getTypeOfUser() == TypeOfUser.LIBRARIAN) ;
             return true;
         }
         return false;
@@ -89,6 +96,7 @@ public class UserRepository {
         else
             return users;
     }
+
     private boolean checkUser(long id) {
         for (User user : getUsers()) {
             if (user != null && user.getId() == id)
@@ -97,7 +105,18 @@ public class UserRepository {
         return false;
     }
 
+    private boolean checkLogin(long id) {
+        if (checkUser(id)) {
+            for (User user : getUsers()) {
+                if (user.isLogin() == false)
+                    return true;
+            }
 
+        }
+        return false;
+
+
+    }
 }
 
 
