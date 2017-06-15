@@ -15,6 +15,10 @@ public class Demo {
         UserRepository userRepository = new UserRepository();
         System.out.println(userRepository.login(1001));
 
+
+        //logout
+        userRepository.logout(admin);
+
         // Адмін залогінився і додав бібліотекаря
         Controller.getController().addLibrarian(1001,librarian);
 

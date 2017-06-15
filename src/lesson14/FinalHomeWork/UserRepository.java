@@ -66,9 +66,10 @@ public class UserRepository {
 
 
     public void logout(User user) {
-        if (login(user.getId()))
+        if (login(user.getId())) {
             user.setLogin(false);
-
+            System.out.println("OK");
+        }else System.out.println("");
     }
 
 
