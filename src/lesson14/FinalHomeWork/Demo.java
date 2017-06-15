@@ -13,37 +13,38 @@ public class Demo {
 
         // login
         UserRepository userRepository = new UserRepository();
-        System.out.println(userRepository.login(1001));
+        System.out.println(userRepository.login("123"));
+
 
 
         //logout
         userRepository.logout(admin);
 
         // Адмін залогінився і додав бібліотекаря
-        Controller.getController().addLibrarian(1001,librarian);
+        Controller.getController().addLibrarian(1001,librarian, "123");
 
 
 
         // Адмін залогінився і шукає бібліотекаря по id
-        Controller.getController().viewLibrarian(1001,1002);
+        Controller.getController().viewLibrarian(1001,1002, "123");
 
 
         // Адмін залогінився і видаляє бібліотекаря
        // Controller.getController().deleteLibrarian(1001,1002);
 
         // Бібліотекар залогінився і додав книгу в список
-        Controller.getController().addBook(1002, book );
+        Controller.getController().addBook(1002, book, "123" );
 
 
         // Бібліотекар залогінився і шукае книгу по id, якщо є то true
-        Controller.getController().viewBook(1002, 1111);
+        Controller.getController().viewBook(1002, 1111, "123");
 
         // Бібліотекар залогінився  видав книжку
-        Controller.getController().issuedBook(1002, 1111);
+        Controller.getController().issuedBook(1002, 1111, "123");
 
 
         // Бібліотекар залогінився і виводить всі видані книжки
-        Controller.getController().allIssuedBooks(1002);
+        Controller.getController().allIssuedBooks(1002,"123");
 
 
         // Return books

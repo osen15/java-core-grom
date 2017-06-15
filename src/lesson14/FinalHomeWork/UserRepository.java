@@ -23,7 +23,7 @@ public class UserRepository {
 
         int index = 0;
         for (User user : users) {
-            if (user != null && findById(id) == findById(user.getId())) {
+            if (user != null && checkUser(id)) {
                 users[index] = null;
                 break;
             }
@@ -45,31 +45,31 @@ public class UserRepository {
         return users;
     }
 
-    public long findById(long id) {
-        for (User user : getUsers()) {
-            if (user != null && user.getId() == id)
-                return id;
+
+    public boolean login(String pass) {
+        for (User user : getUsers()){
+            if (user.getPassword() == pass)
+                user.setLogin(true);
+                return user.isLogin();
+            }
+            return false;
+
         }
-        return 0;
+    public void logout(User user) {
+        if (user.isLogin())
+            user.setLogin(false);
+            System.out.println(user.isLogin());
+        
     }
 
-
-    public boolean login(long id) {
-        for (User user : users) {
-            if (user != null && user.getId() == id)
-                user.setLogin(true);
-
-                return user.isLogin();
+    public boolean checkAndTypeOfUser(long id){
+        for (User user : getUsers()){
+            if(checkUser(id) && user.getTypeOfUser() == TypeOfUser.ADMIN)
+                return true;
+            else  if (checkUser(id) && user.getTypeOfUser() == TypeOfUser.LIBRARIAN);
+            return true;
         }
         return false;
-    }
-
-
-    public void logout(User user) {
-        if (login(user.getId())) {
-            user.setLogin(false);
-            System.out.println("OK");
-        }else System.out.println("");
     }
 
 
@@ -88,6 +88,13 @@ public class UserRepository {
 
         else
             return users;
+    }
+    private boolean checkUser(long id) {
+        for (User user : getUsers()) {
+            if (user != null && user.getId() == id)
+                return true;
+        }
+        return false;
     }
 
 
