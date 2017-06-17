@@ -18,41 +18,44 @@ public class BookRepository {
 
     public Book[] addBook(Book book) {
         int index = 0;
-        findById(book.getBookId());
         checkArray();
-        for (Book book1 : books) {
+        for (Book book1 : getBooks()) {
             if (book1 == null) {
                 books[index] = book;
-                break;
+                return getBooks();
             }
             index++;
         }
 
-        return books;
+        return getBooks();
 
 
     }
 
 
     public void issuedBook(long id) {
-        for (Book book : books) {
-            if (findById(id) == findById(book.getBookId()) && book.getIssue() == null) {
-                book.setIssue("Видана");
-                System.out.println(book.getIssue());
-                break;
-            } else System.out.println("");
+        if (findById(id) == true) {
+            for (Book book : getBooks()) {
+                if (book != null && book.getIssue() == null) {
+                    book.setIssue("Видана");
+                    System.out.println(book.getIssue());
+
+                } else System.out.println("");
+
+            }
 
         }
 
     }
 
-
     public void viewIssuedBooks() {
         for (Book book : books) {
             if (book != null && book.getIssue() == "Видана")
                 System.out.println(book);
-            break;
+
         }
+
+        System.out.println(" ");
     }
 
 

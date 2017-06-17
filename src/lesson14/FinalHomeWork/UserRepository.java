@@ -23,9 +23,9 @@ public class UserRepository {
 
         int index = 0;
         for (User user : users) {
-            if (user != null && checkUser(id)) {
+            if (user != null && checkUser(id) == true) {
                 users[index] = null;
-                break;
+
             }
             index++;
         }
@@ -37,12 +37,13 @@ public class UserRepository {
         for (User user1 : users) {
             if (user1 == null) {
                 users[index] = user;
-                break;
+                return getUsers();
+
             }
             index++;
         }
 
-        return users;
+        return getUsers();
     }
 
 
@@ -56,30 +57,28 @@ public class UserRepository {
             }
 
         }
-        return  false;
+        return false;
 
     }
-
 
 
     public void logout(User user) {
         if (checkLogin(user.getId())) {
             System.err.println("");
-        }  else  user.setLogin(false);
+        } else user.setLogin(false);
         System.out.println(user.isLogin());
     }
 
     public boolean checkAndTypeOfUser(long id) {
         for (User user : getUsers()) {
-            if (checkUser(id) && user.getTypeOfUser() == TypeOfUser.ADMIN)
-                return true;
-            else if (checkUser(id) && user.getTypeOfUser() == TypeOfUser.LIBRARIAN) ;
-            return true;
+          if (user != null && user.getId() == id && user.getTypeOfUser() == TypeOfUser.ADMIN)
+              return true;
+          if (user != null && user.getId() == id && user.getTypeOfUser() == TypeOfUser.LIBRARIAN)
+              return true;
         }
-        return false;
+        return  false;
+
     }
-
-
     public User[] getUsers() {
         return users;
     }
@@ -97,7 +96,7 @@ public class UserRepository {
             return users;
     }
 
-    private boolean checkUser(long id) {
+    public boolean checkUser(long id) {
         for (User user : getUsers()) {
             if (user != null && user.getId() == id)
                 return true;
