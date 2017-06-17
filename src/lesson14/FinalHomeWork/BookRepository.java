@@ -53,10 +53,11 @@ public class BookRepository {
             if (book != null && book.getIssue() == "Видана")
                 System.out.println(book);
 
+            }
         }
 
-        System.out.println("NO");
-    }
+
+    
 
 
     public boolean findById(long bookId) {

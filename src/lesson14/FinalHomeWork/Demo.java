@@ -44,7 +44,7 @@ public class Demo {
 
 
         // Бібліотекар залогінився і виводить всі видані книжки
-      //  Controller.getController().allIssuedBooks(1002,null);
+        Controller.getController().allIssuedBooks(1002,"123");
 
 
         // Return books
