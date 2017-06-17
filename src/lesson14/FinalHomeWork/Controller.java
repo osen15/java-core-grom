@@ -18,8 +18,8 @@ public class Controller {
     }
 
     public void addLibrarian(long adminId, User user, String pass) {
-        if (userRepository.checkAndTypeOfUser(adminId) == true && userRepository.login(adminId, pass) == true) {
-            userRepository.addUser(user);
+        if (userRepository.checkAndTypeOfUser(adminId) == true && userRepository.login(adminId, pass) == true &&
+            userRepository.addUser(user) == true) {
             System.out.println("OK");
 
         } else System.out.println("NO");

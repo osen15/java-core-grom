@@ -31,26 +31,26 @@ public class UserRepository {
         }
     }
 
-    public User[] addUser(User user) {
+    public boolean addUser(User user) {
         int index = 0;
         checkArray();
         for (User user1 : users) {
-            if (user1 == null) {
+            if (user1 == null && user != null) {
                 users[index] = user;
-                return getUsers();
+                return true;
 
             }
             index++;
         }
 
-        return getUsers();
+        return false;
     }
 
 
     public boolean login(long id, String pass) {
         if (checkLogin(id)) {
             for (User user : getUsers()) {
-                if (user.getPassword() == pass) {
+                if (user != null && user.getPassword() == pass) {
                     user.setLogin(true);
                     return user.isLogin();
                 }

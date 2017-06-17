@@ -21,19 +21,19 @@ public class Demo {
       //  userRepository.logout(admin);
 
         // Адмін залогінився і додав бібліотекаря
-      //  Controller.getController().addLibrarian(1001,librarian, "123");
+      //  Controller.getController().addLibrarian(1001,null, "123");
 
 
 
         // Адмін залогінився і шукає бібліотекаря по id
-       // Controller.getController().viewLibrarian(100,1002, "123");
+     //   Controller.getController().viewLibrarian(100,1002, null);
 //
 
         // Адмін залогінився і видаляє бібліотекаря
-      //  Controller.getController().deleteLibrarian(1001,1002, "123");
+      // Controller.getController().deleteLibrarian(1001,1002, null);
 
         // Бібліотекар залогінився і додав книгу в список
-     //  Controller.getController().addBook(100, book, "123" );
+      // Controller.getController().addBook(100, null, "123" );
 
 
         // Бібліотекар залогінився і шукае книгу по id, якщо є то true
@@ -44,7 +44,7 @@ public class Demo {
 
 
         // Бібліотекар залогінився і виводить всі видані книжки
-        Controller.getController().allIssuedBooks(1002,"123");
+      //  Controller.getController().allIssuedBooks(1002,null);
 
 
         // Return books
