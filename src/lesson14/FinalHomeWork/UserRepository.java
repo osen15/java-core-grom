@@ -12,13 +12,6 @@ public class UserRepository {
     private User[] users = {user1, user2, user3, user4, user5};
 
 
-    public void regUser(User user, User user1) {
-        if (user == null && user1 != null) {
-            user = user1;
-            System.out.println(user);
-        } else System.out.println("  ");
-    }
-
     public void delete(long id) {
 
         int index = 0;
@@ -31,7 +24,7 @@ public class UserRepository {
         }
     }
 
-    public boolean addUser(User user) {
+    public boolean registerUser(User user) {
         int index = 0;
         checkArray();
         for (User user1 : users) {
@@ -41,6 +34,7 @@ public class UserRepository {
 
             }
             index++;
+
         }
 
         return false;
@@ -71,14 +65,15 @@ public class UserRepository {
 
     public boolean checkAndTypeOfUser(long id) {
         for (User user : getUsers()) {
-          if (user != null && user.getId() == id && user.getTypeOfUser() == TypeOfUser.ADMIN)
-              return true;
-          if (user != null && user.getId() == id && user.getTypeOfUser() == TypeOfUser.LIBRARIAN)
-              return true;
+            if (user != null && user.getId() == id && user.getTypeOfUser() == TypeOfUser.ADMIN)
+                return true;
+            if (user != null && user.getId() == id && user.getTypeOfUser() == TypeOfUser.LIBRARIAN)
+                return true;
         }
-        return  false;
+        return false;
 
     }
+
     public User[] getUsers() {
         return users;
     }

@@ -21,7 +21,8 @@ public class Demo {
       //  userRepository.logout(admin);
 
         // Адмін залогінився і додав бібліотекаря
-      //  Controller.getController().addLibrarian(1001,null, "123");
+        Controller.getController().addLibrarian(1001,librarian, "123");
+
 
 
 
