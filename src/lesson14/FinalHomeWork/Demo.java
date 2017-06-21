@@ -5,7 +5,32 @@ import java.util.Arrays;
 
 
 public class Demo {
+    private static UserRepository userRepository;
+    public static   UserRepository getInstanceUser() {
+        if (userRepository == null)
+            userRepository = new UserRepository();
+        return userRepository;
+    }
+
+
+
+    private static BookRepository bookRepository;
+
+    public static BookRepository getInstanceBook() {
+        if (bookRepository == null)
+            bookRepository = new BookRepository();
+
+        return bookRepository;
+    }
+
+
+
     public static void main(String[] args) {
+
+
+
+
+
         User admin = new User("A","C", 1001, "123",false, TypeOfUser.ADMIN);
         User librarian = new User("Q", "W", 1005,"123", false, TypeOfUser.LIBRARIAN);
         Book book = new Book("W",1234, 1111,"W","R",null);
@@ -19,40 +44,40 @@ public class Demo {
 
 
         // Адмін залогінився і шукає бібліотекаря по id
-       // Controller.getController().viewLibrarian(1001,1002, "123");
+        controller.viewLibrarian(1001,1002, "123");
 //
 
         // Адмін залогінився і видаляє бібліотекаря
-      // Controller.getController().deleteLibrarian(1001,1002, null);
+       controller.deleteLibrarian(1001,1002, null);
 
         // Бібліотекар залогінився і додав книгу в список
-      // Controller.getController().addBook(100, null, "123" );
+       controller.addBook(100, null, "123" );
 
 
         // Бібліотекар залогінився і шукае книгу по id, якщо є то true
-      //  Controller.getController().viewBook(1002, 1002, "123");
+       controller.viewBook(1002, 1002, "123");
 
         // Бібліотекар залогінився  видав книжку
-      //  Controller.getController().issuedBook(1002, 1111, "123");
+        controller.issuedBook(1002, 1111, "123");
 
 
         // Бібліотекар залогінився і виводить всі видані книжки
-      //  Controller.getController().allIssuedBooks(1002,"123");
+        controller.allIssuedBooks(1002,"123");
 
 
         // Return books
-      //  System.out.println(Arrays.deepToString(Controller.getController().bookRepository.getBooks()));
+        System.out.println(Arrays.deepToString(getInstanceBook().getBooks()));
 
 
-      // System.out.println(userRepository.checkUser(1005));
+       System.out.println(getInstanceUser().checkUser(1005));
 
-       // System.out.println(userRepository.checkAndTypeOfUser(1001));
+        System.out.println(getInstanceUser().checkAndTypeOfUser(1001));
 
-     //   System.out.println(Arrays.deepToString(userRepository.addUser(librarian)));
+        System.out.println(getInstanceUser().registerUser(librarian));
 
-      //  System.out.println(Arrays.deepToString(bookRepository.addBook(book)));
+        System.out.println(Arrays.deepToString(getInstanceBook().addBook(book)));
 
-      //  System.out.println(bookRepository.findById(1001));
+        System.out.println(getInstanceBook().findById(1001));
     }
 
 }
