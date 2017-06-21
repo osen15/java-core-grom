@@ -34,10 +34,10 @@ public class UserRepository {
     private User checkUserById(User user) {
         for (User us : users) {
             if (us != null && us.equals(user))
-                return null;
+                return user;
             else ;
         }
-        return user;
+        return null;
     }
 
     private User[] checkArray_IsFullOrNot(User[] users) {
@@ -72,7 +72,7 @@ public class UserRepository {
 
         int index = 0;
         for (User user : users) {
-            if (user != null && findById(id) == findById(user.getId())) {
+            if (user != null && findById(user.getId()).equals(id)) {
                 users[index] = null;
                 break;
             }
@@ -82,7 +82,7 @@ public class UserRepository {
 
     private User findById(long id) {
         for (User user : users) {
-            if (user != null && id == user.getId())
+            if (user != null && user.getId().equals(id))
                 return user;
         }
         return null;
