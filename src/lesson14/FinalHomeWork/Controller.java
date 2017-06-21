@@ -4,7 +4,7 @@ package lesson14.FinalHomeWork;
 import java.util.Arrays;
 
 public class Controller {
-        private UserRepository userRepository;
+        private  UserRepository userRepository;
         public  UserRepository getInstanceUser() {
             if (userRepository == null)
                 userRepository = new UserRepository();
