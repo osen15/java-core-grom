@@ -18,10 +18,11 @@ public class Demo {
         User user1 = new User(1001,"'Oleg","'www");
         System.out.println(getInstanceUser().save(user));
         System.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
-        System.out.println(getInstanceUser().update(user1));
-        System.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
-        getInstanceUser().delete(1001);
-        System.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
+      //  System.out.println(getInstanceUser().update(user1));
+      //  System.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
+       // getInstanceUser().delete(1001);
+      //  System.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
+
 
 
 
