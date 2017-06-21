@@ -29,9 +29,7 @@ public class User {
     }
 
 
-    public String getSessionld() {
-        return sessionId;
-    }
+
 
     @Override
     public boolean equals(Object o) {
