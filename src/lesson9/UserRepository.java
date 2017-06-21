@@ -7,6 +7,9 @@ public class UserRepository {
 
     private User[] users = new User[10];
 
+    public User[] getUsers() {
+        return users;
+    }
 
     public User save(User user) {
         checkUser(user);
@@ -58,9 +61,9 @@ public class UserRepository {
 
     public User update(User user) {
         int index = 0;
-        for (User us : users) {
-            if (us != null && us.equals(user)) {
-                users[index] = user;
+        for (User us : getUsers()) {
+            if (us != null && user.equals(us)) {
+                getUsers()[index] = user;
                 return user;
             }
             index++;
@@ -72,9 +75,8 @@ public class UserRepository {
 
         int index = 0;
         for (User user : users) {
-            if (user != null && findById(user.getId()).equals(id)) {
+            if (user != null && user.getId() == id) {
                 users[index] = null;
-                break;
             }
             index++;
         }
@@ -87,6 +89,7 @@ public class UserRepository {
         }
         return null;
     }
+
 
 }
 

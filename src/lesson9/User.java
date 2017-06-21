@@ -52,5 +52,14 @@ public class User {
         result = 31 * result + sessionId.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sessionId='" + sessionId + '\'' +
+                '}';
+    }
 }
 
