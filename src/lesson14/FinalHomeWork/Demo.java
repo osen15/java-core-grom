@@ -9,19 +9,11 @@ public class Demo {
         User admin = new User("A","C", 1001, "123",false, TypeOfUser.ADMIN);
         User librarian = new User("Q", "W", 1005,"123", false, TypeOfUser.LIBRARIAN);
         Book book = new Book("W",1234, 1111,"W","R",null);
+        Controller controller = new Controller();
 
-
-        // login
-       UserRepository userRepository = new UserRepository();
-     //   System.out.println(userRepository.login(10, "123"));
-
-       BookRepository bookRepository = new BookRepository();
-
-        //logout
-      //  userRepository.logout(admin);
 
         // Адмін залогінився і додав бібліотекаря
-        Controller.getController().addLibrarian(1002,librarian, "123");
+        controller.addLibrarian(1002,librarian, "123");
 
 
 

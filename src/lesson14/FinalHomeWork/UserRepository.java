@@ -11,12 +11,21 @@ public class UserRepository {
     private User user5 = null;
     private User[] users = {user1, user2, user3, user4, user5};
 
+    private static UserRepository userRepository = new UserRepository();
+
+    private UserRepository() {
+    }
+
+    public static   UserRepository getUserRepository() {
+        return UserRepository.userRepository  ;
+    }
+
 
     public void delete(long id) {
 
         int index = 0;
         for (User user : users) {
-            if (user != null && checkUser(id) == true) {
+            if (user != null && checkUser(id)) {
                 users[index] = null;
 
             }
