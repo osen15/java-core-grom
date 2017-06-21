@@ -14,7 +14,7 @@ public class BookingComAPI implements API {
         Room[] rooms1 = new Room[sizeArray(price, persons, city, hotel)];
         if (rooms != null && checkOnLegalValue(price, persons) == true)
             for (Room room : rooms) {
-                if (room.getPersons() == persons && room.getPrice() >= price - 100 && room.getPrice() <= price + 100 && room.getCityName() == city && room.getHotelName() == hotel)
+                if (room.getPersons() == persons && room.getPrice() >= price - 100 && room.getPrice() <= price + 100 && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
                     rooms1[index++] = room;
             }
         return rooms1;
@@ -30,7 +30,7 @@ public class BookingComAPI implements API {
         if (rooms != null)
 
             for (Room room : rooms) {
-                if (room.getPersons() == persons && room.getPrice() >= price - 100 && room.getPrice() <= price + 100 && room.getCityName() == city && room.getHotelName() == hotel)
+                if (room.getPersons() == persons && room.getPrice() >= price - 100 && room.getPrice() <= price + 100 && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
                     count++;
             }
         return count;

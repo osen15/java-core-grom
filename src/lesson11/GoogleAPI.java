@@ -1,7 +1,7 @@
 package lesson11;
 
 public class GoogleAPI implements API {
-    Room[] rooms;
+   private Room[] rooms;
 
     public GoogleAPI(Room[] rooms) {
         this.rooms = rooms;
@@ -13,13 +13,13 @@ public class GoogleAPI implements API {
         checkOnLegalValue(price, persons);
         int index = 0;
         Room[] rooms1 = new Room[sizeArray(price, persons, city, hotel)];
-        if (rooms != null && checkOnLegalValue(price, persons) == true)
+        if (rooms != null && checkOnLegalValue(price, persons)) {
             for (Room room : rooms) {
-                if (room.getPersons() == persons && room.getPrice() == price && room.getCityName() == city && room.getHotelName() == hotel) {
+                if (room.getPersons() == persons && room.getPrice() == price && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
                     rooms1[index++] = room;
-                }
-
             }
+
+        }
         return rooms1;
     }
 
@@ -31,11 +31,13 @@ public class GoogleAPI implements API {
 
     private int sizeArray(int price, int persons, String city, String hotel) {
         int count = 0;
-        if (rooms != null)
+        if (rooms != null) {
             for (Room room : rooms) {
-                if (room.getPersons() == persons && room.getPrice() == price && room.getCityName() == city && room.getHotelName() == hotel)
+                if (room.getPersons() == persons && room.getPrice() == price && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
+
                     count++;
             }
+        }
         return count;
     }
 

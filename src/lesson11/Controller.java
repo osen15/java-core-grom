@@ -3,7 +3,7 @@ package lesson11;
 
 public class Controller {
 
-    API[] apis = new API[3];
+  private API[] apis = new API[3];
 
 
     public Controller(API[] apis) {
@@ -68,9 +68,9 @@ public class Controller {
 
                 for (Room roomApi2 : roomsApi2) {
 
-                    if (roomApi1.getPrice() == roomApi2.getPrice() && roomApi1.getHotelName() == roomApi2.getHotelName() &&
+                    if (roomApi1.getPrice() == roomApi2.getPrice() && roomApi1.getHotelName().equals(roomApi2.getHotelName()) &&
 
-                            roomApi1.getPersons() == roomApi2.getPersons() && roomApi1.getCityName() == roomApi2.getHotelName()) {
+                            roomApi1.getPersons() == roomApi2.getPersons() && roomApi1.getCityName().equals(roomApi2.getHotelName())) {
 
                         count++;
 

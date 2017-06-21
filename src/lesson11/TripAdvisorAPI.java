@@ -12,9 +12,9 @@ public class TripAdvisorAPI implements API {
         checkOnLegalValue(price, persons);
         int index = 0;
         Room[] rooms1 = new Room[sizeArray(price, persons, city, hotel)];
-        if (rooms != null && checkOnLegalValue(price, persons) == true)
+        if (rooms != null && checkOnLegalValue(price, persons))
             for (Room room : rooms) {
-                if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName() == city && room.getHotelName() == hotel)
+                if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
                     rooms1[index++] = room;
 
 
@@ -32,7 +32,7 @@ public class TripAdvisorAPI implements API {
         int count = 0;
         if (rooms != null)
             for (Room room : rooms) {
-                if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName() == city && room.getHotelName() == hotel)
+                if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
 
 
                     count++;
