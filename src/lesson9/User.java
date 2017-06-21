@@ -6,12 +6,12 @@ package lesson9;
 public class User {
 
 
-    private Long id;
+    private long id;
     private String name;
     private String sessionId;
 
 
-    public User(Long id, String name, String sessionId) {
+    public User(long id, String name, String sessionId) {
         this.id = id;
         this.name = name;
         this.sessionId = sessionId;
@@ -40,14 +40,14 @@ public class User {
 
         User user = (User) o;
 
-        if (!id.equals(user.id)) return false;
+        if (id != user.id) return false;
         if (!name.equals(user.name)) return false;
         return sessionId.equals(user.sessionId);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + name.hashCode();
         result = 31 * result + sessionId.hashCode();
         return result;
