@@ -59,20 +59,18 @@ public class UserRepository {
         }
 
     public User update(User user) {
-        if (user == null) {
-            return null;
-        }
-
-        User findUserById = this.findById(user.getId());
-
-        if (findUserById == null) {
-            return null;
-        }
-        for (int i = 0; i < users.length; i++) {
-            if (users[i].getId() == user.getId()) {
-                return users[i] = user;
+            int index = 0;
+        if (user != null ) {
+            for (User us : getUsers()){
+                if (us != null && us.equals(user)){
+                    getUsers()[index] = user;
+                    return user;
+                }
+                index++;
             }
         }
+
+
         return null;
     }
 
