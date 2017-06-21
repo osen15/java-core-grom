@@ -8,13 +8,13 @@ public class User {
 
     private Long id;
     private String name;
-    private String sessionld;
+    private String sessionId;
 
 
     public User(Long id, String name, String sessionld) {
         this.id = id;
         this.name = name;
-        this.sessionld = sessionld;
+        this.sessionId = sessionld;
 
 
     }
@@ -30,7 +30,7 @@ public class User {
 
 
     public String getSessionld() {
-        return sessionld;
+        return sessionId;
     }
 
     @Override
@@ -42,14 +42,14 @@ public class User {
 
         if (!id.equals(user.id)) return false;
         if (!name.equals(user.name)) return false;
-        return sessionld.equals(user.sessionld);
+        return sessionId.equals(user.sessionId);
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + name.hashCode();
-        result = 31 * result + sessionld.hashCode();
+        result = 31 * result + sessionId.hashCode();
         return result;
     }
 }
