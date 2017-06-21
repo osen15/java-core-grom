@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Controller {
         private UserRepository userRepository = new UserRepository();
-        public  UserRepository getUserRepository() {
+        public  UserRepository getInstanceUser() {
             return userRepository;
     }
 
