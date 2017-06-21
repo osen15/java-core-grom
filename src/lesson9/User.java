@@ -11,10 +11,10 @@ public class User {
     private String sessionId;
 
 
-    public User(Long id, String name, String sessionld) {
+    public User(Long id, String name, String sessionId) {
         this.id = id;
         this.name = name;
-        this.sessionId = sessionld;
+        this.sessionId = sessionId;
 
 
     }
