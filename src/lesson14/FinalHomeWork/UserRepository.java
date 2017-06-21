@@ -67,7 +67,7 @@ public class UserRepository {
         for (User user : getUsers()) {
             if (user != null && user.getId() == id && user.getTypeOfUser() == TypeOfUser.ADMIN)
                 return true;
-            if (user != null && user.getId() == id && user.getTypeOfUser() == TypeOfUser.LIBRARIAN)
+            if (user != null && user.getId() == id && user.getTypeOfUser() == TypeOfUser.ADMIN)
                 return true;
         }
         return false;

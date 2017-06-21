@@ -21,13 +21,13 @@ public class Demo {
       //  userRepository.logout(admin);
 
         // Адмін залогінився і додав бібліотекаря
-        Controller.getController().addLibrarian(1001,librarian, "123");
+        Controller.getController().addLibrarian(1002,librarian, "123");
 
 
 
 
         // Адмін залогінився і шукає бібліотекаря по id
-     //   Controller.getController().viewLibrarian(100,1002, null);
+       // Controller.getController().viewLibrarian(1001,1002, "123");
 //
 
         // Адмін залогінився і видаляє бібліотекаря
@@ -45,7 +45,7 @@ public class Demo {
 
 
         // Бібліотекар залогінився і виводить всі видані книжки
-        Controller.getController().allIssuedBooks(1002,"123");
+      //  Controller.getController().allIssuedBooks(1002,"123");
 
 
         // Return books
