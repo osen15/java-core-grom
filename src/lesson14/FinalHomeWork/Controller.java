@@ -3,13 +3,21 @@ package lesson14.FinalHomeWork;
 
 import java.util.Arrays;
 
-public  class Controller {
-     private UserRepository userRepository = UserRepository.getUserRepository();
-      private BookRepository bookRepository = new BookRepository();
+public class Controller {
+        private UserRepository userRepository = new UserRepository();
+        public  UserRepository getUserRepository() {
+            return userRepository;
+    }
 
 
 
-    public  void addLibrarian(long userId, User user, String pass) {
+        private BookRepository bookRepository = new BookRepository();
+        public BookRepository getInstanceBook() {
+            return bookRepository;
+        }
+
+
+    public void addLibrarian(long userId, User user, String pass) {
         if (userRepository.checkAndTypeOfUser(userId) && userRepository.login(userId, pass)) {
             userRepository.registerUser(user);
             System.out.println("OK");
