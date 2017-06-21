@@ -14,11 +14,11 @@ public class UserRepository {
         }
 
         public User save(User user) {
-            if (checkUser(user) && checkUserById(user) && checkArray_IsFullOrNot(users)) {
+            if (checkUser(user) && checkUserById(user) && checkArray_IsFullOrNot()) {
                 int index = 0;
-                for (User us : users) {
+                for (User us : getUsers()) {
                     if (us == null) {
-                        users[index] = user;
+                        getUsers()[index] = user;
                         return user;
                     }
                     index++;
@@ -34,7 +34,7 @@ public class UserRepository {
 
 
       private boolean checkUserById(User user) {
-            for (User us : users) {
+            for (User us : getUsers()) {
                 if (us != null && user.getId() != us.getId());
                     return true;
 
@@ -42,14 +42,14 @@ public class UserRepository {
             return false;
         }
 
-        private boolean checkArray_IsFullOrNot(User[] users) {
+        private boolean checkArray_IsFullOrNot() {
             int countPlaced = 0;
-            for (User us : users) {
+            for (User us : getUsers()) {
                 if (us != null)
                     countPlaced++;
 
             }
-            if (countPlaced == users.length - 1)
+            if (countPlaced == getUsers().length - 1)
                 return false;
             else
 
@@ -77,16 +77,16 @@ public class UserRepository {
         public void delete(long id) {
 
             int index = 0;
-            for (User user : users) {
+            for (User user : getUsers()) {
                 if (user != null && user.getId() == id) {
-                    users[index] = null;
+                    getUsers()[index] = null;
                 }
                 index++;
             }
         }
 
         private User findById(long id) {
-            for (User user : users) {
+            for (User user : getUsers()) {
                 if (user != null && user.getId().equals(id))
                     return user;
             }
