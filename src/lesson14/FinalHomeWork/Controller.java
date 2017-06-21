@@ -6,13 +6,19 @@ import java.util.Arrays;
 public class Controller {
         private UserRepository userRepository = new UserRepository();
         public  UserRepository getInstanceUser() {
+            if (userRepository == null)
+                userRepository = new UserRepository();
             return userRepository;
     }
 
 
 
         private BookRepository bookRepository = new BookRepository();
+
         public BookRepository getInstanceBook() {
+            if (bookRepository == null)
+                bookRepository = new BookRepository();
+
             return bookRepository;
         }
 
