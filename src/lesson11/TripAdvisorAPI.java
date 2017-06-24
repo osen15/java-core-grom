@@ -9,27 +9,34 @@ public class TripAdvisorAPI implements API {
 
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {
-        int counter = 0;
+
+        int numberOfRoom = 0;
         int index = 0;
+        int roomPriceMin = price - 10;
+        int roomPriceMax = price + 10;
+        int roomPersonsMin = persons - 1;
+        int roomPersonsMax = persons + 1;
+
+
         for (Room room : rooms) {
-            if (room.getPrice() >= price - 1 && room.getPrice() <= price + 1 && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
-                counter++;
+            if (room.getPrice() >= roomPriceMin && room.getPrice() <= roomPriceMax && room.getPersons() >= roomPersonsMin && room.getPersons() <= roomPersonsMax && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
+                numberOfRoom++;
             }
         }
-        if (counter == 0) {
+        if (numberOfRoom == 0) {
             return null;
         }
 
-        Room[] okRooms = new Room[counter];
+        Room[] FindedRoom = new Room[numberOfRoom];
 
         for (Room room : rooms) {
-            if (room.getPrice() >= price - 1 && room.getPrice() <= price + 1 && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
-                okRooms[index] = room;
+            if (room.getPrice() >= roomPriceMin && room.getPrice() <= roomPriceMax && room.getPersons() >= roomPersonsMin && room.getPersons() <= roomPersonsMax && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
+                FindedRoom[index] = room;
                 index++;
             }
         }
 
-        return okRooms;
+        return FindedRoom;
     }
 
 
