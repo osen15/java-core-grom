@@ -43,4 +43,3 @@ public class BookingComAPI implements API {
         return rooms;
     }
 }
-

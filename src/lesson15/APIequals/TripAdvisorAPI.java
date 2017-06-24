@@ -1,5 +1,6 @@
 package lesson15.APIequals;
 
+
 public class TripAdvisorAPI implements API {
     Room[] rooms;
 
