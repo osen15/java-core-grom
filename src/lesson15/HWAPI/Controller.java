@@ -2,9 +2,9 @@ package lesson15.HWAPI;
 
 
 public class Controller {
-   private API[] apis;
+    private API[] apis;
 
-    private Controller(API[] apis) {
+    public Controller(API[] apis) {
         this.apis = apis;
     }
 
