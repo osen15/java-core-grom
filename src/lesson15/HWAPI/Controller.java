@@ -41,13 +41,10 @@ public class Controller {
     public Room[] check(API api1, API api2) {
 
 
-        Room[] first = api1.getAll();
-        Room[] second = api2.getAll();
-
         int count = 0;
 
-        for (Room room : first) {
-            for (Room room2 : second) {
+        for (Room room : api1.getAll()) {
+            for (Room room2 : api2.getAll()) {
                 if (room.equals(room2) && room.hashCode() == room2.hashCode()) {
                     count++;
                 }
@@ -61,8 +58,8 @@ public class Controller {
 
         int indexCheck = 0;
 
-        for (Room room : first) {
-            for (Room room2 : second) {
+        for (Room room : api1.getAll()) {
+            for (Room room2 : api2.getAll()) {
                 if (room.equals(room2) && room.hashCode() == room2.hashCode()) {
                     checkRoom[indexCheck] = room;
                     indexCheck++;
