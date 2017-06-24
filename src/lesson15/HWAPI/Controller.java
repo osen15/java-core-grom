@@ -3,7 +3,7 @@ package lesson15.HWAPI;
 
 public class Controller {
 
-    private API[] apis = new API[3];
+  private API[] apis = new API[3];
 
 
     public Controller(API[] apis) {
@@ -37,8 +37,12 @@ public class Controller {
     }
 
 
+    public Room[] check(API api1, API api2) {
+          if (api1 == null || api2 == null)
+              return null;
+        return findCommonRooms(api1.getAll(), api2.getAll());
 
-
+    }
 
 
     private int findRoomsByParams(int price, int persons, String city, String hotel) {
@@ -56,25 +60,24 @@ public class Controller {
     }
 
 
-    public Room[] check(Room[] roomsApi1, Room[] roomsApi2) {
+    private Room[] findCommonRooms(Room[] roomsApi1, Room[] roomsApi2) {
 
         int count = 0;
-        if (roomsApi1 != null && roomsApi2 != null)
+        if ( roomsApi1 != null && roomsApi2 != null )
             for (Room roomApi1 : roomsApi1) {
 
                 for (Room roomApi2 : roomsApi2) {
 
-                    if (roomApi1.equals(roomApi2) && roomApi1.hashCode() == roomApi2.hashCode()) {
+                    if (roomApi1.getPrice() == roomApi2.getPrice() && roomApi1.getHotelName().equals(roomApi2.getHotelName()) &&
+
+                            roomApi1.getPersons() == roomApi2.getPersons() && roomApi1.getCityName().equals(roomApi2.getHotelName())) {
 
                         count++;
 
                     }
 
                 }
-                if (count == 0) {
-                    return null;
 
-                }
             }
 
 
