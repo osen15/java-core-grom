@@ -38,7 +38,7 @@ public class Controller {
 
 
     public Room[] check(API api1, API api2) {
-          if (api1 == null || api2 == null)
+          if (api1.equals(null)  || api2.equals(null))
               return null;
         return findCommonRooms(api1.getAll(), api2.getAll());
 
