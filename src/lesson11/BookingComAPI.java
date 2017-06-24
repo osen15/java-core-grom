@@ -9,42 +9,38 @@ public class BookingComAPI implements API {
 
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {
-        checkOnLegalValue(price, persons);
-        int index = 0;
-        Room[] rooms1 = new Room[sizeArray(price, persons, city, hotel)];
-        if (rooms != null && checkOnLegalValue(price, persons) == true)
+            int counter = 0;
+            int index = 0;
+
+
             for (Room room : rooms) {
-                if (room.getPersons() == persons && room.getPrice() >= price - 100 && room.getPrice() <= price + 100 && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
-                    rooms1[index++] = room;
+                if (room.getPrice() >= price - 100 && room.getPrice() <= price + 100 && room.getPersons() == persons && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
+                    counter++;
+                }
             }
-        return rooms1;
-    }
+            if (counter == 0) {
+                return null;
+            }
+
+            Room[] okRooms = new Room[counter];
+
+            for (Room room : rooms) {
+                if (room.getPrice() >= price - 100 && room.getPrice() <= price + 100 && room.getPersons() == persons && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
+                    okRooms[index] = room;
+                    index++;
+                }
+
+            }
+
+            return okRooms;
+        }
+
+
+
 
     @Override
     public Room[] getAll() {
         return rooms;
-    }
-
-    private int sizeArray(int price, int persons, String city, String hotel) {
-        int count = 0;
-        if (rooms != null)
-
-            for (Room room : rooms) {
-                if (room.getPersons() == persons && room.getPrice() >= price - 100 && room.getPrice() <= price + 100 && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
-                    count++;
-            }
-        return count;
-    }
-    private boolean checkOnLegalValue(int price, int persons){
-        if (price < 0 || persons < 0){
-            printIllegalValueMsg();
-
-        }
-        return true;
-    }
-
-    private void printIllegalValueMsg() {
-        System.err.println("illegal value");
     }
 
 

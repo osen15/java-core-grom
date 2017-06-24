@@ -1,7 +1,7 @@
 package lesson11;
 
 public class TripAdvisorAPI implements API {
-    private Room[] rooms;
+    Room[] rooms;
 
     public TripAdvisorAPI(Room[] rooms) {
         this.rooms = rooms;
@@ -9,47 +9,32 @@ public class TripAdvisorAPI implements API {
 
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {
-        checkOnLegalValue(price, persons);
+        int counter = 0;
         int index = 0;
-        Room[] rooms1 = new Room[sizeArray(price, persons, city, hotel)];
-        if (rooms != null && checkOnLegalValue(price, persons))
-            for (Room room : rooms) {
-                if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
-                    rooms1[index++] = room;
-
-
+        for (Room room : rooms) {
+            if (room.getPrice() >= price - 1 && room.getPrice() <= price + 1 && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
+                counter++;
             }
-        return rooms1;
+        }
+        if (counter == 0) {
+            return null;
+        }
 
+        Room[] okRooms = new Room[counter];
+
+        for (Room room : rooms) {
+            if (room.getPrice() >= price - 1 && room.getPrice() <= price + 1 && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
+                okRooms[index] = room;
+                index++;
+            }
+        }
+
+        return okRooms;
     }
+
 
     @Override
     public Room[] getAll() {
         return rooms;
     }
-
-    private int sizeArray(int price, int persons, String city, String hotel) {
-        int count = 0;
-        if (rooms != null)
-            for (Room room : rooms) {
-                if (room.getPrice() == price && room.getPersons() >= persons - 1 && room.getPersons() <= persons + 1 && room.getCityName().equals(city) && room.getHotelName().equals(hotel))
-
-
-                    count++;
-            }
-        return count;
-    }
-
-    private boolean checkOnLegalValue(int price, int persons) {
-        if (price < 0 || persons < 0) {
-            printIllegalValueMsg();
-
-        }
-        return true;
-    }
-
-    private void printIllegalValueMsg() {
-        System.err.println("illegal value");
-    }
-
 }
