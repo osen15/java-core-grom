@@ -1,13 +1,10 @@
 package lesson15.APIequals;
 
 
-import lesson11.API;
-import lesson11.Room;
-
 public class Controller {
-    lesson11.API[] apis;
+    API[] apis;
 
-    public Controller(lesson11.API[] apis) {
+    public Controller(API[] apis) {
         this.apis = apis;
     }
 
@@ -16,7 +13,7 @@ public class Controller {
 
         int indexOfRoom = 0;
 
-        for (lesson11.API api : apis) {
+        for (API api : apis) {
             if (api.findRooms(price, persons, city, hotel) != null) {
                 indexOfRoom += api.findRooms(price, persons, city, hotel).length;
             }
@@ -29,7 +26,7 @@ public class Controller {
         Room[] result = new Room[indexOfRoom];
 
         int index = 0;
-        for (lesson11.API api : apis) {
+        for (API api : apis) {
             if (api.findRooms(price, persons, city, hotel) != null) {
                 for (Room room : api.findRooms(price, persons, city, hotel)) {
                     result[index] = room;
@@ -41,7 +38,7 @@ public class Controller {
     }
 
 
-    public Room[] check(lesson11.API api1, API api2) {
+    public Room[] check(API api1, API api2) {
 
 
         Room[] first = api1.getAll();

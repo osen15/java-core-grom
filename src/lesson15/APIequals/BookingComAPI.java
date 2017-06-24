@@ -1,8 +1,5 @@
 package lesson15.APIequals;
 
-import lesson11.API;
-import lesson11.Room;
-
 public class BookingComAPI implements API {
     Room[] rooms;
 

@@ -1,12 +1,6 @@
 package lesson15.APIequals;
 
 
-import lesson11.API;
-import lesson11.*;
-import lesson11.GoogleAPI;
-import lesson11.Room;
-import lesson11.TripAdvisorAPI;
-
 import java.util.Arrays;
 import java.util.Date;
 
@@ -14,11 +8,11 @@ public class Demo {
     public static void main(String[] args) {
 
 
-        lesson11.Room room1 = new lesson11.Room(1l, 0, 1, new Date(), "B", "B");
-        lesson11.Room room2 = new lesson11.Room(2l, 50, 2, new Date(), "B", "B");
-        lesson11.Room room3 = new lesson11.Room(3l, 150, 3, new Date(), "B", "B");
-        lesson11.Room room4 = new lesson11.Room(4l, 50, 2, new Date(), "B", "B");
-        lesson11.Room room5 = new lesson11.Room(5l, 350, 3, new Date(), "E", "E");
+        Room room1 = new Room(1l, 0, 1, new Date(), "B", "B");
+        Room room2 = new Room(2l, 50, 2, new Date(), "B", "B");
+        Room room3 = new Room(3l, 150, 3, new Date(), "B", "B");
+        Room room4 = new Room(4l, 50, 2, new Date(), "B", "B");
+        Room room5 = new Room(5l, 350, 3, new Date(), "E", "E");
         Room[] rooms = {room1, room2, room3, room4, room5};
 
 
