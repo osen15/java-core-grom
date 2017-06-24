@@ -41,32 +41,34 @@ public class Controller {
     public Room[] check(API api1, API api2) {
 
 
-        int count = 0;
+        int roomCount = 0;
 
-        for (Room room : api1.getAll()) {
+        for (Room room1 : api1.getAll()) {
+            if (room1 == null) continue;
+
             for (Room room2 : api2.getAll()) {
-                if (room.equals(room2) && room.hashCode() == room2.hashCode()) {
-                    count++;
-                }
+                if (room2 == null) continue;
+
+                if (room1.equals(room2)) roomCount++;
             }
         }
-        if (count == 0) {
-            return null;
-        }
 
-        Room[] checkRoom = new Room[count];
 
-        int indexCheck = 0;
+        Room[] rooms = new Room[roomCount];
+        int lastRoomPosition = 0;
 
-        for (Room room : api1.getAll()) {
+        for (Room room1 : api1.getAll()) {
+            if (room1 == null) continue;
+
             for (Room room2 : api2.getAll()) {
-                if (room.equals(room2) && room.hashCode() == room2.hashCode()) {
-                    checkRoom[indexCheck] = room;
-                    indexCheck++;
-                }
+                if (room2 == null) continue;
+
+                if (room1.equals(room2))
+                    rooms[lastRoomPosition++] = room1;
             }
         }
-        return checkRoom;
+
+        return rooms;
     }
 
 }
