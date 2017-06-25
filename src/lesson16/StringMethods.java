@@ -7,7 +7,7 @@ public class StringMethods {
     public static void main(String[] args) {
 
 
-        String test = "someString";
+        String test = "someStringExample";
         // вертає true або false в залежності від того порожній String  чи ні.
         System.out.println(test.isEmpty());
         // єдиний випадок коли String порожній
