@@ -23,20 +23,24 @@ public class StringMethods {
         System.out.println(test.replace("me", "T"));
 
         // String regex = {a - z};
-        System.out.println(test.replaceFirst("me", "T"));
-
+        test = "someString";
+        System.out.println(test.replaceAll("me", "T"));
+        System.out.println(test);
         // перевіряє чи містить відповідний String заданий String. Повертає true or false
-        System.out.println(test.contains("e"));
+        System.out.println(test.contains("mes"));
+        System.out.println(test);
 
         // повертає масив String, заміняє заданий символ комою, розділяє. Якщо нема такого символу, то вертає String
-        System.out.println(Arrays.toString(test.split( "я")));
+        String phrase = "Hello there guys";
+        System.out.println(Arrays.toString(phrase.split( " ")));
+
 
         // обрізає пробіли з початку і з кінця String
-        System.out.println(test.trim());
+        System.out.println(" test a".trim());
 
         // повертає кусок String із заданої позиції, або кусок із заданої(включно) і кінцевої(не включно) позиції
-        System.out.println(test.substring(3));
-        System.out.println(test.substring(3,5));
+        System.out.println(phrase.substring(5));
+        System.out.println(phrase.substring(5,10).trim());
 
         // всі букви переводить у великі або маленькі. Повертає String
         System.out.println(test.toUpperCase());
@@ -48,12 +52,6 @@ public class StringMethods {
 
 
         test.getBytes();
-
-
-
-
-
-
         test.equals("eeee");
         test.intern();
 
