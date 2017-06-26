@@ -5,9 +5,9 @@ import java.util.Arrays;
 
 public class Exercises {
     public static void main(String[] args) {
-        String test = "test str here was here two times or not no test";
+        String test = "There is Test something new or jot sdf sdf sdf word Test op or";
         System.out.println(deleteDuplicates(test));
-        System.out.println(Arrays.toString(countDuplicates(test, new  String[]{"test", "here", "not"})));
+        System.out.println(Arrays.toString(countDuplicates(test, new  String[]{"or", "some", "test"})));
 
     }
 
