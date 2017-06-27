@@ -8,7 +8,7 @@ public class ValidateAddr {
     }
 
     private static boolean validate(String address) {
-        if (address == null)
+        if (address.isEmpty() && address == null)
             return false;
         String[] domens = new String[]{".com", ".org", ".net"};
         address.trim();
