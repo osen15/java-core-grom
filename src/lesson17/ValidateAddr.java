@@ -8,7 +8,8 @@ public class ValidateAddr {
     }
 
     private static boolean validate(String address) {
-
+        if (address == null)
+            return false;
         String[] domens = new String[]{".com", ".org", ".net"};
         address.trim();
         if (address.substring(0, 7).equals("http://") || (address.substring(0, 8).equals("https://"))) {

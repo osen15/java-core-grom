@@ -2,7 +2,7 @@ package lesson17;
 
 public class MinAndMaxWords {
     public static void main(String[] args) {
-        String test = "qw we wewewe wewewe lkl wewewewewedfsdf";
+        String test = "qw we wewewe wewewe l wewewewewedfsdf";
         System.out.println(maxWord(test));
         System.out.println(minWord(test));
 
