@@ -4,7 +4,7 @@ package lesson17;
 
 public class CountW {
     public static void main(String[] args) {
-        String res = "A D B E T  Олег   ЙЙЙЙ  111111   ";
+        String res = "Один two три чотири       !!!@!#@#   FIVE        ";
         System.out.println(countWords(res));
     }
 
