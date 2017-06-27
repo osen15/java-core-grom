@@ -1,23 +1,22 @@
 package lesson17;
 
-import java.util.Arrays;
+
 
 public class CountW {
     public static void main(String[] args) {
-        String res = "! G G G g ] g l c 3 & *";
+        String res = "A D B E T  Олег   ЙЙЙЙ  111111   ";
         System.out.println(countWords(res));
-
     }
 
     private static int countWords(String input) {
-        if(input == null && input.toCharArray().length == 0)  return 0;
+        if(input == null)  return 0;
         int count = 0;
-        String[] words = input.split(" ");
+        String string = input.trim();
+        String[] words = string.split(" ");
         for (String word : words) {
-            if (!word.isEmpty() && word.matches("^[а-яА-ЯёЁa-ї-zA-Z]+$"))
+            if (word.matches("^[а-яА-ЯёЁa-zA-Z]+$"))
                 count++;
         }
         return count;
     }
-
 }
