@@ -2,38 +2,37 @@ package lesson17;
 
 public class MinAndMaxWords {
     public static void main(String[] args) {
-        String test = "Напишите методы для поиска самого длинного и самого короткого слова во входящем стринге";
+        String test = " sq'w wet      ";
         System.out.println(maxWord(test));
-        System.out.println(minWord(test));
+       // System.out.println(minWord(test));
+
     }
+
+
     private static String maxWord(String input) {
-        if (input.isEmpty()) return null;
+        if (input.trim().isEmpty() || input == null) return null;
         String string = input.replaceAll("\\pP", "");
-        String[] words = string.split(" ");
-        if (words.length > 0) {
-            String max = words[0];
-            for (String word : words) {
-                if (word.length() > max.length() && word.matches("^[а-яА-ЯёЁa-zA-Z]+$")){
-                    max = word;
-                }
+        String[] words = string.trim().split(" ");
+        if (words.length == 0) return null;
+        String max = words[0];
+        for (String word : words) {
+            if (!word.isEmpty() && word.length() > max.length()  ) {
+                max = word;
             }
-            return max;
         }
-        return null;
+        return max;
     }
+
     private static String minWord(String input) {
-        if (input.isEmpty() ) return null;
-        String string = input.replaceAll("\\pP", "");
-        String[] words = string.split(" ");
-        if (words.length > 0) {
-            String min = words[0];
-            for (String word : words) {
-                if (word.length() < min.length() && word.matches("^[а-яА-ЯёЁa-zA-Z]+$")){
-                    min = word;
-                }
+        if (input.trim().isEmpty() || input == null) return null;
+        String[] words = input.trim().split(" ");
+        if (words.length == 0) return  null;
+        String min = words[0];
+        for (String word : words) {
+            if (!word.isEmpty() && word.length() < min.length()) {
+                min = word;
             }
-            return min;
         }
-        return null;
+        return min;
     }
 }
