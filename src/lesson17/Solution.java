@@ -20,7 +20,6 @@ public class Solution {
                 if (words.length > 0 && words.length == 1) {
                     max = word;
                 }
-
             }
         }
         return max;
