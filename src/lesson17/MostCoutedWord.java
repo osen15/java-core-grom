@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class MostCoutedWord {
     public static void main(String[] args) {
-        String test = " 2   df        df  &   &   &  &   && &  df     ";
+        String test = " 2   df         &   &   &  &   && &      ";
         System.out.println((mostCountedWord(test)));
     }
 
@@ -13,18 +13,24 @@ public class MostCoutedWord {
         String[] words = input.trim().split(" ");
         if (words.length == 2) return null;
         int[] res = new int[words.length];
+        int count = 0;
         for (String word : words) {
             for (int i = 0; i < words.length; i++) {
                 if (checkWord(words[i]) && checkWord(word) && !word.equals("")) {
-                    if (word.equals(words[i]))
+                    if (word.equals(words[i])) {
                         res[i]++;
+                        count++;
+                    }
                 }
+
             }
+
         }
+        if (count == 1 ) return null;
         int maxCount = 0;
         int max = res[0];
         for (int j = 0; j < res.length; j++) {
-            if (res[j] > max) {
+            if (res[j] > max && j > 1) {
                 max = res[j];
                 maxCount = j;
             }
