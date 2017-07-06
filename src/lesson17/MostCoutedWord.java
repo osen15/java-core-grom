@@ -3,14 +3,13 @@ package lesson17;
 
 public class MostCoutedWord {
     public static void main(String[] args) {
-        String test = "1   e e          6";
+        String test = "d d     v       v          v          ";
         System.out.println((mostCountedWord(test)));
     }
 
     private static String mostCountedWord(String input) {
-        if (input.equals("") || input == null || input.length() == 0) return null;
+        if (input == null) return null;
         String[] words = input.trim().split(" ");
-        if (words.length < 2) return null;
         int[] res = new int[words.length];
         for (int i = 0; i < words.length; i++) {
             for (int j = i + 1; j < words.length; j++) {
