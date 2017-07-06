@@ -1,41 +1,40 @@
 package lesson17;
 
-import java.util.Arrays;
 
 public class MostCoutedWord {
     public static void main(String[] args) {
-        String test = " 2   df         &   &   &  &   && &      ";
+        String test = "1   e e          6";
         System.out.println((mostCountedWord(test)));
     }
 
     private static String mostCountedWord(String input) {
         if (input.equals("") || input == null || input.length() == 0) return null;
         String[] words = input.trim().split(" ");
-        if (words.length == 2) return null;
+        if (words.length < 2) return null;
         int[] res = new int[words.length];
-        int count = 0;
-        for (String word : words) {
-            for (int i = 0; i < words.length; i++) {
-                if (checkWord(words[i]) && checkWord(word) && !word.equals("")) {
-                    if (word.equals(words[i])) {
+        for (int i = 0; i < words.length; i++) {
+            for (int j = i + 1; j < words.length; j++) {
+                if (checkWord(words[i]) && checkWord(words[j]) && !words[i].equals("")) {
+                    if (words[j].equals(words[i])) {
                         res[i]++;
-                        count++;
                     }
                 }
-
             }
-
         }
-        if (count == 1 ) return null;
         int maxCount = 0;
         int max = res[0];
         for (int j = 0; j < res.length; j++) {
-            if (res[j] > max && j > 1) {
+            if (res[j] > max) {
                 max = res[j];
                 maxCount = j;
             }
         }
-        return checkWord(words[maxCount]) ? words[maxCount] : null;
+        if (maxCount == 0 && max < 1)
+            return null;
+        else if (maxCount > 0)
+            return words[maxCount];
+
+        return words[maxCount];
     }
 
     private static boolean checkWord(String word) {   // перевірка символів на букву
@@ -47,4 +46,3 @@ public class MostCoutedWord {
         return true;
     }
 }
-
