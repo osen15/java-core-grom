@@ -3,13 +3,13 @@ package lesson17;
 
 public class MostCoutedWord {
     public static void main(String[] args) {
-        String test = "d d     v       v          v          ";
+        String test = "           d d     v       v          v          ";
         System.out.println((mostCountedWord(test)));
     }
 
     private static String mostCountedWord(String input) {
         if (input == null) return null;
-        String[] words = input.trim().split(" ");
+        String[] words = input.split(" ");
         int[] res = new int[words.length];
         for (int i = 0; i < words.length; i++) {
             for (int j = i + 1; j < words.length; j++) {
@@ -35,7 +35,6 @@ public class MostCoutedWord {
 
         return words[maxCount];
     }
-
     private static boolean checkWord(String word) {   // перевірка символів на букву
         char[] chars = word.toCharArray();
         for (char ch : chars) {
