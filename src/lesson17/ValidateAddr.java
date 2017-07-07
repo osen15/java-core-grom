@@ -3,7 +3,7 @@ package lesson17;
 
 public class ValidateAddr {
     public static void main(String[] args) {
-        String test = "http://1 .com";
+        String test = "http://1.com";
         System.out.println(validate(test));
 
     }
@@ -12,10 +12,17 @@ public class ValidateAddr {
         if (address == null)
             return false;
         String[] domens = new String[]{".com", ".org", ".net"};
-        if (address.length() >= 12 && checkAddressOnWhiteSpace(address) && address.substring(0, 7).equals("http://") && checkWord(address.substring(8, address.length() - 4))
-                || address.length() >= 13 && checkAddressOnWhiteSpace(address) && (address.substring(0, 8).equals("https://")) && checkWord(address.substring(9, address.length() - 4))) {
+        if (address.length() >= 12 // мінімально можлива довжина адреса
+                && checkAddressOnWhiteSpace(address) // перевірка на пробіли
+                && address.substring(0, 7).equals("http://")  // прирівнюю до протоколу
+                && checkWord(address.substring(8, address.length() - 4)) // перевіряю назву адреси
+                || address.length() >= 13
+                && checkAddressOnWhiteSpace(address)
+                && (address.substring(0, 8).equals("https://"))
+                && checkWord(address.substring(9, address.length() - 4))) {
+                                                                                 // якщо тру, то перевіряємо домен
             for (String domen : domens) {
-                if (address.substring(address.length() - 4, address.length()).equals(domen)) {
+                if (address.substring(address.length() - 4, address.length()).equals(domen)) { // прирівнюємо домен адреси до доступних доменів
                     return true;
                 }
             }
