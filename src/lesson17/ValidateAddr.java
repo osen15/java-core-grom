@@ -9,13 +9,14 @@ public class ValidateAddr {
     }
 
     private static boolean validate(String address) {
-        if (address == null)
+        if (address == null)  // перевірка адреси на null
             return false;
-        String[] domens = new String[]{".com", ".org", ".net"};
+        String[] domens = new String[]{".com", ".org", ".net"};  // створюю масив з назвами доменів
         if (address.length() >= 12 // мінімально можлива довжина адреса
                 && checkAddressOnWhiteSpace(address) // перевірка на пробіли
                 && address.substring(0, 7).equals("http://")  // прирівнюю до протоколу
                 && checkWord(address.substring(8, address.length() - 4)) // перевіряю назву адреси
+
                 || address.length() >= 13   // аналогічно з другим протоколом https://
                 && checkAddressOnWhiteSpace(address)
                 && (address.substring(0, 8).equals("https://"))
