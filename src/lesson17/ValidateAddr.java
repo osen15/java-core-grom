@@ -16,7 +16,7 @@ public class ValidateAddr {
                 && checkAddressOnWhiteSpace(address) // перевірка на пробіли
                 && address.substring(0, 7).equals("http://")  // прирівнюю до протоколу
                 && checkWord(address.substring(8, address.length() - 4)) // перевіряю назву адреси
-                || address.length() >= 13
+                || address.length() >= 13   // аналогічно з другим протоколом https://
                 && checkAddressOnWhiteSpace(address)
                 && (address.substring(0, 8).equals("https://"))
                 && checkWord(address.substring(9, address.length() - 4))) {
