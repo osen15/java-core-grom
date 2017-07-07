@@ -1,10 +1,9 @@
 package lesson17;
 
-import java.util.Arrays;
 
 public class ValidateAddr {
     public static void main(String[] args) {
-        String test = "https://gromcode.com";
+        String test = "https://bbbbbb.net";
         System.out.println(validate(test));
 
     }
@@ -12,9 +11,11 @@ public class ValidateAddr {
     private static boolean validate(String address) {
         if (address == null)
             return false;
+        // if (address.length() < 13)
+        // return false;
         String[] domens = new String[]{".com", ".org", ".net"};
-        if (checkAddressOnWhiteSpace(address) && address.substring(0, 7).equals("http://") && checkWord(address.substring(8, address.length() - 5))
-                || checkAddressOnWhiteSpace(address) && (address.substring(0, 8).equals("https://")) && checkWord(address.substring(9, address.length() - 5))) {
+        if (address.length() >= 12 && checkAddressOnWhiteSpace(address) && address.substring(0, 7).equals("http://") && checkWord(address.substring(8, address.length() - 4))
+                || address.length() >= 13 && checkAddressOnWhiteSpace(address) && (address.substring(0, 8).equals("https://")) && checkWord(address.substring(9, address.length() - 4))) {
             for (String domen : domens) {
                 if (address.substring(address.length() - 4, address.length()).equals(domen)) {
                     return true;
@@ -40,7 +41,7 @@ public class ValidateAddr {
                 if (Character.isWhitespace(simb.charAt(0)))
                     return false;
             }
-        } else if (simbols.length <= 2)
+        } else if (simbols.length < 13)
             return false;
         return true;
     }
