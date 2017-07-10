@@ -3,14 +3,14 @@ package lesson17;
 
 public class ValidateAddr {
     public static void main(String[] args) {
-        String test = "https://www.gromcode.com";
+        String test = "https://www..gromcode..com";
         System.out.println(validate(test));
 
     }
     private static boolean validate(String address) {
         if (address == null)
             return false;
-        if (!address.startsWith("https://") && !address.startsWith("https://"))
+        if (!address.startsWith("http://") && !address.startsWith("https://"))
             return  false;
             address = address.replace("http://", "");
             address = address.replace("https://", "");
