@@ -3,24 +3,26 @@ package lesson17;
 
 public class ValidateAddr {
     public static void main(String[] args) {
-        String test = "http://www.  .com";
+        String test = "https://www.gromcode.com";
         System.out.println(validate(test));
 
     }
     private static boolean validate(String address) {
-        if (!address.startsWith("http://") || !address.startsWith("https://"))
+        if (address == null)
             return false;
-        address = address.replace("http://", "");
-        address = address.replace("https://", "");
+        if (!address.startsWith("https://") && !address.startsWith("https://"))
+            return  false;
+            address = address.replace("http://", "");
+            address = address.replace("https://", "");
 
-        address = address.replace("www.", "");
 
+            address = address.replace("www.", "");
 
-        if (!address.contains("net.") || !address.contains("com.") || !address.contains("org."))
+        if (!address.contains(".net") && !address.contains(".com") && !address.contains(".org"))
             return false;
-        address = address.replace("net.", "");
-        address = address.replace("com.", "");
-        address = address.replace("org.", "");
+        address = address.replace(".net", "");
+        address = address.replace(".com", "");
+        address = address.replace(".org", "");
 
         return  checkWord(address);
 
