@@ -18,8 +18,16 @@ public class Converter {
     }
 
     public static String intToString(int input) {
-        return String.valueOf(input);
+
+        try {
+            return String.valueOf(input);
+        } catch (Exception e) {
+            System.out.println(input + " can not be converted to string");
+            return null;
+        }
+
     }
+
 
     public static int StringToInt(String input) {
         try {
