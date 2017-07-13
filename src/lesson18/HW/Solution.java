@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
-        String test = "78 3.3";
+        String test = "78 3.3 bn";
         System.out.println(Arrays.toString(findNumbers(test)));
 
     }
