@@ -14,6 +14,12 @@ public class Converter {
         System.out.println(intToString(111231));
         System.out.println(StringToInt("11"));
 
+        System.out.println(intToString(111231));
+        System.out.println(StringToInt("11"));
+
+        System.out.println(intToString(320855599));
+        System.out.println(StringToInt("3453534534534534534534534534534"));
+
 
     }
 
