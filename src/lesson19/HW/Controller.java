@@ -4,7 +4,7 @@ package lesson19.HW;
 import java.util.Arrays;
 
 public class Controller {
-    public File[] put(Storage storage, File file) throws Exception {
+    public File put(Storage storage, File file) throws Exception {
 
         int index = 0;
 
@@ -18,7 +18,7 @@ public class Controller {
 
                 storage.getFiles()[index] = file;
 
-                return storage.getFiles();
+                return storage.getFiles()[index];
             }
             index++;
         }
