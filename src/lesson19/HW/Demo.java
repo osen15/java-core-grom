@@ -8,14 +8,14 @@ public class Demo {
 
 
         File file = new File(1, "dfsafdsf", "txt", 2);
-        File file1 = new File(2, "ffffffffff", "txt", 2);
+        File file1 = new File(2, "ffffffffff", "tx", 2);
         File file2 = new File(3, "afasfafafafa", "txt", 2);
 
         File file3 = new File(4, "E", "txt", 2);
         File file4 = new File(1, "E", "tx", 2);
 
         File[] files = {file, file1, file2, null};
-        File[] files1 = {file, null, null, null, null};
+        File[] files1 = {null, null, null, null};
         String[] format = {"txt", "doc"};
         Storage storage = new Storage(50, files, format, "Lviv", 40);  // нормально
         Storage storage1 = new Storage(50, files, format, "Lviv", 4);  // малий розмір стореджа
@@ -41,14 +41,20 @@ public class Demo {
         //  }
 
         try {
-          //  controller.transfer(storage, storage3);
-            controller.transfer(storage, storage3);
+            controller.transferAll(storage, storage3);
+          //  controller.transferAll(storage, storage3);
 
         } catch (Exception e) {
             System.out.println("error");
         }
 
-     controller.checkArraySize(storage, storage3);
+        try {
+           // controller.transferFile(storage, storage3, 1);  // помилка, файл з таким айді вже є в стореджі.
+           // controller.transferFile(storage, storage3, 2); // додаємо файл, коли в стореджі нема такого айді
+            //  controller.transferFile(storage, storage3, 2); // неправильний формат файла
+        } catch (Exception e) {
+            System.out.println("error");
+        }
 
     }
 

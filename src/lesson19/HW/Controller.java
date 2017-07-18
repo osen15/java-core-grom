@@ -13,7 +13,7 @@ public class Controller {
 
         for (File fileInStorage : storage.getFiles()) {
 
-            if (freeSpace(storage) > file.getSize() && fileInStorage == null &&
+            if (lenghtOfFile(file.getName()) && freeSpace(storage) > file.getSize() && fileInStorage == null &&
                     formatOfFile(storage, file) && checkId(storage, file.getId())) {
 
                 storage.getFiles()[index] = file;
@@ -45,25 +45,40 @@ public class Controller {
         return null;
     }
 
-    public void transfer(Storage storageFrom, Storage storageTo) throws Exception {
+    public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
 
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
-
+        if ( checkArraySize(storageFrom, storageTo));
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             for (int j = 0; j < storageTo.getFiles().length; j++) {
-
-                if (checkArraySize(storageFrom, storageTo)&& freeSpace(storageTo) > sumSizeFiles(storageFrom) && storageFrom.getFiles()[i] != null
-                        && storageTo.getFiles()[j] == null)
+                if (freeSpace(storageTo) > sumSizeFiles(storageFrom) &&
+                        storageFrom.getFiles()[i] != null &&
+                        storageTo.getFiles()[j] == null)
                     storageTo.getFiles()[j] = storageFrom.getFiles()[i++];
 
 
             }
-            System.out.println(Arrays.toString(storageTo.getFiles()));
+
+        }
+        System.out.println(Arrays.toString(storageTo.getFiles()));
+    }
+
+    public void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
+        if (storageFrom == null || storageTo == null)
+            throw new Exception("null is detected");
+
+        for (File filesFrom : storageFrom.getFiles()) {
+
+            if (filesFrom != null && filesFrom.getId() == id) {
+
+                put(storageTo, filesFrom);
+
+                System.out.println(Arrays.toString(storageTo.getFiles()));
+            }
 
         }
     }
-
 
     private boolean formatOfFile(Storage storage, File file) {  // метод чи пыдходить формат
         for (String format : storage.getFormatsSupported()) {
@@ -87,12 +102,10 @@ public class Controller {
 
     }
 
-    private long freeSpace(Storage storage) {    // обчислення вільного місця в стореджі
-        for (File file : storage.getFiles()) {
-            if (file != null)
-                storage.setStorageSize(storage.getStorageSize() - file.getSize());
-        }
-        return storage.getStorageSize();
+    private long freeSpace(Storage storage) {
+        long freeSp = 0;                      // обчислення вільного місця в стореджі
+        freeSp = storage.getStorageSize() - sumSizeFiles(storage);
+               return freeSp;
     }
 
     private long sumSizeFiles(Storage storage) {   // метод який рахує суму розмірів всіх непорожніх файлів в стореджі
@@ -105,7 +118,7 @@ public class Controller {
         return sum;
     }
 
-    public boolean checkArraySize(Storage storageFrom, Storage storageTo) { // метод який перевіряє чи є місце в  масиві стореджа до якого будуть здійснювати трансфер
+    private boolean checkArraySize(Storage storageFrom, Storage storageTo) { // метод який перевіряє чи є місце в  масиві стореджа до якого будуть здійснювати трансфер
         int countFrom = 0;
         int countTo = 0;
 
@@ -117,6 +130,6 @@ public class Controller {
             if (fileTo == null)
                 countTo++;
         }
-        return countFrom <= countTo;
+        return countFrom < countTo;
     }
 }
