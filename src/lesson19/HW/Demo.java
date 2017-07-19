@@ -15,21 +15,21 @@ public class Demo {
         File file4 = new File(7, "E", "txt", 2);
 
         File[] files = {file, file1, file2, null};
-        File[] files1 = {null, null, null, null};
+        File[] files1 = {file4, null, null, null};
         String[] format = {"txt", "doc"};
         Storage storage = new Storage(50, files, format, "Lviv", 40);  // нормально
         Storage storage1 = new Storage(50, files, format, "Lviv", 4);  // малий розмір стореджа
         Storage storage2 = new Storage(50, files, format, "Lviv", 40); // не той формат файла
         Storage storage3 = new Storage(50, files1, format, "Lviv", 40); // не той формат файла
         Controller controller = new Controller();
-         try {
-         controller.put(storage, file4);
+      //   try {
+        // controller.put(storage, file4);
         //   System.out.println((controller.put(storage1, file3)));
         //     System.out.println(Arrays.toString(controller.put(storage2, file4)));
 
-          } catch (Exception e) {
+       //   } catch (Exception e) {
         //       System.err.println("error");
-         }
+       //  }
 
 
         //   try {

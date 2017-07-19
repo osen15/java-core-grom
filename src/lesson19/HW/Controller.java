@@ -9,9 +9,9 @@ public class Controller {
         if (storage == null || file == null)
             throw new Exception("null is detected");
         try {
-            if (checkId(storage, file.getId())) {
+            if (checkId(storage, file.getId()) && checkLenght(file) && checkFormat(storage, file)) {
                 for (File fileInStorage : storage.getFiles()) {
-                    if (lenghtAndformatOfFile(storage, file) && freeSpace(storage) > file.getSize() && fileInStorage == null) {
+                    if (freeSpace(storage) > file.getSize() && fileInStorage == null) {
                         storage.getFiles()[index] = file;
                         System.out.println(storage.getFiles()[index]);
                     }
@@ -52,25 +52,21 @@ public class Controller {
 
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
-        try {
 
 
-            if (checkArraySize(storageFrom, storageTo)) {
-                for (int i = 0; i < storageFrom.getFiles().length; i++) {
-                    for (int j = 0; j < storageTo.getFiles().length; j++) {
-                        if (freeSpace(storageTo) > sumSizeFiles(storageFrom) &&
-                                storageFrom.getFiles()[i] != null &&
-                                storageTo.getFiles()[j] == null)
+        if (checkArraySize(storageFrom, storageTo) && freeSpace(storageTo) > sumSizeFiles(storageFrom)){
+            for (int i = 0; i < storageFrom.getFiles().length; i++) {
+                for (int j = 0; j < storageTo.getFiles().length; j++) {
+                    if (!checkFormat(storageTo, storageFrom.getFiles()[i])) {
+                        return null;
 
-                            storageTo.getFiles()[j] = storageFrom.getFiles()[i++];
-
-                    }
+                    }else if (storageFrom.getFiles()[i] != null  && storageTo.getFiles()[j] == null &&
+                            checkFormat(storageTo, storageFrom.getFiles()[i]))
+                        storageTo.getFiles()[j] = storageFrom.getFiles()[i++];
 
                 }
-                return storageTo.getFiles();
             }
-        } catch (Exception e) {
-            System.err.println("Error");
+            return storageTo.getFiles();
         }
         return null;
     }
@@ -91,15 +87,19 @@ public class Controller {
         }
     }
 
-    private boolean lenghtAndformatOfFile(Storage storage, File file) {  // метод чи пыдходить формат
-        for (String format : storage.getFormatsSupported()) {
-            if (file.getFormat().equals(format) && file.getName().length() <= 10)
+    private boolean checkLenght(File file) {  // метод чи пыдходить формат
+        return file.getName().length() <= 10;
 
-                return true;
+
+    }
+
+    private  boolean checkFormat(Storage storage, File file){
+        for (String format : storage.getFormatsSupported()){
+            if (file != null && file.getFormat().equals(format))
+               return true;
         }
         return false;
     }
-
 
     private boolean checkId(Storage storage, long id) {  // метод перевірки файла по його айді та імені
         for (File file1 : storage.getFiles()) {
@@ -140,6 +140,6 @@ public class Controller {
             if (fileTo == null)
                 countTo++;
         }
-        return countFrom < countTo;
+        return countFrom <= countTo;
     }
 }
