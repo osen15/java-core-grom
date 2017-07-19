@@ -22,14 +22,15 @@ public class Demo {
         Storage storage2 = new Storage(50, files, format, "Lviv", 40); // не той формат файла
         Storage storage3 = new Storage(50, files1, format, "Lviv", 40); // не той формат файла
         Controller controller = new Controller();
-      //   try {
-        // controller.put(storage, file4);
+        try {
+            System.out.println(controller.put(storage3, file3));
+            System.out.println(Arrays.toString(files1));
         //   System.out.println((controller.put(storage1, file3)));
         //     System.out.println(Arrays.toString(controller.put(storage2, file4)));
 
-       //   } catch (Exception e) {
-        //       System.err.println("error");
-       //  }
+          } catch (Exception e) {
+               System.err.println("error");
+         }
 
 
         //   try {
@@ -40,11 +41,11 @@ public class Demo {
         //     System.out.println("error");
         //   }
 
-        try {
-            System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
+     //   try {
+         //   System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
             //  controller.transferAll(storage, storage3);
 
-        } catch (Exception e) {
+      //  } catch (Exception e) {
             //      System.out.println("error");
 
 
@@ -62,4 +63,3 @@ public class Demo {
 
 
     }
-}

@@ -13,7 +13,7 @@ public class Controller {
                 for (File fileInStorage : storage.getFiles()) {
                     if (freeSpace(storage) > file.getSize() && fileInStorage == null) {
                         storage.getFiles()[index] = file;
-                        System.out.println(storage.getFiles()[index]);
+                       return  storage.getFiles()[index];
                     }
 
                     index++;
