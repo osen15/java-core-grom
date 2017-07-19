@@ -8,7 +8,7 @@ public class Controller {
         int index = 0;
         if (storage == null || file == null)
             throw new Exception("null is detected");
-        try {
+
             if (checkId(storage, file.getId()) && checkLenght(file) && checkFormat(storage, file)) {
                 for (File fileInStorage : storage.getFiles()) {
                     if (freeSpace(storage) > file.getSize() && fileInStorage == null) {
@@ -20,9 +20,6 @@ public class Controller {
                 }
             }
 
-        } catch (Exception e) {
-            System.err.println("Error");
-        }
         return null;
     }
 
@@ -34,16 +31,13 @@ public class Controller {
             throw new Exception("null is detected");
 
         for (File file1 : storage.getFiles()) {
-            try {
+
                 if (file1.getId() == file.getId()) {
 
                     storage.getFiles()[index] = null;
                     return storage.getFiles()[index];
                 }
                 index++;
-            } catch (Exception e) {
-                System.err.println("Error");
-            }
         }
         return null;
     }
