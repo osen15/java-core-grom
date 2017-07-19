@@ -9,37 +9,34 @@ public class Controller {
         if (storage == null || file == null)
             throw new Exception("null is detected");
 
-            if (checkId(storage, file.getId()) && checkLenght(file) && checkFormat(storage, file)) {
-                for (File fileInStorage : storage.getFiles()) {
-                    if (freeSpace(storage) > file.getSize() && fileInStorage == null) {
-                        storage.getFiles()[index] = file;
-                       return  storage.getFiles()[index];
-                    }
-
-                    index++;
-                }
+        if (!checkId(storage, file.getId()) && !checkLenght(file) && !checkFormat(storage, file))
+            throw new Exception("bad ID, lenght or format");
+        for (File fileInStorage : storage.getFiles()) {
+            if (!(freeSpace(storage) >= file.getSize()) && fileInStorage == null) {
+                throw new Exception("error");
+            } else if ((freeSpace(storage) >= file.getSize()) && fileInStorage == null) {
+                storage.getFiles()[index] = file;
+                return file;
             }
+            index++;
+        }
 
-        return null;
+        return file;
     }
 
     public File delete(Storage storage, File file) throws Exception {
-
         int index = 0;
-
         if (storage == null || file == null)
             throw new Exception("null is detected");
 
         for (File file1 : storage.getFiles()) {
-
-                if (file1.getId() == file.getId()) {
-
-                    storage.getFiles()[index] = null;
-                    return storage.getFiles()[index];
-                }
-                index++;
+            if ((file1 != null && file1.getId() == file.getId())) {
+                storage.getFiles()[index] = null;
+                return storage.getFiles()[index];
+            }
+            index++;
         }
-        return null;
+        return storage.getFiles()[index];
     }
 
     public File[] transferAll(Storage storageFrom, Storage storageTo) throws Exception {
@@ -48,21 +45,20 @@ public class Controller {
             throw new Exception("null is detected");
 
 
-        if (checkArraySize(storageFrom, storageTo) && freeSpace(storageTo) > sumSizeFiles(storageFrom)){
-            for (int i = 0; i < storageFrom.getFiles().length; i++) {
-                for (int j = 0; j < storageTo.getFiles().length; j++) {
-                    if (!checkFormat(storageTo, storageFrom.getFiles()[i])) {
-                        return null;
+        if (!checkArraySize(storageFrom, storageTo) && !(freeSpace(storageTo) > sumSizeFiles(storageFrom)))
+            throw new Exception("error");
+        for (int i = 0; i < storageFrom.getFiles().length; i++) {
+            for (int j = 0; j < storageTo.getFiles().length; j++) {
+                if (!checkFormat(storageTo, storageFrom.getFiles()[i])) {
+                    throw new Exception("error");
 
-                    }else if (storageFrom.getFiles()[i] != null  && storageTo.getFiles()[j] == null &&
-                            checkFormat(storageTo, storageFrom.getFiles()[i]))
-                        storageTo.getFiles()[j] = storageFrom.getFiles()[i++];
+                } else if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null &&
+                        checkFormat(storageTo, storageFrom.getFiles()[i]))
+                    storageTo.getFiles()[j] = storageFrom.getFiles()[i++];
 
-                }
             }
-            return storageTo.getFiles();
         }
-        return null;
+        return storageTo.getFiles();
     }
 
     public void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
@@ -71,15 +67,15 @@ public class Controller {
 
         for (File filesFrom : storageFrom.getFiles()) {
 
-            if (filesFrom != null && filesFrom.getId() == id) {
+            if (filesFrom != null && filesFrom.getId() != id)
+                throw new Exception("error");
+            put(storageTo, filesFrom);
 
-                put(storageTo, filesFrom);
-
-                System.out.println(Arrays.toString(storageTo.getFiles()));
-            }
-
+            System.out.println(Arrays.toString(storageTo.getFiles()));
         }
+
     }
+
 
     private boolean checkLenght(File file) {  // метод чи пыдходить формат
         return file.getName().length() <= 10;
@@ -87,10 +83,10 @@ public class Controller {
 
     }
 
-    private  boolean checkFormat(Storage storage, File file){
-        for (String format : storage.getFormatsSupported()){
+    private boolean checkFormat(Storage storage, File file) {
+        for (String format : storage.getFormatsSupported()) {
             if (file != null && file.getFormat().equals(format))
-               return true;
+                return true;
         }
         return false;
     }
