@@ -8,12 +8,15 @@ public class Controller {
         int index = 0;
         if (storage == null || file == null)
             throw new Exception("null is detected");
-
-        if (!checkId(storage, file.getId()) && !checkLenght(file) && !checkFormat(storage, file))
-            throw new Exception("bad ID, lenght or format");
+        if (!checkId(storage, file.getId()))
+            throw new Exception("bad ID");
+        if ( !checkLenght(file))
+            throw new  Exception("lenght is big");
+        if (!checkFormat(storage, file))
+            throw new Exception("bad format");
         for (File fileInStorage : storage.getFiles()) {
-            if (!(freeSpace(storage) >= file.getSize()) && fileInStorage == null) {
-                throw new Exception("error");
+            if (freeSpace(storage) < file.getSize()) {
+                throw new Exception("no space");
             } else if ((freeSpace(storage) >= file.getSize()) && fileInStorage == null) {
                 storage.getFiles()[index] = file;
                 return file;
@@ -28,9 +31,8 @@ public class Controller {
         int index = 0;
         if (storage == null || file == null)
             throw new Exception("null is detected");
-
         for (File file1 : storage.getFiles()) {
-            if ((file1 != null && file1.getId() == file.getId())) {
+            if (file1 != null && file1.getId() == file.getId()) {
                 storage.getFiles()[index] = null;
                 return storage.getFiles()[index];
             }
@@ -43,14 +45,14 @@ public class Controller {
 
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
-
-
-        if (!checkArraySize(storageFrom, storageTo) && !(freeSpace(storageTo) > sumSizeFiles(storageFrom)))
-            throw new Exception("error");
+        if (!checkArraySize(storageFrom, storageTo))
+            throw new Exception("wrong lenght");
+        if (freeSpace(storageTo) < sumSizeFiles(storageFrom))
+            throw new  Exception("no space");
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             for (int j = 0; j < storageTo.getFiles().length; j++) {
                 if (!checkFormat(storageTo, storageFrom.getFiles()[i])) {
-                    throw new Exception("error");
+                    throw new Exception("wrong format");
 
                 } else if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null &&
                         checkFormat(storageTo, storageFrom.getFiles()[i]))
@@ -68,7 +70,7 @@ public class Controller {
         for (File filesFrom : storageFrom.getFiles()) {
 
             if (filesFrom != null && filesFrom.getId() != id)
-                throw new Exception("error");
+                throw new Exception("file does not exist");
             put(storageTo, filesFrom);
 
             System.out.println(Arrays.toString(storageTo.getFiles()));
