@@ -7,7 +7,7 @@ public class Demo {
     public static void main(String[] args) throws Exception {
 
 
-        File file = new File(2, "ddsf", "txt", 2);
+        File file = new File(7, "ddsf", "txt", 2);
         File file1 = new File(6, "ffffffffff", "doc", 2);
         File file2 = new File(3, "afasfafafafa", "txt", 2);
 
@@ -49,7 +49,7 @@ public class Demo {
 
 
         // controller.transferFile(storage, storage3, 1);  // помилка, файл з таким айді вже є в стореджі.
-         controller.transferFile(storage, storage3, 2); // додаємо файл, коли в стореджі нема такого айді
+         controller.transferFile(storage, storage3, 7); // додаємо файл, коли в стореджі нема такого айді
         //  controller.transferFile(storage, storage3, 2); // неправильний формат файла
 
 

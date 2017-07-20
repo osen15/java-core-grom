@@ -93,8 +93,8 @@ public class Controller {
     }
 
     private boolean checkId(Storage storage, long id) {  // метод перевірки файла по його айді та імені
-        for (File file1 : storage.getFiles()) {
-            if (file1.getId() != id)
+        for (File file : storage.getFiles()) {
+            if (file != null && file.getId() != id)
                 return true;
         }
         return false;
