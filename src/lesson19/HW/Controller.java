@@ -16,15 +16,15 @@ public class Controller {
             throw new Exception("bad format");
         if (freeSpace(storage) < file.getSize())
             throw new Exception("no space");
+        if (!checkArraySize(storage))
+            throw new Exception("array is full");
 
         for (File fileInStorage : storage.getFiles()) {
-
             if (fileInStorage == null) {
                 storage.getFiles()[index] = file;
                 System.out.println(file);
                 break;
-            } else if ((index + 1) == storage.getFiles().length)  // помилка коли масив повний
-                throw new Exception("array is full");
+            }
 
             index++;
         }
@@ -126,7 +126,10 @@ public class Controller {
         return sum;
     }
 
-    private boolean checkArraySize(Storage storageFrom, Storage storageTo) { // метод який перевіряє чи є місце в  масиві стореджа до якого будуть здійснювати трансфер
+    private boolean checkArraySize(Storage storageFrom, Storage storageTo) { // метод який перевіряє чи є місце в
+                                                                             // масиві стореджа до якого
+                                                                             //буде здійснюватися трансфер
+                                                                             //всіх файлів з іншоло стореджа
         int countFrom = 0;
         int countTo = 0;
 
@@ -139,5 +142,13 @@ public class Controller {
                 countTo++;
         }
         return countFrom <= countTo;
+    }
+
+    private boolean checkArraySize(Storage storage) {  // метод який перевіряє чи є в масиві файлів доступне місце
+        for (File file : storage.getFiles()) {
+            if (file == null)
+                return true;
+        }
+        return false;
     }
 }

@@ -15,7 +15,7 @@ public class Demo {
         File file4 = new File(6, "E", "txt", 2);
 
         File[] files = {file, file1, file2, null};
-        File[] files1 = { file, null, null};
+        File[] files1 = { file};
         String[] format = {"txt", "doc"};
         Storage storage = new Storage(50, files, format, "Lviv", 40);  // нормально
         Storage storage1 = new Storage(50, files, format, "Lviv", 4);  // малий розмір стореджа
@@ -23,8 +23,8 @@ public class Demo {
         Storage storage3 = new Storage(50, files1, format, "Lviv", 40); // не той формат файла
         Controller controller = new Controller();
 
-       //  controller.put(storage3, file1);
-        //    System.out.println(Arrays.toString(files1));
+        controller.put(storage3, file1);
+            System.out.println(Arrays.toString(files1));
         //   System.out.println((controller.put(storage1, file3)));
         //     System.out.println(Arrays.toString(controller.put(storage2, file4)));
 
@@ -32,7 +32,7 @@ public class Demo {
 
 
 
-             System.out.println((controller.delete(storage, file4)));
+         //    System.out.println((controller.delete(storage, file4)));
         //    System.out.println(Arrays.toString(files));
         //      System.out.println(Arrays.toString(controller.put(storage1, file4)));  // нема четвертого файла в масиві.
         //      System.out.println(Arrays.toString(controller.put(storage1, null))); // файл null
