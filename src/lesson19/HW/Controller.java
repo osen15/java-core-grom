@@ -23,7 +23,7 @@ public class Controller {
                 storage.getFiles()[index] = file;
                 System.out.println(file);
                 break;
-            }else if ((index + 1) == storage.getFiles().length)  // помилка коли масив повний
+            } else if ((index + 1) == storage.getFiles().length)  // помилка коли масив повний
                 throw new Exception("array is full");
 
             index++;
@@ -40,7 +40,8 @@ public class Controller {
             if (file1 != null && file1.getId() == file.getId()) {
                 storage.getFiles()[index] = null;
                 return storage.getFiles()[index];
-            }
+            } else if ((index + 1) == storage.getFiles().length)
+                throw new Exception("file is not found");
             index++;
         }
         return storage.getFiles()[index];
@@ -52,16 +53,16 @@ public class Controller {
             throw new Exception("null is detected");
         if (freeSpace(storageTo) < sumSizeFiles(storageFrom))
             throw new Exception("no space");
-        if (!checkArraySize(storageFrom,storageTo))
-            throw new  Exception("Array is full");
+        if (!checkArraySize(storageFrom, storageTo))
+            throw new Exception("Array is full");
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             for (int j = 0; j < storageTo.getFiles().length; j++) {
                 if (!checkFormat(storageTo, storageFrom.getFiles()[i]) && storageFrom.getFiles()[i] != null)
                     throw new Exception("wrong format");
-                if (checkId(storageTo, storageFrom.getFiles()[i].getId()) && storageFrom.getFiles()[i] != null )
-                        throw new Exception("bad ID");
+                if (checkId(storageTo, storageFrom.getFiles()[i].getId()) && storageFrom.getFiles()[i] != null)
+                    throw new Exception("bad ID");
 
-                 else if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null &&
+                else if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null &&
                         checkFormat(storageTo, storageFrom.getFiles()[i]))
                     storageTo.getFiles()[j] = storageFrom.getFiles()[i++];
 
@@ -85,6 +86,7 @@ public class Controller {
         }
 
     }
+
     private boolean checkLenght(File file) {  // метод чи пыдходить формат
         return file.getName().length() <= 10;
 

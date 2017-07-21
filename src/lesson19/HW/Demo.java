@@ -31,17 +31,15 @@ public class Demo {
 
 
 
-        //  try {
-        //     System.out.println((controller.delete(storage, file2)));
+
+             System.out.println((controller.delete(storage, file4)));
         //    System.out.println(Arrays.toString(files));
         //      System.out.println(Arrays.toString(controller.put(storage1, file4)));  // нема четвертого файла в масиві.
         //      System.out.println(Arrays.toString(controller.put(storage1, null))); // файл null
-        //  } catch (Exception e) {
-        //    System.err.println("error");
-        //   }
 
 
-        System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
+
+      //  System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
         //  controller.transferAll(storage, storage3);
 
 
