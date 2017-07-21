@@ -69,22 +69,20 @@ public class Controller {
     }
 
     public void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
+
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
 
         for (File fileFrom : storageFrom.getFiles()) {
-            if (fileFrom != null && fileFrom.getId() != id)
-                throw new Exception("file does not exist");
+            if (fileFrom != null && fileFrom.getId() == id) {
+                put(storageTo, fileFrom);
+                break;
 
-            put(storageTo, fileFrom);
-            break;
-
+            }
 
         }
 
     }
-
-
     private boolean checkLenght(File file) {  // метод чи пыдходить формат
         return file.getName().length() <= 10;
 
