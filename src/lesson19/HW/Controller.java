@@ -8,7 +8,7 @@ public class Controller {
         int index = 0;
         if (storage == null || file == null)
             throw new Exception("null is detected");
-        if (!checkId(storage, file.getId()))
+        if (checkId(storage, file.getId()))
             throw new Exception("bad ID");
         if (!checkLenght(file))
             throw new Exception("wrong lenght");
@@ -16,16 +16,21 @@ public class Controller {
             throw new Exception("bad format");
         if (freeSpace(storage) < file.getSize())
             throw new Exception("no space");
+
         for (File fileInStorage : storage.getFiles()) {
-            if ((freeSpace(storage) >= file.getSize()) && fileInStorage == null) {
+
+            if (fileInStorage == null) {
                 storage.getFiles()[index] = file;
                 System.out.println(file);
                 break;
-            }
+            }else if ((index + 1) == storage.getFiles().length)  // помилка коли масив повний
+                throw new Exception("array is full");
+
             index++;
         }
 
     }
+
 
     public File delete(Storage storage, File file) throws Exception {
         int index = 0;
@@ -73,6 +78,8 @@ public class Controller {
 
             put(storageTo, fileFrom);
             break;
+
+
         }
 
     }
@@ -94,7 +101,7 @@ public class Controller {
 
     private boolean checkId(Storage storage, long id) {  // метод перевірки файла по його айді та імені
         for (File file : storage.getFiles()) {
-            if (file != null && file.getId() != id)
+            if (file != null && file.getId() == id)
                 return true;
         }
         return false;
