@@ -15,7 +15,7 @@ public class Demo {
         File file4 = new File(6, "E", "txt", 2);
 
         File[] files = {file, file1, file2, null};
-        File[] files1 = { file};
+        File[] files1 = { file, null, null};
         String[] format = {"txt", "doc"};
         Storage storage = new Storage(50, files, format, "Lviv", 40);  // нормально
         Storage storage1 = new Storage(50, files, format, "Lviv", 4);  // малий розмір стореджа
@@ -41,15 +41,15 @@ public class Demo {
         //   }
 
 
-       // System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
+        System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
         //  controller.transferAll(storage, storage3);
 
 
 
         // controller.transferFile(storage, storage3, 1);  // помилка, файл з таким айді вже є в стореджі.
-         controller.transferFile(storage, storage3, 32); // додаємо файл, коли в стореджі нема такого айді
+       //  controller.transferFile(storage, storage3, 32); // додаємо файл, коли в стореджі нема такого айді
         //  controller.transferFile(storage, storage3, 2); // неправильний формат файла
-        System.out.println(Arrays.toString(files1));
+     //   System.out.println(Arrays.toString(files1));
 
 
         //  System.out.println(controller.checkId(storage, file4.getId()));
