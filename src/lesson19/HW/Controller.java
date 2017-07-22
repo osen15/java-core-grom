@@ -58,14 +58,16 @@ public class Controller {
             for (int j = 0; j < storageTo.getFiles().length; j++) {
                 if (!checkFormat(storageTo, storageFrom.getFiles()[i]) && storageFrom.getFiles()[i] != null)
                     throw new Exception("wrong format");
-                if (checkId(storageTo, storageFrom.getFiles()[i].getId()) && storageFrom.getFiles()[i] != null)
-                    throw new Exception("bad ID");
+                if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null && checkId(storageTo, storageFrom.getFiles()[i].getId()))
+                    throw new Exception("wrong ID");
 
-                else if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null &&
-                        checkFormat(storageTo, storageFrom.getFiles()[i]))
+                if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null)
                     storageTo.getFiles()[j] = storageFrom.getFiles()[i++];
+
             }
+
         }
+
         return storageTo.getFiles();
     }
 
@@ -74,7 +76,7 @@ public class Controller {
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
         if (!checkId(storageFrom, id))
-            throw new  Exception("StorareFrom: file is not found");
+            throw new Exception("StorareFrom: file is not found");
         for (File fileFrom : storageFrom.getFiles()) {
             if (fileFrom.getId() == id) {
 
@@ -103,9 +105,11 @@ public class Controller {
     }
 
     private boolean checkId(Storage storage, long id) {  // метод перевірки файла по його айді та імені
+
         for (File file : storage.getFiles()) {
             if (file != null && file.getId() == id)
                 return true;
+
         }
         return false;
 
