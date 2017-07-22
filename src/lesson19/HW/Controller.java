@@ -47,7 +47,6 @@ public class Controller {
     }
 
     public File[] transferAll(Storage storageFrom, Storage storageTo) throws Exception {
-
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
         if (freeSpace(storageTo) < sumSizeFiles(storageFrom))
@@ -55,17 +54,8 @@ public class Controller {
         if (!checkArraySize(storageFrom, storageTo))
             throw new Exception("Array is full");
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
-            for (int j = 0; j < storageTo.getFiles().length; j++) {
-                if (!checkFormat(storageTo, storageFrom.getFiles()[i]) && storageFrom.getFiles()[i] != null)
-                    throw new Exception("wrong format");
-                if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null && checkId(storageTo, storageFrom.getFiles()[i].getId()))
-                    throw new Exception("wrong ID");
-
-                if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null)
-                    storageTo.getFiles()[j] = storageFrom.getFiles()[i++];
-
-            }
-
+            if ((storageFrom.getFiles()[i] != null))
+               put(storageTo, storageFrom.getFiles()[i]);
         }
 
         return storageTo.getFiles();

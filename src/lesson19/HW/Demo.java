@@ -7,15 +7,15 @@ public class Demo {
     public static void main(String[] args) throws Exception {
 
 
-        File file = new File(3, "ddsf", "txt", 2);
-        File file1 = new File(4, "ffffffffff", "dc", 2);
-        File file2 = new File(3, "afasfafafafa", "txt", 2);
+        File file = new File(1, "ddsf", "txt", 2);
+        File file1 = new File(2, "ff", "doc", 2);
+        File file2 = new File(3, "af", "txt", 2);
 
-        File file3 = new File(2, "E", "txt", 2);
+        File file3 = new File(8, "E", "txt", 2);
         File file4 = new File(6, "E", "txt", 2);
 
-        File[] files = {null, file1, null};
-        File[] files1 = { file4, null, null, null};
+        File[] files = {file2,file4};
+        File[] files1 = { null,file3};
 
         String[] format = {"txt", "doc"};
         Storage storage = new Storage(50, files, format, "Lviv", 40);  // нормально
