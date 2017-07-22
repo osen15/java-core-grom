@@ -55,7 +55,7 @@ public class Controller {
             throw new Exception("Array is full");
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             if ((storageFrom.getFiles()[i] != null))
-               put(storageTo, storageFrom.getFiles()[i]);
+                put(storageTo, storageFrom.getFiles()[i]);
         }
 
         return storageTo.getFiles();
@@ -72,12 +72,8 @@ public class Controller {
 
                 put(storageTo, fileFrom);
                 break;
-
             }
-
         }
-
-
     }
 
     private boolean checkLenght(File file) {  // метод чи пыдходить формат
@@ -121,7 +117,8 @@ public class Controller {
         return sum;
     }
 
-    private boolean checkArraySize(Storage storageFrom, Storage storageTo) { // метод який перевіряє чи є місце в
+    private boolean checkArraySize(Storage storageFrom, Storage storageTo) {
+        // метод який перевіряє чи є місце в
         // масиві стореджа до якого
         //буде здійснюватися трансфер
         //всіх файлів з іншоло стореджа
