@@ -31,7 +31,6 @@ public class Controller {
 
     }
 
-
     public File delete(Storage storage, File file) throws Exception {
         int index = 0;
         if (storage == null || file == null)
@@ -65,7 +64,6 @@ public class Controller {
                 else if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] == null &&
                         checkFormat(storageTo, storageFrom.getFiles()[i]))
                     storageTo.getFiles()[j] = storageFrom.getFiles()[i++];
-
             }
         }
         return storageTo.getFiles();
@@ -75,15 +73,18 @@ public class Controller {
 
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
-
+        if (!checkId(storageFrom, id))
+            throw new  Exception("StorareFrom: file is not found");
         for (File fileFrom : storageFrom.getFiles()) {
-            if (fileFrom != null && fileFrom.getId() == id) {
+            if (fileFrom.getId() == id) {
+
                 put(storageTo, fileFrom);
                 break;
 
             }
 
         }
+
 
     }
 
@@ -127,9 +128,9 @@ public class Controller {
     }
 
     private boolean checkArraySize(Storage storageFrom, Storage storageTo) { // метод який перевіряє чи є місце в
-                                                                             // масиві стореджа до якого
-                                                                             //буде здійснюватися трансфер
-                                                                             //всіх файлів з іншоло стореджа
+        // масиві стореджа до якого
+        //буде здійснюватися трансфер
+        //всіх файлів з іншоло стореджа
         int countFrom = 0;
         int countTo = 0;
 
