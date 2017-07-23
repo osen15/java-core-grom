@@ -1,8 +1,6 @@
 package lesson19.HW;
 
 
-import java.util.Arrays;
-
 public class Controller {
     public void put(Storage storage, File file) throws Exception {
         int index = 0;
@@ -103,7 +101,7 @@ public class Controller {
     }
 
     private long freeSpace(Storage storage) {
-        long freeSp = 0;                      // обчислення вільного місця в стореджі
+        long freeSp;                      // обчислення вільного місця в стореджі
         freeSp = storage.getStorageSize() - sumSizeFiles(storage);
         return freeSp;
     }
