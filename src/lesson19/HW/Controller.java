@@ -35,12 +35,13 @@ public class Controller {
         int index = 0;
         if (storage == null || file == null)
             throw new Exception("null is detected");
+        if (!checkId(storage, file.getId()))
+            throw new Exception("Storage: file is not found");
         for (File file1 : storage.getFiles()) {
             if (file1 != null && file1.getId() == file.getId()) {
                 storage.getFiles()[index] = null;
                 return storage.getFiles()[index];
-            } else if ((index + 1) == storage.getFiles().length)
-                throw new Exception("file is not found");
+            }
             index++;
         }
         return storage.getFiles()[index];
@@ -66,7 +67,7 @@ public class Controller {
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
         if (!checkId(storageFrom, id))
-            throw new Exception("StorareFrom: file is not found");
+            throw new Exception("StorageFrom: file is not found");
         for (File fileFrom : storageFrom.getFiles()) {
             if (fileFrom.getId() == id) {
 

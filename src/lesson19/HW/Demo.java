@@ -9,7 +9,7 @@ public class Demo {
 
         File file = new File(1, "ddsf", "txt", 2);
         File file1 = new File(2, "ff", "doc", 2);
-        File file2 = new File(3, "af", "txt", 2);
+        File file2 = new File(8, "af", "txt", 2);
 
         File file3 = new File(8, "E", "txt", 2);
         File file4 = new File(6, "E", "txt", 2);
@@ -38,9 +38,17 @@ public class Demo {
         //      System.out.println(Arrays.toString(controller.put(storage1, file4)));  // нема четвертого файла в масиві.
         //      System.out.println(Arrays.toString(controller.put(storage1, null))); // файл null
 
+      try {
 
 
-       System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
+          System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
+
+      } catch (Exception e){
+          System.err.println("error");
+      }finally {
+
+          System.out.println(Arrays.toString(files1));
+      }
         //  controller.transferAll(storage, storage3);
 
 
