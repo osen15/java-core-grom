@@ -11,49 +11,43 @@ public class UserRepository {
         return users;
     }
 
-    public User save(User user) {
+    public User save(User user) throws UserNotFoundException, BadRequestException {
         if (user == null)
-            return null;
-        if (findById(user.getId()) != null)
-            return null;
-        int countPlaced = 0;
-        for (User us : users) {
-            if (us != null)
-                countPlaced++;
-        }
-        int a = 0;
+            throw new NullPointerException("user is null");
+        findById(user.getId());
+
+        int count = 0;
 
         for (User us : users) {
             if (us == null) {
-                users[a] = user;
+                users[count] = user;
                 break;
             }
-            a++;
+            count++;
         }
-        return user;
+        throw new BadRequestException();
+
     }
 
-    public User update(User user) {
-        if (findById(user.getId()) == null)
-            return null;
-        int a = 0;
+    public User update(User user) throws UserNotFoundException, InternalServerError {
+        if (user == null)
+            throw new NullPointerException();
+        int index = 0;
 
         for (User us : users) {
-            if (us.getId().equals( user.getId())) {
-                users[a] = user;
+            if (us.getId().equals(user.getId())) {
+                users[index] = user;
                 break;
             }
-            a++;
+            index++;
         }
 
-        return user;
+        throw new InternalServerError();
     }
 
-    public void delete(long id) {
+    public void delete(long id) throws UserNotFoundException, InternalServerError {
         User user = findById(id);
 
-        if (user == null)
-            return;
         int index = 0;
         for (User us : users) {
             if (us.getId().equals(user.getId())) {
@@ -63,15 +57,29 @@ public class UserRepository {
             index++;
         }
 
+        throw new InternalServerError();
+
 
     }
 
-    private User findById(long id) {
+    private User findById(long id) throws UserNotFoundException {
         for (User user : users) {
-            if (user != null && user.getId().equals(id))
+            if (user != null && user.getId() == id)
                 return user;
         }
-        return null;
+        throw new UserNotFoundException();
+
+    }
+
+    private class BadRequestException extends Exception {
+
+    }
+
+    private class UserNotFoundException extends Exception {
+
+    }
+
+    private class InternalServerError extends Exception {
 
     }
 
