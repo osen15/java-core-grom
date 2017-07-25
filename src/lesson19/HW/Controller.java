@@ -4,18 +4,20 @@ package lesson19.HW;
 public class Controller {
     public void put(Storage storage, File file) throws Exception {
         int index = 0;
-        if (storage == null || file == null)
-            throw new Exception("null is detected");
+        if (storage == null)
+            throw new Exception("storage is detected");
+        if (file == null)
+            throw  new Exception("file is null");
         if (checkId(storage, file.getId()))
-            throw new Exception("bad ID");
+            throw new Exception(file.getId() + " bad ID");
         if (!checkLenght(file))
-            throw new Exception("wrong lenght");
+            throw new Exception(file.getFormat() + " wrong lenght");
         if (!checkFormat(storage, file))
-            throw new Exception("bad format");
+            throw new Exception(file.getFormat() + " bad format");
         if (freeSpace(storage) < file.getSize())
-            throw new Exception("no space");
+            throw new Exception(storage.getId() + " : no space");
         if (!checkArraySize(storage))
-            throw new Exception("array is full");
+            throw new Exception(storage.getId() + " array is full");
 
         for (File fileInStorage : storage.getFiles()) {
             if (fileInStorage == null) {
@@ -31,10 +33,12 @@ public class Controller {
 
     public File delete(Storage storage, File file) throws Exception {
         int index = 0;
-        if (storage == null || file == null)
-            throw new Exception("null is detected");
+        if (storage == null)
+            throw new Exception("storage is null");
+        if (file == null)
+            throw  new  Exception("file is null");
         if (!checkId(storage, file.getId()))
-            throw new Exception("Storage: file is not found");
+            throw new Exception( file.getId() + " is not found in " + storage.getId());
         for (File file1 : storage.getFiles()) {
             if (file1 != null && file1.getId() == file.getId()) {
                 storage.getFiles()[index] = null;
@@ -49,9 +53,9 @@ public class Controller {
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
         if (freeSpace(storageTo) < sumSizeFiles(storageFrom))
-            throw new Exception("no space");
+            throw new Exception(storageTo.getId() + " : no space");
         if (!checkArraySize(storageFrom, storageTo))
-            throw new Exception("Array is full");
+            throw new Exception(storageTo.getId() + " Array is full");
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             if ((storageFrom.getFiles()[i] != null))
                 put(storageTo, storageFrom.getFiles()[i]);
@@ -65,7 +69,7 @@ public class Controller {
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
         if (!checkId(storageFrom, id))
-            throw new Exception("StorageFrom: file is not found");
+            throw new Exception(storageFrom.getId() + " : file with " + id + " is not found");
         for (File fileFrom : storageFrom.getFiles()) {
             if (fileFrom.getId() == id) {
 
