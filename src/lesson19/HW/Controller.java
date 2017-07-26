@@ -30,7 +30,7 @@ public class Controller {
 
     }
 
-    public File delete(Storage storage, File file) throws Exception {
+    public void delete(Storage storage, File file) throws Exception {
         int index = 0;
         if (storage == null)
             throw new Exception("storage is null");
@@ -41,11 +41,11 @@ public class Controller {
         for (File file1 : storage.getFiles()) {
             if (file1 != null && file1.getId() == file.getId()) {
                 storage.getFiles()[index] = null;
-                return storage.getFiles()[index];
+
             }
             index++;
         }
-        return storage.getFiles()[index];
+
     }
 
     public File[] transferAll(Storage storageFrom, Storage storageTo) throws Exception {
