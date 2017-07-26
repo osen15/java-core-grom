@@ -10,8 +10,6 @@ public class Controller {
             throw  new Exception("file is null");
         if (checkId(storage, file.getId()))
             throw new Exception(file.getId() + " bad ID");
-        if (!checkLenght(file))
-            throw new Exception(file.getFormat() + " wrong lenght");
         if (!checkFormat(storage, file))
             throw new Exception(file.getFormat() + " bad format");
         if (freeSpace(storage) < file.getSize())
@@ -21,7 +19,6 @@ public class Controller {
             if (fileInStorage == null) {
                 storage.getFiles()[index] = file;
                 return  file;
-
             }
 
             index++;
@@ -78,11 +75,7 @@ public class Controller {
         }
     }
 
-    private boolean checkLenght(File file) {  // метод чи пыдходить формат
-        return file.getName().length() <= 10;
 
-
-    }
 
     private boolean checkFormat(Storage storage, File file) {
         for (String format : storage.getFormatsSupported()) {

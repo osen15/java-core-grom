@@ -29,4 +29,11 @@ public class File {
     public long getSize() {
         return size;
     }
+    private boolean checkLenght(File file) throws Exception {  // метод перевірки допустимої довжини назви файла
+       if (file.getName().length() > 10)
+           throw new Exception(file.getName() + " >10");
+       return true;
+
+
+    }
 }
