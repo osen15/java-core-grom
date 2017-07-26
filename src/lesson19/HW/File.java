@@ -9,7 +9,6 @@ public class File {
 
     public File(long id, String format, long size) {
         this.id = id;
-
         this.format = format;
         this.size = size;
     }
