@@ -2,7 +2,7 @@ package lesson19.HW;
 
 
 public class Controller {
-    public void put(Storage storage, File file) throws Exception {
+    public File put(Storage storage, File file) throws Exception {
         int index = 0;
         if (storage == null)
             throw new Exception("storage is detected");
@@ -16,18 +16,17 @@ public class Controller {
             throw new Exception(file.getFormat() + " bad format");
         if (freeSpace(storage) < file.getSize())
             throw new Exception(storage.getId() + " : no space");
-        if (!checkArraySize(storage))
-            throw new Exception(storage.getId() + " array is full");
 
         for (File fileInStorage : storage.getFiles()) {
             if (fileInStorage == null) {
                 storage.getFiles()[index] = file;
-                System.out.println(file);
-                break;
+                return  file;
+
             }
 
             index++;
         }
+        throw new Exception(storage.getId() + " array is full");
 
     }
 
