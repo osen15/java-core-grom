@@ -7,7 +7,7 @@ public class File {
     private String format;
     private long size;
 
-   public File(long id, String name, String format, long size) {
+    public File(long id, String name, String format, long size)   {
         this.id = id;
         this.name = name;
         this.format = format;
@@ -29,11 +29,8 @@ public class File {
     public long getSize() {
         return size;
     }
-    private String checkLenght(File file) throws Exception {  // метод перевірки допустимої довжини назви файла
-       if (file.getName().length() > 10)
-           throw new Exception(file.getName() + " >10");
-       return file.getName();
-
-
+    private boolean checkLenght() {  // метод перевірки допустимої довжини назви файла
+        return name.length() <= 10;
     }
+
 }
