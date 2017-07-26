@@ -14,6 +14,8 @@ public class Controller {
             throw new Exception(file.getFormat() + " bad format");
         if (freeSpace(storage) < file.getSize())
             throw new Exception(storage.getId() + " : no space");
+        if (!checkZeroLenght(storage))
+            throw new Exception("array: lenght is 0");
 
         for (File fileInStorage : storage.getFiles()) {
             if (fileInStorage == null) {
@@ -131,11 +133,7 @@ public class Controller {
         return countFrom <= countTo;
     }
 
-    private boolean checkArraySize(Storage storage) {  // метод який перевіряє чи є в масиві файлів доступне місце
-        for (File file : storage.getFiles()) {
-            if (file == null)
-                return true;
-        }
-        return false;
+    private boolean checkZeroLenght(Storage storage) {  // метод який перевіряє чи є в масиві файлів доступне місце
+        return storage.getFiles().length != 0;
     }
 }
