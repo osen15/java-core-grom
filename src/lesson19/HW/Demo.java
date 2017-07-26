@@ -7,12 +7,12 @@ public class Demo {
     public static void main(String[] args) throws Exception {
 
 
-        File file = new File(1,  "txt", 2);
-        File file1 = new File(2,  "doc", 2);
-        File file2 = new File(7,  "txt", 2);
+        File file = new File(1, "ddsf", "txt", 2);
+        File file1 = new File(2, "ff", "doc", 2);
+        File file2 = new File(7, "af", "txt", 2);
 
-        File file3 = new File(8,  "txt", 2);
-        File file4 = new File(6,  "txt", 2);
+        File file3 = new File(8, "E", "txt", 2);
+        File file4 = new File(6, "E", "txt", 2);
 
         File[] files = {null, null, file};
         File[] files1 = { null,file3,null};
