@@ -11,7 +11,7 @@ public class Controller {
         if (!(file.getId() > 0))
             throw new Exception("unacceptable ID");
         if (checkId(storage, file.getId()))
-            throw new Exception(file.getId() + " bad ID");
+            throw new Exception(storage.getId() + " bad ID");
         if (!checkFormat(storage, file))
             throw new Exception(file.getFormat() + " bad format");
         if (freeSpace(storage) < file.getSize())
