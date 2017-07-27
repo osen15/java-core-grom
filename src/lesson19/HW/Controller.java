@@ -16,6 +16,8 @@ public class Controller {
             throw new Exception(storage.getId() + " : no space");
         if (!checkZeroLenght(storage))
             throw new Exception("array: lenght is 0");
+        if (checkIdenticalFile(storage, file))
+            throw new Exception(file.getId() + " already exists");
 
         for (File fileInStorage : storage.getFiles()) {
             if (fileInStorage == null) {
@@ -134,5 +136,13 @@ public class Controller {
 
     private boolean checkZeroLenght(Storage storage) {  // метод який перевіряє чи є в масиві файлів доступне місце
         return storage.getFiles().length != 0;
+    }
+    private boolean checkIdenticalFile(Storage storage, File file){
+        for (File file1 : storage.getFiles()){
+            if (file1.getId() == file.getId() && file1.getName().equals(file.getName()))
+                return  true;
+
+        }
+        return  false;
     }
 }

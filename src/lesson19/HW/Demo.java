@@ -15,7 +15,7 @@ public class Demo {
         File file4 = new File(6, "E", "txt", 2);
 
         File[] files = {null, file1, file};
-        File[] files1 = {file2, null, null};
+        File[] files1 = {file1, null, null, null};
 
         String[] format = {"txt", "doc"};
         Storage storage = new Storage(50, files, format, "Lviv", 40);  // нормально
