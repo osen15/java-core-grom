@@ -13,7 +13,7 @@ public class Controller {
         if (checkId(storage, file.getId()))
             throw new Exception(storage.getId() + " bad ID");
         if (!checkFormat(storage, file))
-            throw new Exception(file.getFormat() + " bad format");
+            throw new Exception(storage.getId() + " bad format");
         if (freeSpace(storage) < file.getSize())
             throw new Exception(storage.getId() + " : no space");
         if (!checkZeroLenght(storage))
@@ -39,7 +39,7 @@ public class Controller {
         if (file == null)
             throw new Exception("file is null");
         if (!checkId(storage, file.getId()))
-            throw new Exception(file.getId() + " is not found in " + storage.getId());
+            throw new Exception(storage.getId() + " is not found");
         for (File file1 : storage.getFiles()) {
             if (file1 != null && file1.getId() == file.getId()) {
                 storage.getFiles()[index] = null;
