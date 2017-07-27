@@ -14,8 +14,8 @@ public class Demo {
         File file3 = new File(8, "E", "txt", 2);
         File file4 = new File(6, "E", "txt", 2);
 
-        File[] files = {null, null, file};
-        File[] files1 = {null};
+        File[] files = {null, file1, file};
+        File[] files1 = {file2, null, null};
 
         String[] format = {"txt", "doc"};
         Storage storage = new Storage(50, files, format, "Lviv", 40);  // нормально
@@ -24,8 +24,8 @@ public class Demo {
         Storage storage3 = new Storage(50, files1, format, "Lviv", 40); // не той формат файла
         Controller controller = new Controller();
 
-        System.out.println(controller.put(storage3, file2));
-        System.out.println(Arrays.toString(files1));
+     //   System.out.println(controller.put(storage3, file3));
+     //   System.out.println(Arrays.toString(files1));
         //   System.out.println((controller.put(storage1, file3)));
         //     System.out.println(Arrays.toString(controller.put(storage2, file4)));
 
@@ -35,14 +35,11 @@ public class Demo {
         //      System.out.println(Arrays.toString(controller.put(storage1, file4)));  // нема четвертого файла в масиві.
         //      System.out.println(Arrays.toString(controller.put(storage1, null))); // файл null
 
-        ///   try {
 
 
-        ///////      System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
+             System.out.println(Arrays.toString(controller.transferAll(storage, storage3)));
 
-        ////  } catch (Exception e){
-       // System.err.println("error");
-        ////  }finally {
+
 
         //     System.out.println(Arrays.toString(files1));
         // }

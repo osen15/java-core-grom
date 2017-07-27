@@ -30,10 +30,9 @@ public class File {
     public long getSize() {
         return size;
     }
-    private String checkLenght(String name) throws Exception {// метод перевірки допустимої довжини назви файла
+    private void checkLenght(String name) throws Exception {// метод перевірки допустимої довжини назви файла
         if (name.length() > 10)
             throw new Exception("long name");
-        return name;
     }
 
 }

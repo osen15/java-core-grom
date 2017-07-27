@@ -26,7 +26,6 @@ public class Controller {
             index++;
         }
         throw new Exception(storage.getId() + " array is full");
-
     }
 
     public void delete(Storage storage, File file) throws Exception {
@@ -52,8 +51,8 @@ public class Controller {
             throw new Exception("null is detected");
         if (freeSpace(storageTo) < sumSizeFiles(storageFrom))
             throw new Exception(storageTo.getId() + " : no space");
-        if (!checkArraySize(storageFrom, storageTo))
-            throw new Exception(storageTo.getId() + " Array is full");
+       // if (!checkArraySize(storageFrom, storageTo))
+        //    throw new Exception(storageTo.getId() + " Array is full");
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             if ((storageFrom.getFiles()[i] != null))
                 put(storageTo, storageFrom.getFiles()[i]);
