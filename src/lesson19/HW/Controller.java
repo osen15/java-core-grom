@@ -139,7 +139,7 @@ public class Controller {
     }
     private boolean checkIdenticalFile(Storage storage, File file){
         for (File file1 : storage.getFiles()){
-            if (file1.getId() == file.getId() && file1.getName().equals(file.getName()))
+            if (file1 != null && file1.getId() == file.getId() && file1.getName().equals(file.getName()))
                 return  true;
 
         }
