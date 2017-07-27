@@ -7,7 +7,9 @@ public class Controller {
         if (storage == null)
             throw new Exception("storage is detected");
         if (file == null)
-            throw  new Exception("file is null");
+            throw new Exception("file is null");
+        if (!(file.getId() > 0))
+            throw new Exception("unacceptable ID");
         if (checkId(storage, file.getId()))
             throw new Exception(file.getId() + " bad ID");
         if (!checkFormat(storage, file))
@@ -22,7 +24,7 @@ public class Controller {
         for (File fileInStorage : storage.getFiles()) {
             if (fileInStorage == null) {
                 storage.getFiles()[index] = file;
-                return  file;
+                return file;
             }
 
             index++;
@@ -35,9 +37,9 @@ public class Controller {
         if (storage == null)
             throw new Exception("storage is null");
         if (file == null)
-            throw  new  Exception("file is null");
+            throw new Exception("file is null");
         if (!checkId(storage, file.getId()))
-            throw new Exception( file.getId() + " is not found in " + storage.getId());
+            throw new Exception(file.getId() + " is not found in " + storage.getId());
         for (File file1 : storage.getFiles()) {
             if (file1 != null && file1.getId() == file.getId()) {
                 storage.getFiles()[index] = null;
@@ -53,7 +55,7 @@ public class Controller {
             throw new Exception("null is detected");
         if (freeSpace(storageTo) < sumSizeFiles(storageFrom))
             throw new Exception(storageTo.getId() + " : no space");
-       // if (!checkArraySize(storageFrom, storageTo))
+        // if (!checkArraySize(storageFrom, storageTo))
         //    throw new Exception(storageTo.getId() + " Array is full");
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             if ((storageFrom.getFiles()[i] != null))
@@ -77,7 +79,6 @@ public class Controller {
             }
         }
     }
-
 
 
     private boolean checkFormat(Storage storage, File file) {
@@ -137,12 +138,13 @@ public class Controller {
     private boolean checkZeroLenght(Storage storage) {  // метод який перевіряє чи є в масиві файлів доступне місце
         return storage.getFiles().length != 0;
     }
-    private boolean checkIdenticalFile(Storage storage, File file){
-        for (File file1 : storage.getFiles()){
+
+    private boolean checkIdenticalFile(Storage storage, File file) {
+        for (File file1 : storage.getFiles()) {
             if (file1 != null && file1.getId() == file.getId() && file1.getName().equals(file.getName()))
-                return  true;
+                return true;
 
         }
-        return  false;
+        return false;
     }
 }
