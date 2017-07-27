@@ -15,7 +15,7 @@ public class Controller {
         if (freeSpace(storage) < file.getSize())
             throw new Exception(storage.getId() + " : no space");
         if (!checkZeroLenght(storage))
-            throw new Exception("array: lenght is 0");
+            throw new Exception(storage.getId() + "array: lenght is 0");
         if (checkIdenticalFile(storage, file))
             throw new Exception(file.getId() + " already exists");
 

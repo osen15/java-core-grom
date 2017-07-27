@@ -11,20 +11,20 @@ public class Demo {
         File file1 = new File(2, "ff", "doc", 2);
         File file2 = new File(7, "af", "txt", 2);
 
-        File file3 = new File(8, "E", "txt", 2);
+        File file3 = new File(8, "E", "doc", 2);
         File file4 = new File(6, "E", "txt", 2);
 
-        File[] files = {null, file1, file};
-        File[] files1 = {file1, null, null, null};
+        File[] files = {null, file, file};
+        File[] files1 = {file1};
 
         String[] format = {"txt", "doc"};
         Storage storage = new Storage(50, files, format, "Lviv", 40);  // нормально
         Storage storage1 = new Storage(50, files, format, "Lviv", 4);  // малий розмір стореджа
         Storage storage2 = new Storage(50, files, format, "Lviv", 40); // не той формат файла
-        Storage storage3 = new Storage(50, files1, format, "Lviv", 40); // не той формат файла
+        Storage storage3 = new Storage(20, files1, format, "Lviv", 40); // не той формат файла
         Controller controller = new Controller();
 
-     //   System.out.println(controller.put(storage3, file3));
+      // System.out.println(controller.put(storage3, file3));
      //   System.out.println(Arrays.toString(files1));
         //   System.out.println((controller.put(storage1, file3)));
         //     System.out.println(Arrays.toString(controller.put(storage2, file4)));
