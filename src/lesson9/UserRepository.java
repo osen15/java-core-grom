@@ -5,86 +5,81 @@ package lesson9;
  */
 public class UserRepository {
 
-    User[] users = new User[10];
+    private User[] users = new User[10];
 
-    public User[] getUsers() {
-        return users;
+
+    private User findById(long id) {
+        for (User user : users) {
+            if (user != null && user.getId() == id) {
+                return user;
+            }
+        }
+        return null;
     }
 
-    public User save(User user) throws UserNotFoundException, BadRequestException {
-        if (user == null)
-            throw new NullPointerException("user is null");
-        findById(user.getId());
 
+    public User save(User user) {
+        if (user == null) {
+            return null;
+        }
         int count = 0;
-
-        for (User us : users) {
-            if (us == null) {
-                users[count] = user;
-                break;
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == null) {
+                count++;
             }
-            count++;
         }
-        throw new BadRequestException();
+        if (count == 0) {
+            return null;
+        }
 
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == user) {
+                return null;
+            }
+            if (users[i] == null) {
+                users[i] = user;
+                return users[i];
+            }
+        }
+        return null;
     }
 
-    public User update(User user) throws UserNotFoundException, InternalServerError {
-        if (user == null)
-            throw new NullPointerException();
+    public User update(User user) {
+        if (user == null) {
+            return null;
+        }
+
+        User findUserById = this.findById(user.getId());
+        if (findUserById == null) {
+            return null;
+        }
+        for (int i = 0; i < users.length; i++) {
+            if (users[i].getId() == user.getId()) {
+                return users[i] = user;
+            }
+        }
+        return null;
+    }
+
+
+    public void delete(long id) {
+
         int index = 0;
-
-        for (User us : users) {
-            if (us.getId().equals(user.getId())) {
-                users[index] = user;
-                break;
-            }
-            index++;
-        }
-
-        throw new InternalServerError();
-    }
-
-    public void delete(long id) throws UserNotFoundException, InternalServerError {
         User user = findById(id);
-
-        int index = 0;
         for (User us : users) {
-            if (us.getId().equals(user.getId())) {
+            if (us == user) {
                 users[index] = null;
                 break;
             }
             index++;
         }
-
-        throw new InternalServerError();
-
-
     }
 
-    private User findById(long id) throws UserNotFoundException {
-        for (User user : users) {
-            if (user != null && user.getId() == id)
-                return user;
-        }
-        throw new UserNotFoundException();
-
+    public User getFindUserById(long id) {
+        return findById(id);
     }
 
-    private class BadRequestException extends Exception {
-
+    public User[] getUsers() {
+        return users;
     }
-
-    private class UserNotFoundException extends Exception {
-
-    }
-
-    private class InternalServerError extends Exception {
-
-    }
-
-
 }
-
-
-
