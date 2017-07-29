@@ -47,7 +47,7 @@ public class Controller {
 
     Transaction[] transactionList() throws Exception {
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServelException("List with transactions is empty");
+            throw new InternalServerException("List with transactions is empty");
         return transactionDAO.getTransactions();
     }
 
@@ -55,7 +55,7 @@ public class Controller {
     Transaction[] transactionList(String city) throws Exception {
 
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServelException("List with transactions is empty");
+            throw new InternalServerException("List with transactions is empty");
 
         if (city == null)
             throw new BadRequestException("The city can not be null");
@@ -83,10 +83,10 @@ public class Controller {
     Transaction[] transactionList(int amount) throws Exception {
 
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServelException("List with transactions is empty");
+            throw new InternalServerException("List with transactions is empty");
 
         if (amount < 0)
-            throw new InternalServelException(amount + " :invalid value");
+            throw new InternalServerException(amount + " :invalid value");
 
         int count = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {

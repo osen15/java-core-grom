@@ -13,15 +13,15 @@ public class TransactionDAO {
         //  if (transactions == null)
         //      throw new BadRequestException("array is null");
         //  if (transactions.length == 0)
-        //      throw new InternalServelException(transactions.length + " :invalid value");
+        //      throw new InternalServerException(transactions.length + " :invalid value");
         if (transaction == null)
             throw new BadRequestException("Can't save null transaction");
         if (transaction.getAmount() < 0)
-            throw new InternalServelException(transaction.getAmount() + " :invalid value");
+            throw new InternalServerException(transaction.getAmount() + " :invalid value");
         if (transaction.getCity() == null)
             throw new BadRequestException("The city can not be null");
         if (transaction.getId() <= 0)
-            throw new InternalServelException(transaction.getId() + " :invalid value");
+            throw new InternalServerException(transaction.getId() + " :invalid value");
         if (transaction.getDateCreated() == null)
             throw new BadRequestException("Date is null");
         for (Transaction tr : transactions) {
@@ -37,7 +37,7 @@ public class TransactionDAO {
             index++;
         }
 
-        throw new InternalServelException("Not enough space to save " + transaction.getId());
+        throw new InternalServerException("Not enough space to save " + transaction.getId());
     }
 
 
