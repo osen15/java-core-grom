@@ -1,7 +1,7 @@
 package lesson20.task2;
 
 import lesson20.task2.exception.BadRequestException;
-import lesson20.task2.exception.InternalServeException;
+import lesson20.task2.exception.InternalServelException;
 import lesson20.task2.exception.LimitExceeded;
 
 
@@ -51,7 +51,7 @@ public class Controller {
 
     Transaction[] allTransactionsList() throws Exception {
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServeException("List with transactions is empty");
+            throw new InternalServelException("List with transactions is empty");
         return transactionDAO.getTransactions();
     }
 
@@ -59,7 +59,7 @@ public class Controller {
     Transaction[] allTransactionList(String city) throws Exception {
 
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServeException("List with transactions is empty");
+            throw new InternalServelException("List with transactions is empty");
 
         if (city == null)
             throw new BadRequestException("The city can not be null");
@@ -87,10 +87,10 @@ public class Controller {
     Transaction[] allTransactionList(int amount) throws Exception {
 
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServeException("List with transactions is empty");
+            throw new InternalServelException("List with transactions is empty");
 
         if (amount < 0)
-            throw new InternalServeException(amount + " :invalid value");
+            throw new InternalServelException(amount + " :invalid value");
 
         int count = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {

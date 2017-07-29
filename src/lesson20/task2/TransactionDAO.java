@@ -1,7 +1,7 @@
 package lesson20.task2;
 
 import lesson20.task2.exception.BadRequestException;
-import lesson20.task2.exception.InternalServeException;
+import lesson20.task2.exception.InternalServelException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -16,15 +16,15 @@ public class TransactionDAO {
         //  if (transactions == null)
         //      throw new BadRequestException("array is null");
         //  if (transactions.length == 0)
-        //      throw new InternalServeException(transactions.length + " :invalid value");
+        //      throw new InternalServelException(transactions.length + " :invalid value");
         if (transaction == null)
             throw new BadRequestException("Can't save null transaction");
         if (transaction.getAmount() < 0)
-            throw new InternalServeException(transaction.getAmount() + " :invalid value");
+            throw new InternalServelException(transaction.getAmount() + " :invalid value");
         if (transaction.getCity() == null)
             throw new BadRequestException("The city can not be null");
         if (transaction.getId() <= 0)
-            throw new InternalServeException(transaction.getId() + " :invalid value");
+            throw new InternalServelException(transaction.getId() + " :invalid value");
         if (transaction.getDateCreated() == null)
             throw new BadRequestException("Date is null");
         for (Transaction tr : transactions) {
@@ -40,7 +40,7 @@ public class TransactionDAO {
             index++;
         }
 
-        throw new InternalServeException("Not enough space to save " + transaction.getId());
+        throw new InternalServelException("Not enough space to save " + transaction.getId());
     }
 
 
