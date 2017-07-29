@@ -39,13 +39,13 @@ public class Demo {
       //  System.out.println(controller.saveTransaction(transaction9));          // перевірено з усіма ексепшинами
 
 
-      //  System.out.println(Arrays.toString(controller.allTransactionsList()));  // виводить масив всіх транзакцій , на разі одної
+      //  System.out.println(Arrays.toString(controller.transactionList()));  // виводить масив всіх транзакцій , на разі одної
 
 
-      //  System.out.println(Arrays.toString(controller.allTransactionList("Odesa")));  // виводимо масив міст (фільтр)
+      //  System.out.println(Arrays.toString(controller.transactionList("Odesa")));  // виводимо масив міст (фільтр)
 
 
-      //  System.out.println(Arrays.toString(controller.allTransactionList(4)));    // виводимо по фільтру масив відповідних сум.
+      //  System.out.println(Arrays.toString(controller.transactionList(4)));    // виводимо по фільтру масив відповідних сум.
 
 
     }

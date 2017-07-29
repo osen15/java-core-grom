@@ -1,11 +1,6 @@
 package lesson20.task1;
 
 
-import lesson20.task1.BadRequestException;
-import lesson20.task1.InternalServelException;
-import lesson20.task1.User;
-import lesson20.task1.UserNotFoundException;
-
 public class UserRepository {
 
     private User[] users = new User[10];
