@@ -1,4 +1,4 @@
-package lesson20.task2.exeption;
+package lesson20.task2.exception;
 
 public class LimitExceeded extends Exception {
     public LimitExceeded(String message) {

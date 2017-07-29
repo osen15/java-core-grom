@@ -23,28 +23,29 @@ public class Demo {
 
 
         TransactionDAO transactionDAO = new TransactionDAO();
-        System.out.println(transactionDAO.save(transaction1));        // заповнюю масив
+       // System.out.println(transactionDAO.save(transaction1));        // заповнюю масив
         transactionDAO.save(transaction2);
         transactionDAO.save(transaction3);
         transactionDAO.save(transaction4);
         transactionDAO.save(transaction5);
         transactionDAO.save(transaction6);
         transactionDAO.save(transaction7);
-        transactionDAO.save(transaction8);
         System.out.println(Arrays.toString(transactionDAO.getTransactions()));
+        transactionDAO.save(transaction7);                                     // перевірка коли всі параметри одного об"єкта дорівнюють другому
 
 
 
-        System.out.println(controller.saveTransaction(transaction9));          // перевірено з усіма ексепшинами
+
+      //  System.out.println(controller.saveTransaction(transaction9));          // перевірено з усіма ексепшинами
 
 
-        System.out.println(Arrays.toString(controller.allTransactionsList()));  // виводить масив всіх транзакцій , на разі одної
+      //  System.out.println(Arrays.toString(controller.allTransactionsList()));  // виводить масив всіх транзакцій , на разі одної
 
 
-        System.out.println(Arrays.toString(controller.allTransactionList("Odesa")));  // виводимо масив міст (фільтр)
+      //  System.out.println(Arrays.toString(controller.allTransactionList("Odesa")));  // виводимо масив міст (фільтр)
 
 
-        System.out.println(Arrays.toString(controller.allTransactionList(4)));    // виводимо по фільтру масив відповідних сум.
+      //  System.out.println(Arrays.toString(controller.allTransactionList(4)));    // виводимо по фільтру масив відповідних сум.
 
 
     }

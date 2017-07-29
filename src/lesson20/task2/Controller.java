@@ -1,8 +1,8 @@
 package lesson20.task2;
 
-import lesson20.task2.exeption.BadRequestExeption;
-import lesson20.task2.exeption.InternalServelExeption;
-import lesson20.task2.exeption.LimitExceeded;
+import lesson20.task2.exception.BadRequestExсeption;
+import lesson20.task2.exception.InternalServelExсeption;
+import lesson20.task2.exception.LimitExceeded;
 
 
 public class Controller {
@@ -44,14 +44,14 @@ public class Controller {
                 return transaction;
             }
         }
-        throw new BadRequestExeption(transaction.getCity() + " : no authorized city");
+        throw new BadRequestExсeption(transaction.getCity() + " : no authorized city");
 
     }
 
 
     Transaction[] allTransactionsList() throws Exception {
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServelExeption("List with transactions is empty");
+            throw new InternalServelExсeption("List with transactions is empty");
         return transactionDAO.getTransactions();
     }
 
@@ -59,10 +59,10 @@ public class Controller {
     Transaction[] allTransactionList(String city) throws Exception {
 
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServelExeption("List with transactions is empty");
+            throw new InternalServelExсeption("List with transactions is empty");
 
         if (city == null)
-            throw new BadRequestExeption("The city can not be null");
+            throw new BadRequestExсeption("The city can not be null");
 
         int count = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
@@ -71,7 +71,7 @@ public class Controller {
         }
         Transaction[] result = new Transaction[count];
         if (result.length == 0)
-            throw new BadRequestExeption(city + " : no authorized city");
+            throw new BadRequestExсeption(city + " : no authorized city");
 
         int index = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
@@ -87,10 +87,10 @@ public class Controller {
     Transaction[] allTransactionList(int amount) throws Exception {
 
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServelExeption("List with transactions is empty");
+            throw new InternalServelExсeption("List with transactions is empty");
 
         if (amount < 0)
-            throw new InternalServelExeption(amount + " :invalid value");
+            throw new InternalServelExсeption(amount + " :invalid value");
 
         int count = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
