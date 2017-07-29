@@ -1,9 +1,10 @@
-package lesson20;
+package lesson20.task1;
 
 
-import lesson20.task1.exception.BadRequestExeption;
-import lesson20.task1.exception.InternalServelExeption;
-import lesson20.task1.exception.UserNotFoundExeption;
+import lesson20.task1.BadRequestException;
+import lesson20.task1.InternalServelException;
+import lesson20.task1.User;
+import lesson20.task1.UserNotFoundException;
 
 public class UserRepository {
 
@@ -13,12 +14,12 @@ public class UserRepository {
     public User save(User user) throws Exception {
 
         if (user == null)
-            throw new BadRequestExeption("Can't save null user");
+            throw new BadRequestException("Can't save null user");
         try {
 
             findById(user.getId());
-            throw new BadRequestExeption("User with id : " + user.getId() + " already exist");
-        } catch (UserNotFoundExeption e) {
+            throw new BadRequestException("User with id : " + user.getId() + " already exist");
+        } catch (UserNotFoundException e) {
             System.out.println("User with id : " + user.getId() + " not found. Will be saved");
         }
 
@@ -32,13 +33,13 @@ public class UserRepository {
             }
             index++;
         }
-        throw new InternalServelExeption("Not enough space to save user with id: " + user.getId());
+        throw new InternalServelException("Not enough space to save user with id: " + user.getId());
 
     }
 
     public User update(User user) throws Exception {
         if (user == null)
-            throw new BadRequestExeption("Can't save null user");
+            throw new BadRequestException("Can't save null user");
         findById(user.getId());
 
 
@@ -52,7 +53,7 @@ public class UserRepository {
             index++;
         }
 
-        throw new InternalServelExeption("Unexpected error");
+        throw new InternalServelException("Unexpected error");
     }
 
     public void delete(long id) throws Exception {
@@ -74,7 +75,7 @@ public class UserRepository {
             if (user != null && user.getId().equals(id))
                 return user;
         }
-        throw new UserNotFoundExeption("User with: " + id + " not found");
+        throw new UserNotFoundException("User with: " + id + " not found");
 
     }
 

@@ -1,4 +1,4 @@
-package lesson20;
+package lesson20.task1;
 
 /**
  * Created by Oleg on 21.06.2017.
