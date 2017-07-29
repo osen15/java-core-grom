@@ -1,7 +1,7 @@
 package lesson20.task2;
 
-import lesson20.task2.exception.BadRequestExсeption;
-import lesson20.task2.exception.InternalServelExсeption;
+import lesson20.task2.exception.BadRequestException;
+import lesson20.task2.exception.InternalServeException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -14,22 +14,22 @@ public class TransactionDAO {
 
     public Transaction save(Transaction transaction) throws Exception {
         //  if (transactions == null)
-        //      throw new BadRequestExсeption("array is null");
+        //      throw new BadRequestException("array is null");
         //  if (transactions.length == 0)
-        //      throw new InternalServelExсeption(transactions.length + " :invalid value");
+        //      throw new InternalServeException(transactions.length + " :invalid value");
         if (transaction == null)
-            throw new BadRequestExсeption("Can't save null transaction");
+            throw new BadRequestException("Can't save null transaction");
         if (transaction.getAmount() < 0)
-            throw new InternalServelExсeption(transaction.getAmount() + " :invalid value");
+            throw new InternalServeException(transaction.getAmount() + " :invalid value");
         if (transaction.getCity() == null)
-            throw new BadRequestExсeption("The city can not be null");
+            throw new BadRequestException("The city can not be null");
         if (transaction.getId() <= 0)
-            throw new InternalServelExсeption(transaction.getId() + " :invalid value");
+            throw new InternalServeException(transaction.getId() + " :invalid value");
         if (transaction.getDateCreated() == null)
-            throw new BadRequestExсeption("Date is null");
+            throw new BadRequestException("Date is null");
         for (Transaction tr : transactions) {
             if (tr != null && tr.equals(transaction))
-                throw new BadRequestExсeption(transaction + " already exists");
+                throw new BadRequestException(transaction + " already exists");
         }
         int index = 0;
         for (Transaction tr : transactions) {
@@ -40,7 +40,7 @@ public class TransactionDAO {
             index++;
         }
 
-        throw new InternalServelExсeption("Not enough space to save " + transaction.getId());
+        throw new InternalServeException("Not enough space to save " + transaction.getId());
     }
 
 

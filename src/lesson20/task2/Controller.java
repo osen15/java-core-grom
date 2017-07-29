@@ -1,7 +1,7 @@
 package lesson20.task2;
 
-import lesson20.task2.exception.BadRequestExсeption;
-import lesson20.task2.exception.InternalServelExсeption;
+import lesson20.task2.exception.BadRequestException;
+import lesson20.task2.exception.InternalServeException;
 import lesson20.task2.exception.LimitExceeded;
 
 
@@ -44,14 +44,14 @@ public class Controller {
                 return transaction;
             }
         }
-        throw new BadRequestExсeption(transaction.getCity() + " : no authorized city");
+        throw new BadRequestException(transaction.getCity() + " : no authorized city");
 
     }
 
 
     Transaction[] allTransactionsList() throws Exception {
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServelExсeption("List with transactions is empty");
+            throw new InternalServeException("List with transactions is empty");
         return transactionDAO.getTransactions();
     }
 
@@ -59,10 +59,10 @@ public class Controller {
     Transaction[] allTransactionList(String city) throws Exception {
 
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServelExсeption("List with transactions is empty");
+            throw new InternalServeException("List with transactions is empty");
 
         if (city == null)
-            throw new BadRequestExсeption("The city can not be null");
+            throw new BadRequestException("The city can not be null");
 
         int count = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
@@ -71,7 +71,7 @@ public class Controller {
         }
         Transaction[] result = new Transaction[count];
         if (result.length == 0)
-            throw new BadRequestExсeption(city + " : no authorized city");
+            throw new BadRequestException(city + " : no authorized city");
 
         int index = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
@@ -87,10 +87,10 @@ public class Controller {
     Transaction[] allTransactionList(int amount) throws Exception {
 
         if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServelExсeption("List with transactions is empty");
+            throw new InternalServeException("List with transactions is empty");
 
         if (amount < 0)
-            throw new InternalServelExсeption(amount + " :invalid value");
+            throw new InternalServeException(amount + " :invalid value");
 
         int count = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
