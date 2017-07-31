@@ -78,24 +78,59 @@ public class TransactionDAO {
         return result;
     }
 
-    public boolean checkCityName(String city) throws Exception {
+    public Transaction[] checkCityName(String city) throws Exception {      //метод валідації по назві міста
+        int count = 0;
         if (city == null)
             throw new BadRequestException("The city can not be null");
         for (Transaction transaction : transactions) {
             if (transaction != null && transaction.getCity().equals(city))
-                return true;
+                count++;
         }
-        return false;
+
+        Transaction[] result = new Transaction[count];
+        if (count == 0)
+            throw new BadRequestException("no authorized city");
+
+
+
+        int index = 0;
+        for (Transaction transaction : transactions) {
+            if (transaction != null && transaction.getCity().equals(city))
+                result[index] = transaction;
+            index++;
+        }
+
+
+        return result;
+
+
     }
 
-    public boolean checkAmount(int amount) throws Exception {
+    public Transaction[] checkAmount(int amount) throws Exception {    // метод валідації по сумі
+        int count = 0;
         if (amount < 0)
             throw new InternalServerException(amount + " :invalid value");
         for (Transaction transaction : transactions) {
             if (transaction != null && transaction.getAmount() == amount)
-                return true;
+                count++;
         }
-        return false;
+
+        Transaction[] result = new Transaction[count];
+        if (count == 0)
+            throw new BadRequestException("There are no transfers with such amount");
+
+
+
+        int index = 0;
+        for (Transaction transaction : transactions) {
+            if (transaction != null && transaction.getAmount() == amount)
+                result[index] = transaction;
+            index++;
+        }
+
+
+        return result;
+
     }
 
 

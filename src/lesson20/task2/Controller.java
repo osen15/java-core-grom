@@ -56,47 +56,15 @@ public class Controller {
         if (transactionDAO.getTransactions() == null)
             throw new BadRequestException("invalid value");
 
-        int count = 0;
-        for (Transaction transaction : transactionDAO.getTransactions()) {
-            if (transactionDAO.checkCityName(city))
-                count++;
-        }
-        Transaction[] result = new Transaction[count];
-        if (result.length == 0)
-            throw new BadRequestException(city + " : no authorized city");
+      return transactionDAO.checkCityName(city);
 
-        int index = 0;
-        for (Transaction transaction : transactionDAO.getTransactions()) {
-            if (transactionDAO.checkCityName(city))
-                result[index] = transaction;
-            index++;
-        }
-
-
-        return result;
     }
 
     Transaction[] transactionList(int amount) throws Exception {
         if (transactionDAO.getTransactions() == null)
             throw new BadRequestException("invalid value");
 
-        int count = 0;
-        for (Transaction transaction : transactionDAO.getTransactions()) {
-            if (transactionDAO.checkAmount(amount))
-                count++;
-        }
-        Transaction[] result = new Transaction[count];
-        if (result.length == 0)
-            throw new Exception("Transfers on amount: " + amount + " were not found");
-        int index = 0;
-        for (Transaction transaction : transactionDAO.getTransactions()) {
-            if (transactionDAO.checkAmount(amount))
-                result[index] = transaction;
-            index++;
-        }
-
-
-        return result;
+        return  transactionDAO.checkAmount(amount);
     }
 
 
