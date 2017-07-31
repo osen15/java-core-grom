@@ -17,7 +17,7 @@ public class TransactionDAO {
         if (transaction == null)
             throw new BadRequestException("Can't save null transaction");
         if (transaction.getAmount() < 0)
-            throw new InternalServerException(transaction.getAmount() + " :invalid value");
+            throw new BadRequestException(transaction.getAmount() + " :invalid value");
         if (transaction.getCity() == null)
             throw new BadRequestException("The city can not be null");
         if (transaction.getId() <= 0)
@@ -41,6 +41,7 @@ public class TransactionDAO {
     }
 
 
+
     public Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
@@ -51,7 +52,7 @@ public class TransactionDAO {
         int count = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null)
-            calendar.setTime(transaction.getDateCreated());
+                calendar.setTime(transaction.getDateCreated());
             int trMonth = calendar.get(Calendar.MONTH);
             int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
@@ -63,7 +64,7 @@ public class TransactionDAO {
         int index = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null)
-            calendar.setTime(transaction.getDateCreated());
+                calendar.setTime(transaction.getDateCreated());
             int trMonth = calendar.get(Calendar.MONTH);
             int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
@@ -75,12 +76,38 @@ public class TransactionDAO {
 
 
         return result;
-
     }
+
+    public boolean checkCityName(String city) throws Exception {
+        if (city == null)
+            throw new BadRequestException("The city can not be null");
+        for (Transaction transaction : transactions) {
+            if (transaction != null && transaction.getCity().equals(city))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean checkAmount(int amount) throws Exception {
+        if (amount < 0)
+            throw new InternalServerException(amount + " :invalid value");
+        for (Transaction transaction : transactions) {
+            if (transaction != null && transaction.getAmount() == amount)
+                return true;
+        }
+        return false;
+    }
+
+
+    private boolean checkArrayOnZeroLenght() {
+        return transactions.length == 0;
+    }
+
 
     public Transaction[] getTransactions() {
         return transactions;
     }
+
 
 
 }

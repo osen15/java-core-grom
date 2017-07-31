@@ -23,15 +23,15 @@ public class Demo {
 
 
         TransactionDAO transactionDAO = new TransactionDAO();
-       // System.out.println(transactionDAO.save(transaction1));        // заповнюю масив
-        transactionDAO.save(transaction2);
-        transactionDAO.save(transaction3);
-        transactionDAO.save(transaction4);
-        transactionDAO.save(transaction5);
-        transactionDAO.save(transaction6);
-        transactionDAO.save(transaction7);
-        System.out.println(Arrays.toString(transactionDAO.getTransactions()));
-        transactionDAO.save(transaction7);                                     // перевірка коли всі параметри одного об"єкта дорівнюють другому
+      //  System.out.println(transactionDAO.save(transaction1));        // заповнюю масив
+       // transactionDAO.save(transaction2);
+     //   transactionDAO.save(transaction3);
+     //   transactionDAO.save(transaction4);
+     //   transactionDAO.save(transaction5);
+     //   transactionDAO.save(transaction6);
+      //  transactionDAO.save(transaction7);
+      //  System.out.println(Arrays.toString(transactionDAO.getTransactions()));
+     //   transactionDAO.save(transaction7);                                     // перевірка коли всі параметри одного об"єкта дорівнюють другому
 
 
 
@@ -39,13 +39,15 @@ public class Demo {
       //  System.out.println(controller.saveTransaction(transaction9));          // перевірено з усіма ексепшинами
 
 
-      //  System.out.println(Arrays.toString(controller.transactionList()));  // виводить масив всіх транзакцій , на разі одної
+        System.out.println(Arrays.toString(controller.transactionList()));  // виводить масив всіх транзакцій , на разі одної
 
 
-      //  System.out.println(Arrays.toString(controller.transactionList("Odesa")));  // виводимо масив міст (фільтр)
+        System.out.println(Arrays.toString(controller.transactionList("Odesa")));  // виводимо масив міст (фільтр)
 
 
-      //  System.out.println(Arrays.toString(controller.transactionList(4)));    // виводимо по фільтру масив відповідних сум.
+        System.out.println(Arrays.toString(controller.transactionList(4)));    // виводимо по фільтру масив відповідних сум.
+
+
 
 
     }

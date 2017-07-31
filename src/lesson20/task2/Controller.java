@@ -46,23 +46,19 @@ public class Controller {
 
 
     Transaction[] transactionList() throws Exception {
-        if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServerException("List with transactions is empty");
+        if (transactionDAO.getTransactions() == null)
+            throw new BadRequestException("invalid value");
         return transactionDAO.getTransactions();
     }
 
 
     Transaction[] transactionList(String city) throws Exception {
-
-        if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServerException("List with transactions is empty");
-
-        if (city == null)
-            throw new BadRequestException("The city can not be null");
+        if (transactionDAO.getTransactions() == null)
+            throw new BadRequestException("invalid value");
 
         int count = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
-            if (transaction != null && transaction.getCity().equals(city))
+            if (transactionDAO.checkCityName(city))
                 count++;
         }
         Transaction[] result = new Transaction[count];
@@ -71,7 +67,7 @@ public class Controller {
 
         int index = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
-            if (transaction != null && transaction.getCity().equals(city))
+            if (transactionDAO.checkCityName(city))
                 result[index] = transaction;
             index++;
         }
@@ -81,24 +77,20 @@ public class Controller {
     }
 
     Transaction[] transactionList(int amount) throws Exception {
-
-        if (transactionDAO.getTransactions().length == 0)
-            throw new InternalServerException("List with transactions is empty");
-
-        if (amount < 0)
-            throw new InternalServerException(amount + " :invalid value");
+        if (transactionDAO.getTransactions() == null)
+            throw new BadRequestException("invalid value");
 
         int count = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
-            if (transaction != null && transaction.getAmount() == amount)
+            if (transactionDAO.checkAmount(amount))
                 count++;
         }
         Transaction[] result = new Transaction[count];
         if (result.length == 0)
-            throw new Exception("Transfers on amount: " + amount  + " were not found");
+            throw new Exception("Transfers on amount: " + amount + " were not found");
         int index = 0;
         for (Transaction transaction : transactionDAO.getTransactions()) {
-            if (transaction != null && transaction.getAmount() == amount)
+            if (transactionDAO.checkAmount(amount))
                 result[index] = transaction;
             index++;
         }
@@ -112,7 +104,7 @@ public class Controller {
         int amount = 0;
         for (Transaction tr : transactions) {
             if (tr != null)
-            amount += tr.getAmount();
+                amount += tr.getAmount();
         }
         return amount;
     }
