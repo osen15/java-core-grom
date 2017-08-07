@@ -1,4 +1,4 @@
-package lesson20.task2;
+package lesson22.HW;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -139,7 +139,7 @@ public class TransactionDAO {
     }
 
 
-    public Transaction[] getTransactions() {
+    public static Transaction[] getTransactions() {
         return transactions;
     }
 
