@@ -9,12 +9,7 @@ public class TransactionDAO {
     private static Transaction[] transactions = new Transaction[10];
 
 
-
     public static Transaction save(Transaction transaction) throws Exception {
-        //  if (transactions == null)
-        //      throw new BadRequestException("array is null");
-        //  if (transactions.length == 0)
-        //      throw new InternalServerException(transactions.length + " :invalid value");
 
         if (transaction.getAmount() < 0)
             throw new BadRequestException(transaction.getAmount() + " :invalid value");
@@ -54,7 +49,7 @@ public class TransactionDAO {
         if (transactions.length + 1 > Utils.getCountOfTransactionsPerDay()) {
             throw new LimitExceeded("Count of transactions per day exceeded");
         }
-        if (tranactionsPerDayAmount(transactions) + transaction.getAmount() > Utils.getSumAmountOfTransactionsPerDay()) {
+        if (transactionsPerDayAmount(transactions) + transaction.getAmount() > Utils.getSumAmountOfTransactionsPerDay()) {
             throw new LimitExceeded("Amount of transactions per day exceeded");
         }
 
@@ -66,53 +61,6 @@ public class TransactionDAO {
         }
         throw new BadRequestException(transaction.getCity() + " : no authorized city");
 
-    }
-
-
-    public static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(dateOfCurTransaction);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-
-        int count = 0;
-        for (Transaction transaction : transactions) {
-            if (transaction != null)
-                calendar.setTime(transaction.getDateCreated());
-            int trMonth = calendar.get(Calendar.MONTH);
-            int trDay = calendar.get(Calendar.DAY_OF_MONTH);
-
-            if (trMonth == month && trDay == day)
-                count++;
-        }
-
-        Transaction[] result = new Transaction[count];
-        int index = 0;
-        for (Transaction transaction : transactions) {
-            if (transaction != null)
-                calendar.setTime(transaction.getDateCreated());
-            int trMonth = calendar.get(Calendar.MONTH);
-            int trDay = calendar.get(Calendar.DAY_OF_MONTH);
-
-            if (trMonth == month && trDay == day)
-                result[index] = transaction;
-            index++;
-
-        }
-
-
-        return result;
-    }
-
-
-    public static int tranactionsPerDayAmount(Transaction[] transactions) {
-        int amount = 0;
-        for (Transaction tr : transactions) {
-            if (tr != null)
-                amount += tr.getAmount();
-        }
-        return amount;
     }
 
 
@@ -167,14 +115,58 @@ public class TransactionDAO {
 
         return result;
 
+
     }
-
-
-
-
 
     public static Transaction[] getTransactions() {
         return transactions;
+    }
+
+
+    private static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dateOfCurTransaction);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+        int count = 0;
+        for (Transaction transaction : transactions) {
+            if (transaction != null)
+                calendar.setTime(transaction.getDateCreated());
+            int trMonth = calendar.get(Calendar.MONTH);
+            int trDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+            if (trMonth == month && trDay == day)
+                count++;
+        }
+
+        Transaction[] result = new Transaction[count];
+        int index = 0;
+        for (Transaction transaction : transactions) {
+            if (transaction != null)
+                calendar.setTime(transaction.getDateCreated());
+            int trMonth = calendar.get(Calendar.MONTH);
+            int trDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+            if (trMonth == month && trDay == day)
+                result[index] = transaction;
+            index++;
+
+        }
+
+
+        return result;
+    }
+
+
+    private static int transactionsPerDayAmount(Transaction[] transactions) {
+        int amount = 0;
+        for (Transaction tr : transactions) {
+            if (tr != null)
+                amount += tr.getAmount();
+        }
+        return amount;
     }
 
 
