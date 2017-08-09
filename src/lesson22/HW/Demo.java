@@ -37,7 +37,7 @@ public class Demo {
 
 
 
-       System.out.println(Controller.saveTransaction(transaction9));          // перевірено з усіма ексепшинами
+       System.out.println(Controller.saveTransaction(transaction9)) ;       // перевірено з усіма ексепшинами
 
 
         System.out.println(Arrays.toString(Controller.transactionList()));  // виводить масив всіх транзакцій , на разі одної

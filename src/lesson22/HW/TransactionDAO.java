@@ -6,11 +6,11 @@ import java.util.Date;
 public class TransactionDAO {
 
 
-    private Transaction[] transactions = new Transaction[10];
-    private Utils utils = new Utils();
+    private static Transaction[] transactions = new Transaction[10];
 
 
-    public Transaction save(Transaction transaction) throws Exception {
+
+    public static Transaction save(Transaction transaction) throws Exception {
         //  if (transactions == null)
         //      throw new BadRequestException("array is null");
         //  if (transactions.length == 0)
@@ -41,24 +41,24 @@ public class TransactionDAO {
     }
 
 
-    public Transaction checkOnLimitsOfTransaction(Transaction transaction) throws Exception {
+    public static Transaction checkOnLimitsOfTransaction(Transaction transaction) throws Exception {
         if (transaction == null)
             throw new BadRequestException("Can't save null transaction");
         Transaction[] transactions = getTransactionsPerDay(transaction.getDateCreated());
 
 
-        if (transaction.getAmount() > utils.getTransactionAmountLimit()) {
+        if (transaction.getAmount() > Utils.getTransactionAmountLimit()) {
             throw new LimitExceeded("Amount of this transaction exceeded");
         }
 
-        if (transactions.length + 1 > utils.getCountOfTransactionsPerDay()) {
+        if (transactions.length + 1 > Utils.getCountOfTransactionsPerDay()) {
             throw new LimitExceeded("Count of transactions per day exceeded");
         }
-        if (tranactionsPerDayAmount(transactions) + transaction.getAmount() > utils.getSumAmountOfTransactionsPerDay()) {
+        if (tranactionsPerDayAmount(transactions) + transaction.getAmount() > Utils.getSumAmountOfTransactionsPerDay()) {
             throw new LimitExceeded("Amount of transactions per day exceeded");
         }
 
-        for (String city : utils.getCitiesAllowed()) {
+        for (String city : Utils.getCitiesAllowed()) {
             if (transaction.getCity().equals(city)) {
 
                 return transaction;
@@ -69,7 +69,7 @@ public class TransactionDAO {
     }
 
 
-    public Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
+    public static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);
@@ -106,7 +106,7 @@ public class TransactionDAO {
     }
 
 
-    public int tranactionsPerDayAmount(Transaction[] transactions) {
+    public static int tranactionsPerDayAmount(Transaction[] transactions) {
         int amount = 0;
         for (Transaction tr : transactions) {
             if (tr != null)
@@ -116,7 +116,7 @@ public class TransactionDAO {
     }
 
 
-    public Transaction[] checkCityName(String city) throws Exception {      //метод валідації по назві міста
+    public static Transaction[] checkCityName(String city) throws Exception {      //метод валідації по назві міста
         int count = 0;
         if (city == null)
             throw new BadRequestException("The city can not be null");
@@ -143,7 +143,7 @@ public class TransactionDAO {
 
     }
 
-    public Transaction[] checkAmount(int amount) throws Exception {    // метод валідації по сумі
+    public static Transaction[] checkAmount(int amount) throws Exception {    // метод валідації по сумі
         int count = 0;
         if (amount < 0)
             throw new InternalServerException(amount + " :invalid value");
@@ -173,7 +173,7 @@ public class TransactionDAO {
 
 
 
-    public Transaction[] getTransactions() {
+    public static Transaction[] getTransactions() {
         return transactions;
     }
 

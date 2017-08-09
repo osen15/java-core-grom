@@ -4,43 +4,33 @@ package lesson22.HW;
 public class Controller {
 
 
-    // bad way
-    private TransactionDAO transactionDAO = new TransactionDAO();
-
-
-
-
-
-    Transaction saveTransaction(Transaction transaction) throws Exception {
-        return transactionDAO.save(transactionDAO.checkOnLimitsOfTransaction(transaction));
+    public static Transaction saveTransaction(Transaction transaction) throws Exception {
+        return TransactionDAO.save(TransactionDAO.checkOnLimitsOfTransaction(transaction));
 
     }
 
 
-    Transaction[] transactionList() throws Exception {
-        if (transactionDAO.getTransactions() == null)
+    public static Transaction[] transactionList() throws Exception {
+        if (TransactionDAO.getTransactions() == null)
             throw new InternalServerException("invalid value");
-        return transactionDAO.getTransactions();
+        return TransactionDAO.getTransactions();
     }
 
 
-    Transaction[] transactionList(String city) throws Exception {
-        if (transactionDAO.getTransactions() == null)
+    public static Transaction[] transactionList(String city) throws Exception {
+        if (TransactionDAO.getTransactions() == null)
             throw new InternalServerException("invalid value");
 
-        return transactionDAO.checkCityName(city);
+        return TransactionDAO.checkCityName(city);
 
     }
 
-    Transaction[] transactionList(int amount) throws Exception {
-        if (transactionDAO.getTransactions() == null)
+    public static Transaction[] transactionList(int amount) throws Exception {
+        if (TransactionDAO.getTransactions() == null)
             throw new InternalServerException("invalid value");
 
-        return  transactionDAO.checkAmount(amount);
+        return TransactionDAO.checkAmount(amount);
     }
-
-
-
 
 
 }

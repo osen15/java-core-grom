@@ -2,35 +2,35 @@ package lesson22.HW;
 
 public class Utils {
 
-    private int sumAmountOfTransactionsPerDay;
-    private int countOfTransactionsPerDay;
-    private int transactionAmountLimit;
-    private String[] citiesAllowed;
+    private static int sumAmountOfTransactionsPerDay;
+    private static int countOfTransactionsPerDay;
+    private static int transactionAmountLimit;
+    private static String[] citiesAllowed;
 
 
     public Utils() {
-        this.sumAmountOfTransactionsPerDay = 1000;
-        this.countOfTransactionsPerDay = 1000;
-        this.transactionAmountLimit = 1000;
-        this.citiesAllowed = new String[]{"Kiev", "Odesa", "Mykolayiv"};
+        sumAmountOfTransactionsPerDay = 1000;
+        countOfTransactionsPerDay = 1000;
+        transactionAmountLimit = 1000;
+        citiesAllowed = new String[]{"Kiev", "Odesa", "Mykolayiv"};
     }
 
-    public String[] getCitiesAllowed() {
+    public static String[] getCitiesAllowed() {
         return citiesAllowed;
     }
 
 
-    public int getTransactionAmountLimit() {
+    public static int getTransactionAmountLimit() {
         return transactionAmountLimit;
     }
 
 
-    public int getSumAmountOfTransactionsPerDay() {
+    public static int getSumAmountOfTransactionsPerDay() {
         return sumAmountOfTransactionsPerDay;
     }
 
 
-    public int getCountOfTransactionsPerDay() {
+    public static int getCountOfTransactionsPerDay() {
         return countOfTransactionsPerDay;
     }
 
