@@ -7,35 +7,32 @@ public class Utils {
     private int transactionAmountLimit;
     private String[] citiesAllowed;
 
+
+    public Utils() {
+        this.sumAmountOfTransactionsPerDay = 1000;
+        this.countOfTransactionsPerDay = 1000;
+        this.transactionAmountLimit = 1000;
+        this.citiesAllowed = new String[]{"Kiev", "Odesa", "Mykolayiv"};
+    }
+
     public String[] getCitiesAllowed() {
         return citiesAllowed;
     }
 
-    public void setCitiesAllowed(String[] citiesAllowed) {
-        this.citiesAllowed = citiesAllowed;
-    }
 
     public int getTransactionAmountLimit() {
         return transactionAmountLimit;
     }
 
-    public void setTransactionAmountLimit(int transactionAmountLimit) {
-        this.transactionAmountLimit = transactionAmountLimit;
-    }
 
     public int getSumAmountOfTransactionsPerDay() {
         return sumAmountOfTransactionsPerDay;
     }
 
-    public void setSumAmountOfTransactionsPerDay(int sumAmountOfTransactionsPerDay) {
-        this.sumAmountOfTransactionsPerDay = sumAmountOfTransactionsPerDay;
-    }
 
     public int getCountOfTransactionsPerDay() {
         return countOfTransactionsPerDay;
     }
 
-    public void setCountOfTransactionsPerDay(int countOfTransactionsPerDay) {
-        this.countOfTransactionsPerDay = countOfTransactionsPerDay;
-    }
+
 }

@@ -6,16 +6,16 @@ import java.util.Date;
 public class TransactionDAO {
 
 
-    private static Transaction[] transactions = new Transaction[10];
+    private Transaction[] transactions = new Transaction[10];
+    private Utils utils = new Utils();
 
 
-    public static Transaction save(Transaction transaction) throws Exception {
+    public Transaction save(Transaction transaction) throws Exception {
         //  if (transactions == null)
         //      throw new BadRequestException("array is null");
         //  if (transactions.length == 0)
         //      throw new InternalServerException(transactions.length + " :invalid value");
-        if (transaction == null)
-            throw new BadRequestException("Can't save null transaction");
+
         if (transaction.getAmount() < 0)
             throw new BadRequestException(transaction.getAmount() + " :invalid value");
         if (transaction.getCity() == null)
@@ -41,8 +41,35 @@ public class TransactionDAO {
     }
 
 
+   public Transaction checkOnLimitsOfTransaction(Transaction transaction) throws Exception {
+        if (transaction == null)
+            throw new BadRequestException("Can't save null transaction");
+        Transaction[] transactions = getTransactionsPerDay(transaction.getDateCreated());
 
-    public static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
+
+        if (transaction.getAmount() > utils.getTransactionAmountLimit()) {
+            throw new LimitExceeded("Amount of this transaction exceeded");
+        }
+
+        if (transactions.length + 1 > utils.getCountOfTransactionsPerDay()) {
+            throw new LimitExceeded("Count of transactions per day exceeded");
+        }
+        if (tranactionsPerDayAmount(transactions) + transaction.getAmount() > utils.getSumAmountOfTransactionsPerDay()) {
+            throw new LimitExceeded("Amount of transactions per day exceeded");
+        }
+
+        for (String city : utils.getCitiesAllowed()) {
+            if (transaction.getCity().equals(city)) {
+
+                return transaction;
+            }
+        }
+        throw new BadRequestException(transaction.getCity() + " : no authorized city");
+
+    }
+
+
+    public Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);
@@ -78,7 +105,18 @@ public class TransactionDAO {
         return result;
     }
 
-    public static Transaction[] checkCityName(String city) throws Exception {      //метод валідації по назві міста
+
+    public int tranactionsPerDayAmount(Transaction[] transactions) {
+        int amount = 0;
+        for (Transaction tr : transactions) {
+            if (tr != null)
+                amount += tr.getAmount();
+        }
+        return amount;
+    }
+
+
+    public Transaction[] checkCityName(String city) throws Exception {      //метод валідації по назві міста
         int count = 0;
         if (city == null)
             throw new BadRequestException("The city can not be null");
@@ -92,7 +130,6 @@ public class TransactionDAO {
             throw new BadRequestException("no authorized city");
 
 
-
         int index = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null && transaction.getCity().equals(city))
@@ -106,7 +143,7 @@ public class TransactionDAO {
 
     }
 
-    public static Transaction[] checkAmount(int amount) throws Exception {    // метод валідації по сумі
+    public Transaction[] checkAmount(int amount) throws Exception {    // метод валідації по сумі
         int count = 0;
         if (amount < 0)
             throw new InternalServerException(amount + " :invalid value");
@@ -118,7 +155,6 @@ public class TransactionDAO {
         Transaction[] result = new Transaction[count];
         if (count == 0)
             throw new BadRequestException("There are no transfers with such amount");
-
 
 
         int index = 0;
@@ -134,15 +170,12 @@ public class TransactionDAO {
     }
 
 
-    private boolean checkArrayOnZeroLenght() {
-        return transactions.length == 0;
-    }
+
 
 
     public Transaction[] getTransactions() {
         return transactions;
     }
-
 
 
 }
