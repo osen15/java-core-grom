@@ -6,16 +6,17 @@ import java.util.Date;
 public class TransactionDAO {
 
 
-    private static Transaction[] transactions = new Transaction[10];
+    private static Transaction[]  transactions = new Transaction[10];
     private Utils utils = new Utils();
 
 
-    public Transaction save(Transaction transaction) throws Exception {
-        //  if (transactions == null)
-        //      throw new BadRequestException("array is null");
+    public Transaction checkTransaction(Transaction transaction) throws Exception {
+       // if (transactions == null)
+          //  throw new BadRequestException("array is null");
         //  if (transactions.length == 0)
         //      throw new InternalServerException(transactions.length + " :invalid value");
-
+        if (transaction == null)
+            throw new BadRequestException("Can't save null transaction");
         if (transaction.getAmount() < 0)
             throw new BadRequestException(transaction.getAmount() + " :invalid value");
         if (transaction.getCity() == null)
@@ -28,23 +29,16 @@ public class TransactionDAO {
             if (tr != null && tr.equals(transaction))
                 throw new BadRequestException(transaction + " already exists");
         }
-        int index = 0;
-        for (Transaction tr : transactions) {
-            if (tr == null) {
-                transactions[index] = transaction;
-                return transactions[index];
-            }
-            index++;
-        }
 
-        throw new InternalServerException("Not enough space to save " + transaction.getId());
+        return transaction;
+
     }
 
 
-   public Transaction checkOnLimitsOfTransaction(Transaction transaction) throws Exception {
-        if (transaction == null)
-            throw new BadRequestException("Can't save null transaction");
-        Transaction[] transactions = getTransactionsPerDay(transaction.getDateCreated());
+    public Transaction save(Transaction transaction) throws Exception {
+        checkTransaction(transaction);
+
+        Transaction[] transactions1 = getTransactionsPerDay(transaction.getDateCreated());
 
 
         if (transaction.getAmount() > utils.getTransactionAmountLimit()) {
@@ -54,18 +48,23 @@ public class TransactionDAO {
         if (transactions.length + 1 > utils.getCountOfTransactionsPerDay()) {
             throw new LimitExceeded("Count of transactions per day exceeded");
         }
-        if (tranactionsPerDayAmount(transactions) + transaction.getAmount() > utils.getSumAmountOfTransactionsPerDay()) {
+        if (transactionsPerDayAmount(transactions) + transaction.getAmount() > utils.getSumAmountOfTransactionsPerDay()) {
             throw new LimitExceeded("Amount of transactions per day exceeded");
         }
 
-        for (String city : utils.getCities()) {
-            if (transaction.getCity().equals(city)) {
+        if (!checkCity(transaction))
+            throw new BadRequestException(transaction.getCity() + " : no authorized city");
 
-                return transaction;
+        int index = 0;
+        for (Transaction tr : transactions) {
+            if (tr == null) {
+                transactions[index] = transaction;
+                return transactions[index];
             }
-        }
-        throw new BadRequestException(transaction.getCity() + " : no authorized city");
 
+
+        }
+        throw new InternalServerException("Not enough space to save " + transaction.getId());
     }
 
 
@@ -103,16 +102,6 @@ public class TransactionDAO {
 
 
         return result;
-    }
-
-
-    public int tranactionsPerDayAmount(Transaction[] transactions) {
-        int amount = 0;
-        for (Transaction tr : transactions) {
-            if (tr != null)
-                amount += tr.getAmount();
-        }
-        return amount;
     }
 
 
@@ -171,10 +160,32 @@ public class TransactionDAO {
 
 
 
+    public  Transaction[] transactionList() {
+        return getTransactions();
+    }
 
-
-    public Transaction[] transactionList() {
+    public Transaction[] getTransactions() {
         return transactions;
+    }
+
+    private int transactionsPerDayAmount(Transaction[] transactions) {
+        int amount = 0;
+        for (Transaction tr : transactions) {
+            if (tr != null)
+                amount += tr.getAmount();
+        }
+        return amount;
+    }
+
+    private boolean checkCity(Transaction transaction) {
+        for (String city : utils.getCities()) {
+            if (city.equals(transaction.getCity()))
+                return true;
+
+        }
+        return false;
+
+
     }
 
 

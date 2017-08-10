@@ -9,7 +9,7 @@ public class Controller {
 
 
     public Transaction save(Transaction transaction) throws Exception {
-        return transactionDAO.save(transactionDAO.checkOnLimitsOfTransaction(transaction));
+        return transactionDAO.save(transaction);
 
     }
 
