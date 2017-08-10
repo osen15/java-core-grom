@@ -1,5 +1,6 @@
 package lesson20.task2;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,7 +39,7 @@ public class TransactionDAO {
 
         Transaction[] result = new Transaction[count];
         if (count == 0)
-            throw new BadRequestException("no authorized city");
+            throw new BadRequestException(city + " no authorized city");
 
 
         int index = 0;
@@ -67,7 +68,7 @@ public class TransactionDAO {
 
         Transaction[] result = new Transaction[count];
         if (count == 0)
-            throw new BadRequestException("There are no transfers with such amount");
+            throw new BadRequestException(amount + " : there are no transfers with such amount");
 
 
         int index = 0;
@@ -94,7 +95,7 @@ public class TransactionDAO {
 
         Transaction[] result = new Transaction[count];
         if (count == 0)
-            throw new BadRequestException("list of transfers is empty");
+            throw new BadRequestException(Arrays.toString(result) + "list of transfers is empty");
 
 
         int index = 0;
