@@ -33,8 +33,9 @@ public class TransactionDAO {
         if (city == null)
             throw new BadRequestException("The city can not be null");
         for (Transaction transaction : transactions) {
-            if (transaction != null && transaction.getCity().equals(city))
+            if (transaction != null && transaction.getCity().equals(city)) {
                 count++;
+            }
         }
 
         Transaction[] result = new Transaction[count];
@@ -44,9 +45,10 @@ public class TransactionDAO {
 
         int index = 0;
         for (Transaction transaction : transactions) {
-            if (transaction != null && transaction.getCity().equals(city))
+            if (transaction != null && transaction.getCity().equals(city)) {
                 result[index] = transaction;
-            index++;
+                index++;
+            }
         }
 
 
@@ -73,9 +75,10 @@ public class TransactionDAO {
 
         int index = 0;
         for (Transaction transaction : transactions) {
-            if (transaction != null && transaction.getAmount() == amount)
+            if (transaction != null && transaction.getAmount() == amount) {
                 result[index] = transaction;
-            index++;
+                index++;
+            }
         }
 
 
@@ -100,9 +103,10 @@ public class TransactionDAO {
 
         int index = 0;
         for (Transaction transaction : transactions) {
-            if (transaction != null)
+            if (transaction != null) {
                 result[index] = transaction;
-            index++;
+                index++;
+            }
         }
 
 

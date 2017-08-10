@@ -2,11 +2,12 @@ package lesson20.task2;
 
 import java.util.Arrays;
 import java.util.Date;
+
 public class Demo {
     public static void main(String[] args) throws Exception {
 
-        Transaction transaction1 = new Transaction(1, "Lviv", 50, "qwe",null, new Date());
-        Transaction transaction2 = new Transaction(2, "Kiev", 0, "qwe", null, new Date());
+        Transaction transaction1 = new Transaction(1, "Lviv", 50, "qwe", TransactionType.INCOME, new Date());
+        Transaction transaction2 = new Transaction(2, "Kiev", 0, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction3 = new Transaction(3, "Tokio", 10, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction4 = new Transaction(4, "New Yourk", 5, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction5 = new Transaction(5, "Kharkiv", 6, "qwe", TransactionType.INCOME, new Date());
@@ -21,9 +22,9 @@ public class Demo {
         Utils utils = new Utils();
 
         TransactionDAO transactionDAO = new TransactionDAO();
-      //  System.out.println(controller.save(transaction7));        // заповнюю масив
-      //  System.out.println(controller.save(transaction8));
-      //  System.out.println(controller.save(transaction7));
+        System.out.println(controller.save(transaction9));        // заповнюю масив
+        System.out.println(controller.save(transaction8));
+        System.out.println(controller.save(transaction7));
         System.out.println(controller.save(transaction2));
         //  transactionDAO.save(transaction5);
         // transactionDAO.save(transaction6);
@@ -40,7 +41,7 @@ public class Demo {
         //  System.out.println(Arrays.toString(controller.transactionList()));  // виводить масив всіх транзакцій , на разі одної
 
 
-     //   System.out.println(Arrays.toString(controller.transactionList()));  // виводимо масив міст (фільтр)
+        System.out.println(Arrays.toString(controller.transactionList("Kiev")));  // виводимо масив міст (фільтр)
 
 
         // System.out.println(Arrays.toString(controller.transactionList(100)));    // виводимо по фільтру масив відповідних сум.
