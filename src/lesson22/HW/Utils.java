@@ -3,14 +3,14 @@ package lesson22.HW;
 public class Utils {
 
     private static int sumAmountOfTransactionsPerDay;
-    private static int limitTransactionsPerDayCount;
+    private static int countOfTransactionsPerDay;
     private static int transactionAmountLimit;
     private static String[] citiesAllowed;
 
 
     public Utils() {
         sumAmountOfTransactionsPerDay = 1000;
-        limitTransactionsPerDayCount = 1000;
+        countOfTransactionsPerDay = 1000;
         transactionAmountLimit = 1000;
         citiesAllowed = new String[]{"Kiev", "Odesa", "Mykolayiv"};
     }
@@ -31,7 +31,7 @@ public class Utils {
 
 
     public static int getCountOfTransactionsPerDay() {
-        return limitTransactionsPerDayCount;
+        return countOfTransactionsPerDay;
     }
 
 
