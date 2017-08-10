@@ -10,11 +10,9 @@ public class TransactionDAO {
     private Utils utils = new Utils();
 
 
-    public Transaction checkTransaction(Transaction transaction) throws Exception {
+    public void checkTransaction(Transaction transaction) throws Exception {
         if (transactions == null)
             throw new BadRequestException("array is null");
-        //  if (transactions.length == 0)
-        //      throw new InternalServerException(transactions.length + " :invalid value");
         if (transaction == null)
             throw new BadRequestException("Can't save null transaction");
         if (transaction.getAmount() < 0)
@@ -30,10 +28,7 @@ public class TransactionDAO {
                 throw new BadRequestException(transaction.getId() + " already exists");
         }
 
-        return transaction;
-
     }
-
 
     public Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) throws Exception {
         if (transactions == null)
@@ -48,6 +43,7 @@ public class TransactionDAO {
         for (Transaction transaction : transactions) {
             if (transaction != null)
                 calendar.setTime(transaction.getDateCreated());
+
             int trMonth = calendar.get(Calendar.MONTH);
             int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
@@ -63,8 +59,9 @@ public class TransactionDAO {
             int trMonth = calendar.get(Calendar.MONTH);
             int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-            if (trMonth == month && trDay == day)
+            if (trMonth == month && trDay == day) {
                 result[index] = transaction;
+            }
             index++;
 
         }
@@ -76,7 +73,7 @@ public class TransactionDAO {
 
     public Transaction[] transactionList(String city) throws Exception {      //метод валідації по назві міста
         if (transactions == null)
-            throw new InternalServerException("array is null");
+            throw new BadRequestException("array is null");
         int count = 0;
         if (city == null)
             throw new BadRequestException("The city can not be null");
@@ -105,7 +102,7 @@ public class TransactionDAO {
 
     public Transaction[] transactionList(int amount) throws Exception {    // метод валідації по сумі
         if (transactions == null)
-            throw new InternalServerException("array is null");
+            throw new BadRequestException("array is null");
         int count = 0;
         if (amount < 0)
             throw new InternalServerException(amount + " :invalid value");
@@ -148,7 +145,7 @@ public class TransactionDAO {
 
     public Transaction[] transactionList() throws Exception {
         if (transactions == null)
-            throw new InternalServerException("array is null");
+            throw new BadRequestException("array is null");
         int count = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null)
