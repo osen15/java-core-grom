@@ -6,7 +6,7 @@ import java.util.Date;
 public class TransactionDAO {
 
 
-    private  Transaction[] transactions = new Transaction[10];
+    private static Transaction[]  transactions = new Transaction[10];
     private Utils utils = new Utils();
 
 
@@ -86,7 +86,7 @@ public class TransactionDAO {
 
         Transaction[] result = new Transaction[count];
         if (count == 0)
-            throw new BadRequestException("no authorized city");
+           return result;
 
 
         int index = 0;
@@ -113,7 +113,7 @@ public class TransactionDAO {
 
         Transaction[] result = new Transaction[count];
         if (count == 0)
-            throw new BadRequestException("There are no transfers with such amount");
+           return result;
 
 
         int index = 0;
@@ -140,7 +140,7 @@ public class TransactionDAO {
         }
 
 
-        throw new InternalServerException("Not enough space to save " + transaction.getId());
+        throw new InternalServerException(transaction.getId() + "Not enough space to save " + transaction.getId());
     }
 
 

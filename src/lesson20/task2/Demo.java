@@ -7,7 +7,7 @@ public class Demo {
     public static void main(String[] args) throws Exception {
 
         Transaction transaction1 = new Transaction(1, "Lviv", 50, "qwe", TransactionType.INCOME, new Date());
-        Transaction transaction2 = new Transaction(2, "Kiev", 10000, "qwe", TransactionType.INCOME, new Date());
+        Transaction transaction2 = new Transaction(2, "Kiev", 100, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction3 = new Transaction(3, "Tokio", 10, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction4 = new Transaction(4, "New Yourk", 5, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction5 = new Transaction(5, "Kharkiv", 6, "qwe", TransactionType.INCOME, new Date());
@@ -23,7 +23,7 @@ public class Demo {
         Utils utils = new Utils();
 
         TransactionDAO transactionDAO = new TransactionDAO();
-        System.out.println(controller.save(transaction2));        // заповнюю масив
+        System.out.println(controller.save(transaction4));        // заповнюю масив
       //  transactionDAO.save(transaction9);
      //   transactionDAO.save(transaction3);
       //  transactionDAO.save(transaction4);
@@ -33,7 +33,7 @@ public class Demo {
 
                                          // перевірка коли всі параметри одного об"єкта дорівнюють другому
 
-        System.out.println(Arrays.toString(transactionDAO.getTransactions()));
+        System.out.println(Arrays.toString(controller.transactionList()));
 
 
       //  System.out.println(controller.saveTransaction(transaction9));          // перевірено з усіма ексепшинами
@@ -42,12 +42,12 @@ public class Demo {
       //  System.out.println(Arrays.toString(controller.transactionList()));  // виводить масив всіх транзакцій , на разі одної
 
 
-        System.out.println(Arrays.toString(controller.transactionList("Odesa")));  // виводимо масив міст (фільтр)
+        System.out.println(Arrays.toString(controller.transactionList("Kiev")));  // виводимо масив міст (фільтр)
 
 
        // System.out.println(Arrays.toString(controller.transactionList(100)));    // виводимо по фільтру масив відповідних сум.
-        System.out.println(Arrays.toString(utils.getCities()));
-
+       // System.out.println(Arrays.toString(utils.getCities()));
+//
 
 
     }
