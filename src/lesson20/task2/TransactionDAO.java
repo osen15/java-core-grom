@@ -58,7 +58,7 @@ public class TransactionDAO {
             throw new LimitExceeded("Amount of transactions per day exceeded");
         }
 
-        for (String city : utils.getCitiesAllowed()) {
+        for (String city : utils.getCities()) {
             if (transaction.getCity().equals(city)) {
 
                 return transaction;
@@ -116,7 +116,7 @@ public class TransactionDAO {
     }
 
 
-    public Transaction[] checkCityName(String city) throws Exception {      //метод валідації по назві міста
+    public Transaction[] transactionList(String city) throws Exception {      //метод валідації по назві міста
         int count = 0;
         if (city == null)
             throw new BadRequestException("The city can not be null");
@@ -143,7 +143,7 @@ public class TransactionDAO {
 
     }
 
-    public Transaction[] checkAmount(int amount) throws Exception {    // метод валідації по сумі
+    public Transaction[] transactionList(int amount) throws Exception {    // метод валідації по сумі
         int count = 0;
         if (amount < 0)
             throw new InternalServerException(amount + " :invalid value");
@@ -173,7 +173,7 @@ public class TransactionDAO {
 
 
 
-    public Transaction[] getTransactions() {
+    public Transaction[] transactionList() {
         return transactions;
     }
 

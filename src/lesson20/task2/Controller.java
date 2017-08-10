@@ -11,32 +11,32 @@ public class Controller {
 
 
 
-    Transaction saveTransaction(Transaction transaction) throws Exception {
+    Transaction save(Transaction transaction) throws Exception {
     return transactionDAO.save(transactionDAO.checkOnLimitsOfTransaction(transaction));
 
     }
 
 
     Transaction[] transactionList() throws Exception {
-        if (transactionDAO.getTransactions() == null)
+        if (transactionDAO.transactionList() == null)
             throw new InternalServerException("invalid value");
-        return transactionDAO.getTransactions();
+        return transactionDAO.transactionList();
     }
 
 
     Transaction[] transactionList(String city) throws Exception {
-        if (transactionDAO.getTransactions() == null)
+        if (transactionDAO.transactionList() == null)
             throw new InternalServerException("invalid value");
 
-      return transactionDAO.checkCityName(city);
+      return transactionDAO.transactionList(city);
 
     }
 
     Transaction[] transactionList(int amount) throws Exception {
-        if (transactionDAO.getTransactions() == null)
+        if (transactionDAO.transactionList() == null)
             throw new InternalServerException("invalid value");
 
-        return  transactionDAO.checkAmount(amount);
+        return  transactionDAO.transactionList(amount);
     }
 
 

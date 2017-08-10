@@ -30,7 +30,7 @@ public class Demo {
      //   transactionDAO.save(transaction5);
      //   transactionDAO.save(transaction6);
       //  transactionDAO.save(transaction7);
-      //  System.out.println(Arrays.toString(transactionDAO.getTransactions()));
+      //  System.out.println(Arrays.toString(transactionDAO.transactionList()));
      //   transactionDAO.save(transaction7);                                     // перевірка коли всі параметри одного об"єкта дорівнюють другому
 
 

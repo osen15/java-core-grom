@@ -15,7 +15,7 @@ public class Utils {
         this.cities = new String[]{"Kiev", "Odesa", "Mykolayiv"};
     }
 
-    public String[] getCitiesAllowed() {
+    public String[] getCities() {
         return cities;
     }
 
