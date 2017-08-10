@@ -117,24 +117,33 @@ public class TransactionDAO {
     }
 
     public void checkTransaction(Transaction transaction) throws Exception {
-        if (transactions == null)
+        if (transactions == null) {
             throw new BadRequestException("array is null");
-        if (transaction == null)
+        }
+        if (transaction == null) {
             throw new BadRequestException("Can't save null transaction");
-        if (transaction.getAmount() < 0)
+        }
+        if (transaction.getAmount() < 0) {
             throw new BadRequestException(transaction.getId() + " :invalid value");
-        if (transaction.getCity() == null)
+        }
+        if (transaction.getCity() == null) {
             throw new BadRequestException("The city can not be null");
-        if (transaction.getId() <= 0)
+        }
+        if (transaction.getId() <= 0) {
             throw new InternalServerException(transaction.getId() + " :invalid value");
-        if (!checkTransactionType(transaction))
+        }
+        if (!checkTransactionType(transaction)) {
             throw new BadRequestException(transaction.getId() + " transaction type is null");
-        if (transaction.getDateCreated() == null)
+        }
+        if (transaction.getDateCreated() == null) {
             throw new BadRequestException(transaction.getId() + " Date is null");
-        if (transaction.getDescription() == null)
+        }
+        if (transaction.getDescription() == null) {
             throw new BadRequestException(transaction.getId() + " Description is null");
-        if (theSameTransaction(transaction))
+        }
+        if (theSameTransaction(transaction)) {
             throw new BadRequestException(transaction.getId() + " already exists");
+        }
     }
 
 
@@ -203,6 +212,7 @@ public class TransactionDAO {
         }
         return false;
     }
+
     private boolean checkTransactionType(Transaction transaction) {
         return (transaction.getType() == TransactionType.INCOME || transaction.getType() == TransactionType.OUTCOME);
 
