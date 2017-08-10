@@ -6,13 +6,13 @@ import java.util.Date;
 public class TransactionDAO {
 
 
-    private static Transaction[]  transactions = new Transaction[10];
+    private Transaction[] transactions = new Transaction[0];
     private Utils utils = new Utils();
 
 
     public Transaction checkTransaction(Transaction transaction) throws Exception {
-        // if (transactions == null)
-        //  throw new BadRequestException("array is null");
+        if (transactions == null)
+            throw new BadRequestException("array is null");
         //  if (transactions.length == 0)
         //      throw new InternalServerException(transactions.length + " :invalid value");
         if (transaction == null)
@@ -35,10 +35,9 @@ public class TransactionDAO {
     }
 
 
-
-
-
-    public  Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
+    public Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) throws Exception {
+        if (transactions == null)
+            throw new BadRequestException("array is null");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);
@@ -76,6 +75,8 @@ public class TransactionDAO {
 
 
     public Transaction[] transactionList(String city) throws Exception {      //метод валідації по назві міста
+        if (transactions == null)
+            throw new InternalServerException("array is null");
         int count = 0;
         if (city == null)
             throw new BadRequestException("The city can not be null");
@@ -86,7 +87,7 @@ public class TransactionDAO {
 
         Transaction[] result = new Transaction[count];
         if (count == 0)
-           return result;
+            throw new BadRequestException("no authorized city");
 
 
         int index = 0;
@@ -103,6 +104,8 @@ public class TransactionDAO {
     }
 
     public Transaction[] transactionList(int amount) throws Exception {    // метод валідації по сумі
+        if (transactions == null)
+            throw new InternalServerException("array is null");
         int count = 0;
         if (amount < 0)
             throw new InternalServerException(amount + " :invalid value");
@@ -113,7 +116,7 @@ public class TransactionDAO {
 
         Transaction[] result = new Transaction[count];
         if (count == 0)
-           return result;
+            throw new BadRequestException("There are no transfers with such amount");
 
 
         int index = 0;
@@ -129,7 +132,6 @@ public class TransactionDAO {
     }
 
     public Transaction save(Transaction transaction) throws Exception {
-        checkTransaction(transaction);
         int index = 0;
         for (Transaction tr : transactions) {
             if (tr == null) {
@@ -140,20 +142,35 @@ public class TransactionDAO {
         }
 
 
-        throw new InternalServerException(transaction.getId() + "Not enough space to save " + transaction.getId());
+        throw new InternalServerException(transaction.getId() + " Not enough space to save transaction");
     }
 
 
-    public Transaction[] transactionList() {
-        return getTransactions();
+    public Transaction[] transactionList() throws Exception {
+        if (transactions == null)
+            throw new InternalServerException("array is null");
+        int count = 0;
+        for (Transaction transaction : transactions) {
+            if (transaction != null)
+                count++;
+        }
+
+        Transaction[] result = new Transaction[count];
+        if (count == 0)
+            throw new BadRequestException("list of transfers is empty");
+
+
+        int index = 0;
+        for (Transaction transaction : transactions) {
+            if (transaction != null)
+                result[index] = transaction;
+            index++;
+        }
+
+
+        return result;
+
     }
-
-    public Transaction[] getTransactions() {
-        return transactions;
-    }
-
-
-
 
 
     public int transactionsPerDayAmount(Transaction[] transactions) {

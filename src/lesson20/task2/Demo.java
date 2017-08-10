@@ -23,7 +23,7 @@ public class Demo {
         Utils utils = new Utils();
 
         TransactionDAO transactionDAO = new TransactionDAO();
-        System.out.println(controller.save(transaction4));        // заповнюю масив
+       System.out.println(controller.save(transaction2));        // заповнюю масив
       //  transactionDAO.save(transaction9);
      //   transactionDAO.save(transaction3);
       //  transactionDAO.save(transaction4);
@@ -33,7 +33,7 @@ public class Demo {
 
                                          // перевірка коли всі параметри одного об"єкта дорівнюють другому
 
-        System.out.println(Arrays.toString(controller.transactionList()));
+       // System.out.println(Arrays.toString(controller.transactionList()));
 
 
       //  System.out.println(controller.saveTransaction(transaction9));          // перевірено з усіма ексепшинами

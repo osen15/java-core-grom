@@ -10,6 +10,7 @@ public class Controller {
 
 
     public Transaction save(Transaction transaction) throws Exception {
+        transactionDAO.checkTransaction(transaction);
         Transaction[] transactions = transactionDAO.getTransactionsPerDay(transaction.getDateCreated());
 
 
@@ -33,23 +34,18 @@ public class Controller {
 
 
     public Transaction[] transactionList() throws Exception {
-        if (transactionDAO.transactionList() == null)
-            throw new InternalServerException("invalid value");
+
         return transactionDAO.transactionList();
     }
 
 
     public Transaction[] transactionList(String city) throws Exception {
-        if (transactionDAO.transactionList() == null)
-            throw new InternalServerException("invalid value");
 
         return transactionDAO.transactionList(city);
 
     }
 
     public Transaction[] transactionList(int amount) throws Exception {
-        if (transactionDAO.transactionList() == null)
-            throw new InternalServerException("invalid value");
 
         return transactionDAO.transactionList(amount);
     }
