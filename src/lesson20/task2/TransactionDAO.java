@@ -22,7 +22,7 @@ public class TransactionDAO {
         }
 
 
-        throw new InternalServerException(transaction.getId() + " Not enough space to save transaction");
+        throw new InternalServerException("Not enough space to save transaction");
     }
 
 
@@ -167,9 +167,8 @@ public class TransactionDAO {
 
             if (trMonth == month && trDay == day) {
                 result[index] = transaction;
+                index++;
             }
-            index++;
-
         }
 
 
