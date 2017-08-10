@@ -7,7 +7,7 @@ import java.util.Date;
 public class TransactionDAO {
 
 
-    private Transaction[] transactions = null;
+    private Transaction[] transactions = new Transaction[10];
     private Utils utils = new Utils();
 
 
