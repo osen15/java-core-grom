@@ -5,18 +5,18 @@ public class Utils {
     private int limitSimpleTransactionAmount;
     private int limitTransactionsPerDayCount;
     private int limitTransactionsPerDayAmount;
-    private String[] citiesAllowed;
+    private String[] cities;
 
 
     public Utils() {
         this.limitSimpleTransactionAmount = 1000;
         this.limitTransactionsPerDayCount = 1000;
         this.limitTransactionsPerDayAmount = 1000;
-        this.citiesAllowed = new String[]{"Kiev", "Odesa", "Mykolayiv"};
+        this.cities = new String[]{"Kiev", "Odesa", "Mykolayiv"};
     }
 
     public String[] getCitiesAllowed() {
-        return citiesAllowed;
+        return cities;
     }
 
 
