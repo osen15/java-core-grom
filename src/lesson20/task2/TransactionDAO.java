@@ -124,6 +124,8 @@ public class TransactionDAO {
             throw new BadRequestException(transaction.getId() + " transaction type is null");
         if (transaction.getDateCreated() == null)
             throw new BadRequestException(transaction.getId() + " Date is null");
+        if (transaction.getDescription() == null)
+            throw new BadRequestException(transaction.getId() + " Description is null");
         if (theSameTransaction(transaction))
             throw new BadRequestException(transaction.getId() + " already exists");
     }
