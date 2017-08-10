@@ -7,11 +7,13 @@ import java.util.Date;
 public class TransactionDAO {
 
 
-    private Transaction[] transactions = new Transaction[10];
+    private Transaction[] transactions = null;
     private Utils utils = new Utils();
 
 
     public Transaction save(Transaction transaction) throws Exception {
+        if (transactions == null)
+            throw new BadRequestException("array is null");
         int index = 0;
         for (Transaction tr : transactions) {
             if (tr == null) {
@@ -22,7 +24,7 @@ public class TransactionDAO {
         }
 
 
-        throw new InternalServerException("Not enough space to save transaction");
+        throw new InternalServerException("Not enough space to save transaction " + transaction.getId());
     }
 
 
