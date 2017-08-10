@@ -7,7 +7,7 @@ public class Demo {
     public static void main(String[] args) throws Exception {
 
         Transaction transaction1 = new Transaction(1, "Lviv", 50, "qwe", TransactionType.INCOME, new Date());
-        Transaction transaction2 = new Transaction(2, "Kiev", 100, "qwe", TransactionType.INCOME, new Date());
+        Transaction transaction2 = new Transaction(2, "Kiev", 10000, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction3 = new Transaction(3, "Tokio", 10, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction4 = new Transaction(4, "New Yourk", 5, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction5 = new Transaction(5, "Kharkiv", 6, "qwe", TransactionType.INCOME, new Date());
@@ -23,8 +23,8 @@ public class Demo {
         Utils utils = new Utils();
 
         TransactionDAO transactionDAO = new TransactionDAO();
-        System.out.println(transactionDAO.save(transaction2));        // заповнюю масив
-        transactionDAO.save(transaction9);
+        System.out.println(controller.save(transaction2));        // заповнюю масив
+      //  transactionDAO.save(transaction9);
      //   transactionDAO.save(transaction3);
       //  transactionDAO.save(transaction4);
       //  transactionDAO.save(transaction5);
