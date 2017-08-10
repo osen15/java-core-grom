@@ -66,4 +66,16 @@ public class Transaction {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", type=" + type +
+                ", dateCreated=" + dateCreated +
+                '}';
+    }
 }
