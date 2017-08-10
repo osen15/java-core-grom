@@ -8,39 +8,33 @@ public class Controller {
     private TransactionDAO transactionDAO = new TransactionDAO();
 
 
-
-
-
-    Transaction save(Transaction transaction) throws Exception {
-    return transactionDAO.save(transactionDAO.checkOnLimitsOfTransaction(transaction));
+    public Transaction save(Transaction transaction) throws Exception {
+        return transactionDAO.save(transactionDAO.checkOnLimitsOfTransaction(transaction));
 
     }
 
 
-    Transaction[] transactionList() throws Exception {
+    public Transaction[] transactionList() throws Exception {
         if (transactionDAO.transactionList() == null)
             throw new InternalServerException("invalid value");
         return transactionDAO.transactionList();
     }
 
 
-    Transaction[] transactionList(String city) throws Exception {
+    public Transaction[] transactionList(String city) throws Exception {
         if (transactionDAO.transactionList() == null)
             throw new InternalServerException("invalid value");
 
-      return transactionDAO.transactionList(city);
+        return transactionDAO.transactionList(city);
 
     }
 
-    Transaction[] transactionList(int amount) throws Exception {
+    public Transaction[] transactionList(int amount) throws Exception {
         if (transactionDAO.transactionList() == null)
             throw new InternalServerException("invalid value");
 
-        return  transactionDAO.transactionList(amount);
+        return transactionDAO.transactionList(amount);
     }
-
-
-
 
 
 }
