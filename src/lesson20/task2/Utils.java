@@ -15,24 +15,19 @@ public class Utils {
         this.cities = new String[]{"Kiev", "Odesa", "Mykolayiv"};
     }
 
-    public String[] getCities() {
-        return cities;
-    }
-
-
-    public int getTransactionAmountLimit() {
-        return limitTransactionsPerDayAmount;
-    }
-
-
-    public int getSumAmountOfTransactionsPerDay() {
+    public int getLimitSimpleTransactionAmount() {
         return limitSimpleTransactionAmount;
     }
 
-
-    public int getCountOfTransactionsPerDay() {
+    public int getLimitTransactionsPerDayCount() {
         return limitTransactionsPerDayCount;
     }
 
+    public int getLimitTransactionsPerDayAmount() {
+        return limitTransactionsPerDayAmount;
+    }
 
+    public String[] getCities() {
+        return cities;
+    }
 }
