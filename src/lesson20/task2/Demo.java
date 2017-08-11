@@ -48,7 +48,7 @@ public class Demo {
         // System.out.println(Arrays.toString(utils.getCities()));
 //
 
-        System.out.println(Arrays.toString(transactionDAO.getTransactionsPerDay(transaction1.getDateCreated())));
+        System.out.println(Arrays.toString(transactionDAO.getTransactionsPerDay(transaction2.getDateCreated())));
     }
 
 

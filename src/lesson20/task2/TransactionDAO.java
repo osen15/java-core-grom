@@ -116,7 +116,7 @@ public class TransactionDAO {
 
     }
 
-    public void checkTransaction(Transaction transaction) throws Exception {
+    private void checkTransaction(Transaction transaction) throws Exception {
         if (transactions == null) {
             throw new BadRequestException("array is null");
         }
@@ -170,6 +170,8 @@ public class TransactionDAO {
         return transaction;
     }
 
+
+
     public Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) throws Exception {
         if (transactions == null)
             throw new BadRequestException("array is null");
@@ -182,14 +184,15 @@ public class TransactionDAO {
         int count = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null)
-                calendar.setTime(transaction.getDateCreated());
+            calendar.setTime(transaction.getDateCreated());
+
 
             int trMonth = calendar.get(Calendar.MONTH);
             int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-            if (trMonth == month && trDay == day) {
+            if (trMonth == month && trDay == day)
                 count++;
-            }
+
 
         }
 
@@ -203,9 +206,10 @@ public class TransactionDAO {
 
             if (trMonth == month && trDay == day) {
                 result[index] = transaction;
+            }
                 index++;
             }
-        }
+
 
 
         return result;
