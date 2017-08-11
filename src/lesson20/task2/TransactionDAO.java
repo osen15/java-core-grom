@@ -7,8 +7,11 @@ import java.util.Date;
 public class TransactionDAO {
 
 
-    private static Transaction[] transactions = new Transaction[10];
     private Utils utils = new Utils();
+    private Transaction transaction3 = new Transaction(3, "Kiev", 10, "qwe", TransactionType.INCOME, new Date());
+    private Transaction transaction4 = new Transaction(4, "Kiev", 5, "qwe", TransactionType.INCOME, new Date());
+    private Transaction transaction5 = new Transaction(5, "Kiev", 6, "qwe", TransactionType.INCOME, new Date());
+    private Transaction[] transactions = new Transaction[]{null, transaction4, transaction5, null, null, transaction3, null};
 
 
     public Transaction save(Transaction transaction) throws Exception {
@@ -171,7 +174,6 @@ public class TransactionDAO {
     }
 
 
-
     public Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) throws Exception {
         if (transactions == null)
             throw new BadRequestException("array is null");
@@ -183,33 +185,33 @@ public class TransactionDAO {
 
         int count = 0;
         for (Transaction transaction : transactions) {
-            if (transaction != null)
-            calendar.setTime(transaction.getDateCreated());
+            if (transaction != null) {
+                calendar.setTime(transaction.getDateCreated());
 
 
-            int trMonth = calendar.get(Calendar.MONTH);
-            int trDay = calendar.get(Calendar.DAY_OF_MONTH);
+                int trMonth = calendar.get(Calendar.MONTH);
+                int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-            if (trMonth == month && trDay == day)
-                count++;
-
+                if (trMonth == month && trDay == day)
+                    count++;
+            }
 
         }
 
         Transaction[] result = new Transaction[count];
         int index = 0;
         for (Transaction transaction : transactions) {
-            if (transaction != null)
+            if (transaction != null) {
                 calendar.setTime(transaction.getDateCreated());
-            int trMonth = calendar.get(Calendar.MONTH);
-            int trDay = calendar.get(Calendar.DAY_OF_MONTH);
+                int trMonth = calendar.get(Calendar.MONTH);
+                int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-            if (trMonth == month && trDay == day) {
-                result[index] = transaction;
+                if (trMonth == month && trDay == day) {
+                    result[index] = transaction;
+                    index++;
+                }
             }
-                index++;
-            }
-
+        }
 
 
         return result;

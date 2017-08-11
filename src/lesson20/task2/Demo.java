@@ -15,7 +15,7 @@ public class Demo {
         Transaction transaction7 = new Transaction(7, "Kiev", 90, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction8 = new Transaction(8, "Kiev", 34, "qwe", TransactionType.INCOME, new Date());
         Transaction transaction9 = new Transaction(9, "Odesa", 20, "qwe", TransactionType.INCOME, new Date());
-        Transaction transaction10 = new Transaction(10, "Lviv", 12, "qwe", TransactionType.INCOME, new Date());
+        Transaction transaction10 = new Transaction(10, "Kiev", 12, "qwe", TransactionType.INCOME, new Date());
 
 
         Controller controller = new Controller();
@@ -23,9 +23,9 @@ public class Demo {
 
         TransactionDAO transactionDAO = new TransactionDAO();
         System.out.println(controller.save(transaction9));        // заповнюю масив
-          System.out.println(controller.save(transaction8));
-          System.out.println(controller.save(transaction7));
-         System.out.println(controller.save(transaction2));
+        //  System.out.println(controller.save(transaction8));
+        //  System.out.println(controller.save(transaction7));
+        // System.out.println(controller.save(transaction2));
         //  transactionDAO.save(transaction5);
         // transactionDAO.save(transaction6);
         //  transactionDAO.save(transaction7);
@@ -48,7 +48,7 @@ public class Demo {
         // System.out.println(Arrays.toString(utils.getCities()));
 //
 
-        System.out.println(Arrays.toString(transactionDAO.getTransactionsPerDay(transaction2.getDateCreated())));
+        System.out.println(Arrays.toString(transactionDAO.getTransactionsPerDay(transaction10.getDateCreated())));
     }
 
 
