@@ -23,9 +23,9 @@ public class Demo {
 
         TransactionDAO transactionDAO = new TransactionDAO();
         System.out.println(controller.save(transaction9));        // заповнюю масив
-        //  System.out.println(controller.save(transaction8));
-        //  System.out.println(controller.save(transaction7));
-        // System.out.println(controller.save(transaction2));
+          System.out.println(controller.save(transaction8));
+          System.out.println(controller.save(transaction7));
+         System.out.println(controller.save(transaction2));
         //  transactionDAO.save(transaction5);
         // transactionDAO.save(transaction6);
         //  transactionDAO.save(transaction7);
@@ -44,11 +44,11 @@ public class Demo {
         //  System.out.println(Arrays.toString(controller.transactionList("Kiev")));  // виводимо масив міст (фільтр)
 
 
-        //   System.out.println(Arrays.toString(controller.transactionList(20)));    // виводимо по фільтру масив відповідних сум.
+         //  System.out.println(Arrays.toString(controller.transactionList(20)));    // виводимо по фільтру масив відповідних сум.
         // System.out.println(Arrays.toString(utils.getCities()));
 //
 
-
+        System.out.println(Arrays.toString(transactionDAO.getTransactionsPerDay(transaction1.getDateCreated())));
     }
 
 

@@ -7,7 +7,7 @@ import java.util.Date;
 public class TransactionDAO {
 
 
-    private Transaction[] transactions = new Transaction[10];
+    private static Transaction[] transactions = new Transaction[10];
     private Utils utils = new Utils();
 
 
@@ -100,7 +100,7 @@ public class TransactionDAO {
 
         Transaction[] result = new Transaction[count];
         if (count == 0)
-            throw new BadRequestException(Arrays.toString(result) + "list of transfers is empty");
+            throw new BadRequestException(Arrays.toString(result) + "list is empty");
 
 
         int index = 0;
@@ -146,6 +146,29 @@ public class TransactionDAO {
         }
     }
 
+    public Transaction checkLimits(Transaction transaction) throws Exception {
+
+        checkTransaction(transaction);
+
+        Transaction[] transactions = getTransactionsPerDay(transaction.getDateCreated());
+
+
+        if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount()) {
+            throw new LimitExceeded(transaction.getId() + " Amount of this transaction exceeded");
+        }
+
+        if (transactions.length + 1 > utils.getLimitTransactionsPerDayCount()) {
+            throw new LimitExceeded(transaction.getId() + " Count of transactions per day exceeded");
+        }
+        if (transactionsPerDayAmount(transactions) + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
+            throw new LimitExceeded(transaction.getId() + " Amount of transactions per day exceeded");
+        }
+
+        if (!checkCity(transaction)) {
+            throw new BadRequestException(transaction.getId() + " : no authorized city");
+        }
+        return transaction;
+    }
 
     public Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) throws Exception {
         if (transactions == null)
@@ -164,8 +187,10 @@ public class TransactionDAO {
             int trMonth = calendar.get(Calendar.MONTH);
             int trDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-            if (trMonth == month && trDay == day)
+            if (trMonth == month && trDay == day) {
                 count++;
+            }
+
         }
 
         Transaction[] result = new Transaction[count];
@@ -187,7 +212,7 @@ public class TransactionDAO {
     }
 
 
-    public int transactionsPerDayAmount(Transaction[] transactions) { // сума грошей за день
+    private int transactionsPerDayAmount(Transaction[] transactions) { // сума грошей за день
         int amount = 0;
         for (Transaction tr : transactions) {
             if (tr != null)
@@ -196,7 +221,7 @@ public class TransactionDAO {
         return amount;
     }
 
-    public boolean checkCity(Transaction transaction) {  //метод перевіряє чи таке місто є в списку
+    private boolean checkCity(Transaction transaction) {  //метод перевіряє чи таке місто є в списку
         for (String city : utils.getCities()) {
             if (city.equals(transaction.getCity()))
                 return true;
