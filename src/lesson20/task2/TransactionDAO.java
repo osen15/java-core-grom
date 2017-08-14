@@ -8,13 +8,12 @@ public class TransactionDAO {
 
 
     private Utils utils = new Utils();
-    private Transaction transaction3 = new Transaction(3, "Kiev", 10, "qwe", TransactionType.INCOME, new Date());
-    private Transaction transaction4 = new Transaction(4, "Kiev", 5, "qwe", TransactionType.INCOME, new Date());
-    private Transaction transaction5 = new Transaction(5, "Kiev", 6, "qwe", TransactionType.INCOME, new Date());
-    private Transaction[] transactions = new Transaction[]{null, transaction4, transaction5, null, null, transaction3, null};
+
+    private  Transaction[] transactions = new Transaction[10];
 
 
     public Transaction save(Transaction transaction) throws Exception {
+        validate(transaction);
         if (transactions == null)
             throw new BadRequestException("array is null");
         int index = 0;
@@ -93,6 +92,7 @@ public class TransactionDAO {
 
 
     public Transaction[] transactionList() throws Exception { // всі транзакції
+
         if (transactions == null)
             throw new BadRequestException("array is null");
         int count = 0;
@@ -149,28 +149,26 @@ public class TransactionDAO {
         }
     }
 
-    public Transaction checkLimits(Transaction transaction) throws Exception {
+    public void validate(Transaction transaction) throws Exception {
 
         checkTransaction(transaction);
-
-        Transaction[] transactions = getTransactionsPerDay(transaction.getDateCreated());
 
 
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount()) {
             throw new LimitExceeded(transaction.getId() + " Amount of this transaction exceeded");
         }
 
-        if (transactions.length + 1 > utils.getLimitTransactionsPerDayCount()) {
+        if (getTransactionsPerDay(transaction.getDateCreated()).length + 1 > utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded(transaction.getId() + " Count of transactions per day exceeded");
         }
-        if (transactionsPerDayAmount(transactions) + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
+        if (transactionsPerDayAmount(getTransactionsPerDay(transaction.getDateCreated())) + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded(transaction.getId() + " Amount of transactions per day exceeded");
         }
 
         if (!checkCity(transaction)) {
             throw new BadRequestException(transaction.getId() + " : no authorized city");
         }
-        return transaction;
+
     }
 
 

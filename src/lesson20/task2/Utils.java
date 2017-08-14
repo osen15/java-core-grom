@@ -2,18 +2,11 @@ package lesson20.task2;
 
 public class Utils {
 
-    private int limitSimpleTransactionAmount;
-    private int limitTransactionsPerDayCount;
-    private int limitTransactionsPerDayAmount;
-    private String[] cities;
+    private int limitSimpleTransactionAmount = 40;
+    private int limitTransactionsPerDayCount = 10;
+    private int limitTransactionsPerDayAmount = 100;
+    private String[] cities = new String[]{"Kiev", "Odesa", "Mykolayiv"};
 
-
-    public Utils() {
-        this.limitSimpleTransactionAmount = 1000;
-        this.limitTransactionsPerDayCount = 1000;
-        this.limitTransactionsPerDayAmount = 1000;
-        this.cities = new String[]{"Kiev", "Odesa", "Mykolayiv"};
-    }
 
     public int getLimitSimpleTransactionAmount() {
         return limitSimpleTransactionAmount;

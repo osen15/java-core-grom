@@ -23,7 +23,7 @@ public class Demo {
 
         TransactionDAO transactionDAO = new TransactionDAO();
         System.out.println(controller.save(transaction9));        // заповнюю масив
-        //  System.out.println(controller.save(transaction8));
+        System.out.println(controller.save(transaction8));
         //  System.out.println(controller.save(transaction7));
         // System.out.println(controller.save(transaction2));
         //  transactionDAO.save(transaction5);
