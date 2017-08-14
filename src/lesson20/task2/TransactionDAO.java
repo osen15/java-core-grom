@@ -29,6 +29,10 @@ public class TransactionDAO {
     }
 
 
+    public Transaction[] getTransactions() {
+        return transactions;
+    }
+
     public Transaction[] transactionList(String city) throws Exception {      //метод валідації по назві міста
         if (transactions == null)
             throw new BadRequestException("array is null");
@@ -36,6 +40,7 @@ public class TransactionDAO {
         if (city == null)
             throw new BadRequestException("The city can not be null");
         for (Transaction transaction : transactions) {
+
             if (transaction != null && transaction.getCity().equals(city)) {
                 count++;
             }
@@ -87,7 +92,7 @@ public class TransactionDAO {
         if (transactions == null)
             throw new BadRequestException("array is null");
 
-        return transactions;
+        return getTransactions();
 
     }
 
