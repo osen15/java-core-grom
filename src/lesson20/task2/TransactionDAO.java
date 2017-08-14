@@ -42,10 +42,6 @@ public class TransactionDAO {
         }
 
         Transaction[] result = new Transaction[count];
-        if (count == 0)
-            throw new BadRequestException(city + " no authorized city");
-
-
         int index = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null && transaction.getCity().equals(city)) {
@@ -72,10 +68,6 @@ public class TransactionDAO {
         }
 
         Transaction[] result = new Transaction[count];
-        if (count == 0)
-            throw new BadRequestException(amount + " : there are no transfers with such amount");
-
-
         int index = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null && transaction.getAmount() == amount) {
