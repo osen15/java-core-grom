@@ -91,8 +91,24 @@ public class TransactionDAO {
 
         if (transactions == null)
             throw new BadRequestException("array is null");
+        int count = 0;
 
-        return getTransactions();
+        for (Transaction transaction : transactions) {
+            if (transaction != null)
+                count++;
+        }
+
+        Transaction[] result = new Transaction[count];
+        int index = 0;
+        for (Transaction transaction : transactions) {
+            if (transaction != null) {
+                result[index] = transaction;
+                index++;
+            }
+        }
+
+
+        return result;
 
     }
 
