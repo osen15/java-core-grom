@@ -1,6 +1,5 @@
 package lesson20.task2;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -9,7 +8,7 @@ public class TransactionDAO {
 
     private Utils utils = new Utils();
 
-    private  Transaction[] transactions = new Transaction[10];
+    private Transaction[] transactions = new Transaction[10];
 
 
     public Transaction save(Transaction transaction) throws Exception {
@@ -95,27 +94,8 @@ public class TransactionDAO {
 
         if (transactions == null)
             throw new BadRequestException("array is null");
-        int count = 0;
-        for (Transaction transaction : transactions) {
-            if (transaction != null)
-                count++;
-        }
 
-        Transaction[] result = new Transaction[count];
-        if (count == 0)
-            throw new BadRequestException(Arrays.toString(result) + "list is empty");
-
-
-        int index = 0;
-        for (Transaction transaction : transactions) {
-            if (transaction != null) {
-                result[index] = transaction;
-                index++;
-            }
-        }
-
-
-        return result;
+        return transactions;
 
     }
 
