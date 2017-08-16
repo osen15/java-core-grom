@@ -10,7 +10,7 @@ public class Demo {
         System.out.println(company.getLicence());
 
 
-        Company company1 = new Company(9, "Test");
+        Company company1 = new Company(9, "Order");
         System.out.println(company1.getLicence());
 
         Company.setLicence("TTT11");

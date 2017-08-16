@@ -17,6 +17,6 @@ public class CompareOperatorExample {
         System.out.println(res);
 
 
-        // System.out.println(a < b);
+        // Sys.out.println(a < b);
     }
 }

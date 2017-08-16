@@ -25,7 +25,7 @@ public class Demo {
         System.out.println(controller.save(transaction9));        // заповнюю масив
         System.out.println(controller.save(transaction8));
         System.out.println(controller.save(transaction7));
-        // System.out.println(controller.save(transaction2));
+        // Sys.out.println(controller.save(transaction2));
         //  transactionDAO.save(transaction5);
         // transactionDAO.save(transaction6);
         //  transactionDAO.save(transaction7);
@@ -35,20 +35,20 @@ public class Demo {
         System.out.println(Arrays.toString(controller.transactionList()));
 
 
-        //  System.out.println(controller.saveTransaction(transaction9));          // перевірено з усіма ексепшинами
+        //  Sys.out.println(controller.saveTransaction(transaction9));          // перевірено з усіма ексепшинами
 
 
-        //  System.out.println(Arrays.toString(controller.transactionList()));  // виводить масив всіх транзакцій , на разі одної
+        //  Sys.out.println(Arrays.toString(controller.transactionList()));  // виводить масив всіх транзакцій , на разі одної
 
 
           System.out.println(Arrays.toString(controller.transactionList("Kiev")));  // виводимо масив міст (фільтр)
 
 
-         //  System.out.println(Arrays.toString(controller.transactionList(20)));    // виводимо по фільтру масив відповідних сум.
-        // System.out.println(Arrays.toString(utils.getCities()));
+         //  Sys.out.println(Arrays.toString(controller.transactionList(20)));    // виводимо по фільтру масив відповідних сум.
+        // Sys.out.println(Arrays.toString(utils.getCities()));
 //
 
-       // System.out.println(Arrays.toString(transactionDAO.getTransactionsPerDay(transaction10.getDateCreated())));
+       // Sys.out.println(Arrays.toString(transactionDAO.getTransactionsPerDay(transaction10.getDateCreated())));
     }
 
 

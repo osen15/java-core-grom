@@ -26,7 +26,7 @@ public class Test implements  Cloneable {
         System.out.println(test1.hashCode());
 
 
-       // Test test2 = new Test(test.getSomeNumber(), test.getName());
+       // Order test2 = new Order(test.getSomeNumber(), test.getName());
 
 
 
@@ -42,7 +42,7 @@ public class Test implements  Cloneable {
 
     @Override
     public String toString() {
-        return "Test{" +
+        return "Order{" +
                 "someNumber=" + someNumber +
                 ", name='" + name + '\'' +
                 '}';

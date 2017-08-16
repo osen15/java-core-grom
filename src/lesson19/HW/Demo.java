@@ -24,16 +24,16 @@ public class Demo {
         Storage storage3 = new Storage(20, files1, format, "Lviv", 40); // не той формат файла
         Controller controller = new Controller();
 
-      // System.out.println(controller.put(storage3, file3));
-     //   System.out.println(Arrays.toString(files1));
-        //   System.out.println((controller.put(storage1, file3)));
-        //     System.out.println(Arrays.toString(controller.put(storage2, file4)));
+      // Sys.out.println(controller.put(storage3, file3));
+     //   Sys.out.println(Arrays.toString(files1));
+        //   Sys.out.println((controller.put(storage1, file3)));
+        //     Sys.out.println(Arrays.toString(controller.put(storage2, file4)));
 
 
-        //    System.out.println((controller.delete(storage, file4)));
-        //    System.out.println(Arrays.toString(files));
-        //      System.out.println(Arrays.toString(controller.put(storage1, file4)));  // нема четвертого файла в масиві.
-        //      System.out.println(Arrays.toString(controller.put(storage1, null))); // файл null
+        //    Sys.out.println((controller.delete(storage, file4)));
+        //    Sys.out.println(Arrays.toString(files));
+        //      Sys.out.println(Arrays.toString(controller.put(storage1, file4)));  // нема четвертого файла в масиві.
+        //      Sys.out.println(Arrays.toString(controller.put(storage1, null))); // файл null
 
 
 
@@ -41,7 +41,7 @@ public class Demo {
 
 
 
-        //     System.out.println(Arrays.toString(files1));
+        //     Sys.out.println(Arrays.toString(files1));
         // }
         //  controller.transferAll(storage, storage3);
 
@@ -49,10 +49,10 @@ public class Demo {
         // controller.transferFile(storage, storage3, 1);  // помилка, файл з таким айді вже є в стореджі.
         // controller.transferFile(storage, storage3,0); // додаємо файл, коли в стореджі нема такого айді
         //  controller.transferFile(storage, storage3, 2); // неправильний формат файла
-        // System.out.println(Arrays.toString(files1));
+        // Sys.out.println(Arrays.toString(files1));
 
 
-        //  System.out.println(controller.checkId(storage, file4.getId()));
+        //  Sys.out.println(controller.checkId(storage, file4.getId()));
 
     }
 

@@ -16,12 +16,12 @@ public class Demo {
     public static void main(String[] args) {
         User user = new User(1001,"Oleg", "www");
         User user1 = new User(1001,"'Oleg","'www");
-      //  System.out.println(getInstanceUser().save(user));
-     //   System.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
-     //   System.out.println(getInstanceUser().update(user));
-      //  System.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
+      //  Sys.out.println(getInstanceUser().save(user));
+     //   Sys.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
+     //   Sys.out.println(getInstanceUser().update(user));
+      //  Sys.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
        // getInstanceUser().delete(1001);
-      //  System.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
+      //  Sys.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
 
 
 

@@ -10,8 +10,8 @@ public class BreakContinueExample {
 
         // break example
        /* while (test > 0){
-            System.out.println(test);
-            System.out.println("...");
+            Sys.out.println(test);
+            Sys.out.println("...");
             test--;
             break;
 

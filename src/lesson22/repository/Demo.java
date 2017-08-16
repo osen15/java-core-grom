@@ -15,7 +15,7 @@ public class Demo {
         System.out.println(Arrays.deepToString(UserRepository.getUsers()));
 
 
-        User user3 = new User(1001, "Test", "fwefsf324432");
+        User user3 = new User(1001, "Order", "fwefsf324432");
         UserRepository.update(user3);
         System.out.println(Arrays.deepToString(UserRepository.getUsers()));
 
