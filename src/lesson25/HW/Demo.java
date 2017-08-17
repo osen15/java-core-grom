@@ -10,6 +10,7 @@ public class Demo {
         String name = "Oleg";
         Integer value = new Integer(100);
         Long value1 = new Long(123);
+        Short value2 = new Short((short) 1000);
 
         GeneralDAO<String> stringGeneralDAO = new GeneralDAO<>();            //String
         stringGeneralDAO.save(name);
@@ -30,7 +31,9 @@ public class Demo {
         orderGeneralDAO.save(order);
         System.out.println(Arrays.toString(orderGeneralDAO.getAll()));
 
-
+        GeneralDAO<Short> shortGeneralDAO = new GeneralDAO<>();
+        shortGeneralDAO.save(value2);
+        System.out.println(Arrays.toString(shortGeneralDAO.getAll()));
 
     }
 }

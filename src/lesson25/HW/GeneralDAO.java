@@ -17,6 +17,10 @@ public class GeneralDAO<T> {
         if (sameObject(t)) {
             throw new Exception(t + " Such an object already exists in the array");
         }
+        if (t instanceof String && ((String) t).length() > 10) {
+            throw new Exception(t + " Length must be up to ten characters");
+        }
+
 
         int index = 0;
         for (T el : array) {
