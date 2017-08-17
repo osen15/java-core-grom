@@ -18,7 +18,10 @@ public class GeneralDAO<T> {
             throw new Exception(t + " Such an object already exists in the array");
         }
         if (t instanceof String && ((String) t).length() > 10) {
-            throw new Exception(t + " Length must be up to ten characters");
+            throw new Exception(t + " Length must be up to 10 characters");
+        }
+        if (t.equals(0)){
+            throw new Exception(t + " can't be");
         }
 
 
