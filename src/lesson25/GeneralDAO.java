@@ -10,7 +10,7 @@ public class GeneralDAO {
     }
 
 
-    public <T extends IdAntity> void validate(T t) throws Exception {
+    public <T extends IdEntity> void validate(T t) throws Exception {
 
 
         if (t.getId() <= 0)

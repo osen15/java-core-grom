@@ -1,7 +1,7 @@
 package lesson25;
 
 
-public class Order extends IdAntity {
+public class Order extends IdEntity {
     private long id;
 
 
