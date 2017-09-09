@@ -25,6 +25,7 @@ public class GeneralDAO<T> {
         }
 
 
+
         int index = 0;
         for (T el : array) {
             if (el == null) {

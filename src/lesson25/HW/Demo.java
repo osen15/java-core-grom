@@ -8,7 +8,7 @@ public class Demo {
 
     public static void main(String[] args) throws Exception {
         String name = "Oleg";
-        Integer value = new Integer(76);
+        Integer value = new Integer(0);
         Long value1 = new Long(123);
         Short value2 = new Short((short) 1000);
 
