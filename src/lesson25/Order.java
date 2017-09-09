@@ -1,5 +1,6 @@
 package lesson25;
 
+
 public class Order extends IdAntity {
     private long id;
 
@@ -20,3 +21,4 @@ public class Order extends IdAntity {
                 '}';
     }
 }
+
