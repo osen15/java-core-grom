@@ -5,14 +5,14 @@ public class Demo {
     public static void main(String[] args) throws Exception {
         GeneralDAO generalDAO = new GeneralDAO();
 
-        Order order = new Order(1);
+        //  Order order = new Order(1);
 
 
-        generalDAO.validate(order);
+        //   generalDAO.validate(order);
 
 
-        TestClass<String, Order, Long> testClass = new TestClass<>();
-        System.out.println(testClass.doSomething1("rrr"));
+        //  TestClass<String, Long, Long> testClass = new TestClass<>();
+        //  System.out.println(testClass.doSomething1("rrr"));
 
 
         //long - Long
@@ -26,11 +26,11 @@ public class Demo {
         Long variable2 = new Long(222);   // клас обгортка
 
 
-        generalDAO.validate(variable2);   // об єкт класу обгортки
+        generalDAO.validate1(variable2);   // об єкт класу обгортки
 
-        generalDAO.validate(variable1);  // теж працює автоприведення типів
+        generalDAO.validate2(variable1);  // теж працює автоприведення типів
 
-        generalDAO.validate(test);
+        generalDAO.validate1(test);
 
 
     }
