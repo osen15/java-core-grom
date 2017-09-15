@@ -13,5 +13,6 @@ public class Student {
         this.lastName = lastName;
         this.group = group;
         this.coursesTaken = coursesTaken;
+
     }
 }
