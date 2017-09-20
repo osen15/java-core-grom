@@ -1,11 +1,11 @@
-package lesson27;
+package lesson27.HW;
 
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class UserRepository {
 
-    private ArrayList<User> users = new ArrayList<>();
+    private LinkedList<User> users = new LinkedList<>();
 
 
     public User save(User user) throws Exception {
@@ -59,7 +59,7 @@ public class UserRepository {
     }
 
 
-    public ArrayList<User> getUsers() {
+    public LinkedList<User> getUsers() {
         return users;
     }
 }

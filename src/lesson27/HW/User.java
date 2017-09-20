@@ -1,4 +1,4 @@
-package lesson27;
+package lesson27.HW;
 
 /**
  * Created by Oleg on 21.06.2017.

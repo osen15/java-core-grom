@@ -1,4 +1,4 @@
-package lesson27;
+package lesson27.HW;
 
 public class Demo {
     public static void main(String[] args) throws Exception {
