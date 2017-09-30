@@ -7,19 +7,20 @@ import java.util.Date;
 
 public class DemoComparator {
     public static void main(String[] args) {
-        Capability capability1 = new Capability(1001, "DF", "aaa", true, new Date());
+        Capability capability1 = new Capability(1001, null, "aaa", true, new Date());
         Capability capability2 = new Capability(1005, "TRER", "a", false, new Date());
         Capability capability3 = new Capability(900, "DRT", "a", true, new Date());
 
 
         ArrayList<Capability> capabilities = new ArrayList<>();
-        capabilities.add(capability1);
+        capabilities.add(null);
         capabilities.add(capability2);
         capabilities.add(capability3);
+        capabilities.add(null);
 
-        capabilities.sort(new IsActiveComparator());
+      //  capabilities.sort(new IsActiveComparator());
         capabilities.sort(new FullComparator());
-        capabilities.sort(new DateComparator());
+      //  capabilities.sort(new DateComparator());
         System.out.println(capabilities);
 
 
