@@ -1,10 +1,5 @@
 package lesson30.task2;
 
-import lesson30.task2.DAO.CustomerDAO;
-import lesson30.task2.DAO.DepartmenDAO;
-import lesson30.task2.DAO.EmployeeDAO;
-import lesson30.task2.DAO.ProjectDAO;
-
 public class Demo {
     public static void main(String[] args) throws Exception {
         CustomerDAO customerDAO = new CustomerDAO();

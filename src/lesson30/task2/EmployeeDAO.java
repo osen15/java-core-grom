@@ -1,6 +1,4 @@
-package lesson30.task2.DAO;
-
-import lesson30.task2.*;
+package lesson30.task2;
 
 import java.util.Date;
 import java.util.HashSet;

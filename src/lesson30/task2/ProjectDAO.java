@@ -1,7 +1,4 @@
-package lesson30.task2.DAO;
-
-import lesson30.task2.Customer;
-import lesson30.task2.Project;
+package lesson30.task2;
 
 import java.util.ArrayList;
 

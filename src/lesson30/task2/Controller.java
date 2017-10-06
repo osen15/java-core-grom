@@ -1,9 +1,5 @@
 package lesson30.task2;
 
-import lesson30.task2.DAO.DepartmenDAO;
-import lesson30.task2.DAO.EmployeeDAO;
-import lesson30.task2.DAO.ProjectDAO;
-
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;

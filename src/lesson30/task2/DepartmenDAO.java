@@ -1,9 +1,4 @@
-package lesson30.task2.DAO;
-
-import lesson30.task2.Department;
-import lesson30.task2.DepartmentType;
-import lesson30.task2.Employee;
-
+package lesson30.task2;
 
 import java.util.LinkedList;
 
