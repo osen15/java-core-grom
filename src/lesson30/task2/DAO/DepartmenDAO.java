@@ -8,8 +8,8 @@ import lesson30.task2.Employee;
 import java.util.LinkedList;
 
 
-public class DepartmensDAO {
-    private EmployeesDAO employeesDAO = new EmployeesDAO();
+public class DepartmenDAO {
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
 
     public LinkedList<Department> getDepartments() {
         LinkedList<Department> departments = new LinkedList<>();
@@ -27,7 +27,7 @@ public class DepartmensDAO {
 
     public LinkedList<Employee> getEmployeesInDep(DepartmentType departmentType) throws  Exception {
         LinkedList<Employee> employees = new LinkedList<>();
-        for (Employee employee : employeesDAO.getEmployees()){
+        for (Employee employee : employeeDAO.getEmployees()){
             if (employee != null && employee.getDepartment().getType().equals(departmentType))
                 employees.add(employee);
         }

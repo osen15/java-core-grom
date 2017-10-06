@@ -6,7 +6,7 @@ import lesson30.task2.Project;
 import java.util.ArrayList;
 
 
-public class ProjectsDAO {
+public class ProjectDAO {
     private static ArrayList<Project> projects = new ArrayList<>();
 
     public ArrayList<Project> addProgects() {

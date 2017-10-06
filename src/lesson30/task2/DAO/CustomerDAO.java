@@ -4,7 +4,7 @@ import lesson30.task2.Customer;
 
 import java.util.LinkedList;
 
-public class CustomersDAO {
+public class CustomerDAO {
 
 
   private   LinkedList<Customer> customers = new LinkedList<>();

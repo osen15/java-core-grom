@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-public class EmployeesDAO {
+public class EmployeeDAO {
     private LinkedList<Project> projects = new LinkedList<>();
     private static Set<Employee> employees = new HashSet<>();
     Employee employee1 = new Employee("f1", "l1", new Date(), Position.TEAM_LEAD,
@@ -36,11 +36,11 @@ public class EmployeesDAO {
 
     public Employee addProjectToEmployee(String employeeName, String projectName) throws Exception {
         LinkedList<Project> projects = new LinkedList<>();
-        ProjectsDAO projectsDAO = new ProjectsDAO();
+        ProjectDAO projectDAO = new ProjectDAO();
         for (Employee employee : addEmployees()) {
             if (employee != null && employee.getFirstName().equals(employeeName)) {
                 projects.addAll(employee.getProjects());
-                projects.add(projectsDAO.findProjectbyName(projectName));
+                projects.add(projectDAO.findProjectbyName(projectName));
                 employee.setProjects(projects);
                 return employee;
             }
