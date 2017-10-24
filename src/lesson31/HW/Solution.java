@@ -1,7 +1,7 @@
 package lesson31.HW;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class Solution {
@@ -13,7 +13,8 @@ public class Solution {
             throw new Exception("String is null");
         }
 
-        Map<Character, Integer> result = new HashMap<>();
+        SortedMap<Character, Integer> result = new TreeMap<>();
+
 
         Integer count = 0;
 
