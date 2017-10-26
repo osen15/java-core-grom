@@ -12,7 +12,7 @@ public class Solution {
         int count = 1;
 
 
-        SortedMap<Character, Integer>  result = new TreeMap<>();
+        SortedMap<Character, Integer> result = new TreeMap<>();
         char[] symbols = text.toLowerCase().toCharArray();
         for (Character ch : symbols) {
             if (Character.isLetter(ch)) {
@@ -36,8 +36,8 @@ public class Solution {
         String[] words = res.toLowerCase().trim().split(" ");
 
         for (String word : words) {
-            if (word.length() > 2 ) {
-                if (!result.containsKey(word)){
+            if (word.length() > 2 && checkSubString(word)) {
+                if (!result.containsKey(word)) {
                     count = 1;
                 }
                 result.put(word, count++);
@@ -63,6 +63,7 @@ public class Solution {
 
         return true;
     }
+
 
 }
 
