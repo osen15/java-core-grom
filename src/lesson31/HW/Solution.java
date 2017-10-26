@@ -1,58 +1,47 @@
 package lesson31.HW;
 
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Solution {
 
 
     public Map<Character, Integer> countSymbols(String text) throws Exception {
-
         if (text == null) {
             throw new Exception("String is null");
         }
+        int count = 1;
 
-        SortedMap<Character, Integer> result = new TreeMap<>();
 
-
-        Integer count = 0;
-
-        char[] letters = text.toCharArray();
-
-        for (Character ch1 : letters) {
-            for (char ch2 : letters) {
-                if (Character.isLetter(ch1) && Character.toLowerCase(ch1) == Character.toLowerCase(ch2)) {
-                    count++;
-                    result.put(Character.toLowerCase(ch1), count);
+        SortedMap<Character, Integer>  result = new TreeMap<>();
+        char[] symbols = text.toLowerCase().toCharArray();
+        for (Character ch : symbols) {
+            if (Character.isLetter(ch)) {
+                if (!result.containsKey(ch)) {
+                    count = 1;
                 }
+                result.put(ch, count++);
             }
-            count = 0;
         }
         return result;
-
     }
+
 
     public Map<String, Integer> words(String text) throws Exception {
         if (text == null) {
             throw new Exception("text is null");
         }
-        Integer count = 0;
+        int count = 0;
         Map<String, Integer> result = new TreeMap<>();
-        String res = text.replaceAll("\\p{Punct}","");
-
+        String res = text.replaceAll("\\p{Punct}", " ");
         String[] words = res.toLowerCase().trim().split(" ");
 
-        for (String word1 : words) {
-            for (String word2 : words) {
-
-                if (word1.length() > 2 && checkSubString(word1) && word1.equals(word2)) {
-                    count++;
-                    result.put(word1, count);
+        for (String word : words) {
+            if (word.length() > 2 ) {
+                if (!result.containsKey(word)){
+                    count = 1;
                 }
-
+                result.put(word, count++);
             }
-            count = 0;
         }
         return result;
 
@@ -74,7 +63,6 @@ public class Solution {
 
         return true;
     }
-
 
 }
 
