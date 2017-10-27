@@ -1,6 +1,7 @@
 package lesson27.HW;
 
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class UserRepository {
@@ -11,11 +12,9 @@ public class UserRepository {
     public User save(User user) throws Exception {
 
         if (user == null) {
-
             throw new Exception("user can't be null");
         }
-
-        if (users.size() == 0 || !findById(user.getId()).equals(user)) {
+        if (users.size() == 0 || !users.contains(user)) {
 
             users.add(user);
         }
@@ -23,24 +22,16 @@ public class UserRepository {
     }
 
 
-    public User update(User user) throws Exception {
+    public User update(User user, User user1) throws Exception {
         if (user == null) {
             throw new Exception("user can't be null");
         }
-
-        int index = 0;
-
-        for (User us : users) {
-            if (us != null && us.getId().equals(user.getId())) {
-                users.remove(us);
-                users.add(index, user);
-                return user;
-            }
-            index++;
+        if (findById(user1.getId()).getId().equals(user.getId())) {
+            Collections.replaceAll(users, user, user1);
         }
-        throw new Exception("user was not found");
-    }
+            return user;
 
+    }
 
     public void delete(long id) throws Exception {
         users.remove(findById(id));
@@ -55,12 +46,18 @@ public class UserRepository {
             count++;
         }
 
-        throw new Exception(id + " was not found");
+
+        throw new Exception("User not was found");
     }
 
 
     public LinkedList<User> getUsers() {
         return users;
+    }
+
+    private <T> T unarOp(T t) {
+
+        return t;
     }
 }
 
