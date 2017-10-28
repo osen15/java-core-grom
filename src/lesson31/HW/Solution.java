@@ -9,19 +9,11 @@ public class Solution {
         if (text == null) {
             throw new Exception("String is null");
         }
-        int count = 1;
-
 
         SortedMap<Character, Integer> result = new TreeMap<>();
         char[] symbols = text.toLowerCase().toCharArray();
-        for (Character ch : symbols) {
-            if (Character.isLetter(ch)) {
-                if (!result.containsKey(ch)) {
-                    count = 1;
-                }
-                result.put(ch, count++);
-            }
-        }
+        convertToList(symbols).forEach(s -> result.merge(s, 1, (a, b) -> a + b));
+
         return result;
     }
 
@@ -30,18 +22,17 @@ public class Solution {
         if (text == null) {
             throw new Exception("text is null");
         }
-        int count = 0;
-        Map<String, Integer> result = new TreeMap<>();
+
+        Map<String, Integer> result = new HashMap<>();
+
         String res = text.replaceAll("\\p{Punct}", " ");
+
         String[] words = res.toLowerCase().trim().split(" ");
 
+
         for (String word : words) {
-            if (word.length() > 2 && checkSubString(word)) {
-                if (!result.containsKey(word)) {
-                    count = 1;
-                }
-                result.put(word, count++);
-            }
+            if (word.length() > 2 && checkSubString(word))
+                result.merge(word, 1, (a, b) -> a + b);
         }
         return result;
 
@@ -64,7 +55,14 @@ public class Solution {
         return true;
     }
 
-
+    private List<Character> convertToList(char[] chars) {
+        List<Character> characterList = new LinkedList<>();
+        for (char ch : chars) {
+            if (Character.isLetter(ch))
+                characterList.add(ch);
+        }
+        return characterList;
+    }
 }
 
 

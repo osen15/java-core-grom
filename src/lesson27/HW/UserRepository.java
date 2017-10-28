@@ -2,6 +2,8 @@ package lesson27.HW;
 
 
 import java.util.LinkedList;
+import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 public class UserRepository {
 
@@ -34,6 +36,25 @@ public class UserRepository {
 
     }
 
+    public User updateUnaryOpEx(User userToReplace) throws Exception {
+        if (userToReplace == null) {
+            throw new Exception("user can't be null");
+        }
+        users.replaceAll(new UnaryOperator<User>() {
+            @Override
+            public User apply(User user) {
+                if (Objects.equals(user.getId(), userToReplace.getId()))
+                    return userToReplace;
+                return user;
+
+            }
+
+
+        });
+
+     return userToReplace;
+    }
+
 
     public void delete(long id) throws Exception {
         users.remove(findById(id));
@@ -58,9 +79,7 @@ public class UserRepository {
     }
 
 
-
-
- }
+}
 
 
 
