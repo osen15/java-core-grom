@@ -1,7 +1,6 @@
 package lesson27.HW;
 
 
-import java.util.Collections;
 import java.util.LinkedList;
 
 public class UserRepository {
@@ -22,16 +21,19 @@ public class UserRepository {
     }
 
 
-    public User update(User user, User user1) throws Exception {
+    public User update(User user) throws Exception {
         if (user == null) {
             throw new Exception("user can't be null");
         }
-        if (findById(user1.getId()).getId().equals(user.getId())) {
-            Collections.replaceAll(users, user, user1);
-        }
-            return user;
+
+
+        users.replaceAll(user1 -> user1.equals(user) ? user : user1);
+
+
+        return user;
 
     }
+
 
     public void delete(long id) throws Exception {
         users.remove(findById(id));
@@ -55,10 +57,17 @@ public class UserRepository {
         return users;
     }
 
-    private <T> T unarOp(T t) {
 
-        return t;
-    }
-}
+
+
+ }
+
+
+
+
+
+
+
+
 
 

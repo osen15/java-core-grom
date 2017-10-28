@@ -40,10 +40,10 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
-        if (!name.equals(user.name)) return false;
-        return sessionId.equals(user.sessionId);
+        return id == user.id;
     }
+
+
 
     @Override
     public int hashCode() {
@@ -61,5 +61,8 @@ public class User {
                 ", sessionId='" + sessionId + '\'' +
                 '}';
     }
+
+
+
 }
 
