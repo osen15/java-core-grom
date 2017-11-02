@@ -104,7 +104,9 @@ public class Solution {
         int index = 0;
 
         for (T t : first) {
-            if (t == second[index] || t != null && second[index] == null && t.toString().equals(second[index].toString()))
+            if (t != null && second[index] != null && t.equals(second[index]))
+                index++;
+            else if (t == null && second[index] == null)
                 index++;
             else return false;
         }
