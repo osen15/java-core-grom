@@ -23,12 +23,12 @@ public class Solution {
             if (digits.length == 10) {
                 for (String el : digits) {
 
-                    if (!validateOnDigit(el) || validateOnDigit(el) && Double.parseDouble(el) > 100) {
+                    if (!validateOnDigit(el) || Double.parseDouble(el) > 100) {
 
                         break;
 
                     }
-                    sum = sum + Double.parseDouble(el);
+                    sum += Double.parseDouble(el);
                     count++;
                 }
 
@@ -55,7 +55,7 @@ public class Solution {
         if (!validateCharArray(chars))
             return false;
         for (char ch : chars) {
-            if (Character.isDigit(ch) || ch == '.')
+            if (!Character.isDigit(ch) || ch != '.')
                 count++;
             else return false;
 
@@ -71,7 +71,7 @@ public class Solution {
         int count = 0;
         for (char aChar : chars) {
 
-            if (chars[0] == '.' && chars[chars.length - 1] == '.') {
+            if (chars[0] == '.' || chars[chars.length - 1] == '.') {
                 return false;
             }
             if (aChar == '.')
