@@ -10,7 +10,7 @@ public class Solution {
     public void readNumbers() throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int sum = 0;
+        double sum = 0;
         int count = 0;
 
         while (n >= 0) {
@@ -23,12 +23,12 @@ public class Solution {
             if (digits.length == 10) {
                 for (String el : digits) {
 
-                    if (!validateOnDigit(el) || validateOnDigit(el) &&Integer.parseInt(el) > 100) {
+                    if (!validateOnDigit(el) || validateOnDigit(el) && Double.parseDouble(el) > 100) {
 
                         break;
 
                     }
-                    sum = sum + Integer.parseInt(el);
+                    sum = sum + Double.parseDouble(el);
                     count++;
                 }
 
@@ -48,10 +48,35 @@ public class Solution {
     }
 
 
-    private boolean validateOnDigit(String string){
+    private boolean validateOnDigit(String string) {
+        int count = 0;
         char[] chars = string.toCharArray();
-        for (char ch : chars){
-            if (!Character.isDigit(ch))
+
+        if (!validateCharArray(chars))
+            return false;
+        for (char ch : chars) {
+            if (Character.isDigit(ch) || ch == '.')
+                count++;
+            else return false;
+
+            count++;
+
+
+        }
+
+        return true;
+    }
+
+    private boolean validateCharArray(char[] chars) {
+        int count = 0;
+        for (char aChar : chars) {
+
+            if (chars[0] == '.' && chars[chars.length - 1] == '.') {
+                return false;
+            }
+            if (aChar == '.')
+                count++;
+            else if (count > 1)
                 return false;
         }
         return true;
