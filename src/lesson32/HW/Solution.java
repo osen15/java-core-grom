@@ -39,10 +39,10 @@ public class Solution {
 
         }
 
-        if (n == 0)
+        if (n == 0) {
             System.out.println(" “Your numbers are wrong. Number of attempts exceeded”");
-
-        else System.out.println(sum);
+            br.close();
+        } else System.out.println(sum);
         br.close();
 
     }
@@ -58,10 +58,6 @@ public class Solution {
             if (!Character.isDigit(ch) || ch != '.')
                 count++;
             else return false;
-
-            count++;
-
-
         }
 
         return true;

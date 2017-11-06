@@ -1,4 +1,4 @@
-package exercises;
+package exercises.equalsElementsOfTwoArrays;
 
 import java.util.Comparator;
 
