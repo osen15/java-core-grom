@@ -4,15 +4,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 
-public class FileRead {
-    public static void main(String[] args) throws InterruptedException {
-
-
-      //  readFile("C:/Test.txt");
-        writeFile("C:/Test1.txt");
-
-    }
-
+public class ReadWriteFile  {
 
     public   void readFile(String path) {
         FileReader reader;
@@ -41,7 +33,7 @@ public class FileRead {
 
     }
 
-    private static void writeFile(String path) throws InterruptedException {
+    public  void writeFile(String path) throws InterruptedException {
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
 
