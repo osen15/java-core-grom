@@ -6,16 +6,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Solution {
-    public static void main(String[] args) throws  Exception {
+    public static void main(String[] args){
 
-        Solution solution = new Solution();
-        solution.printTextFromTextFile("C:/Test.txt");
+
+        printTextFromTextFile("C:/Test.txt");
 
 
     }
 
 
-    public void printTextFromTextFile(String placeOfFile) throws Exception {
+    private static void printTextFromTextFile(String placeOfFile) {
         try {
             FileInputStream fileInputStream = new FileInputStream(placeOfFile);
 
