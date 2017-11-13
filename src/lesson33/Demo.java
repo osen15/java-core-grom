@@ -8,7 +8,7 @@ public class Demo {
 
 
      readWriteFile.readFile("C:/Test.txt");
-     readWriteFile.writeFile("C:/Test1.txt");
+     readWriteFile.writeFile("C:/Test1.txt", "Hello");
 
     }
 }

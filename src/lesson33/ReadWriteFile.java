@@ -33,7 +33,7 @@ public class ReadWriteFile  {
 
     }
 
-    public  void writeFile(String path) throws InterruptedException {
+    public  void writeFile(String path, String content) throws InterruptedException {
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
 
@@ -45,7 +45,7 @@ public class ReadWriteFile  {
             bufferedWriter = new BufferedWriter(fileWriter);
 
             bufferedWriter.append("\n");  // з нового рядка додає
-            bufferedWriter.append("PPPPPPPPP");
+            bufferedWriter.append(content);
 
         } catch (IOException e) {
             System.err.println("Can't write to file");

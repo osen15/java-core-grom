@@ -1,6 +1,6 @@
 package lesson33.homeWork;
 
-import lesson33.FileRead;
+import lesson33.ReadWriteFile;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,7 +9,7 @@ public class ReadFileByConsolePath {
 
 
  public void    readFileByConsolePath() throws  Exception{
-     FileRead fileRead = new FileRead();
+     ReadWriteFile readWriteFile = new ReadWriteFile();
 
      System.out.println("Please, enter file path to read:");
      InputStreamReader reader = new InputStreamReader(System.in);
@@ -18,7 +18,7 @@ public class ReadFileByConsolePath {
 
      String text = br.readLine();
 
-     fileRead.readFile(text);
+     readWriteFile.readFile(text);
 
      br.close();
      reader.close();
