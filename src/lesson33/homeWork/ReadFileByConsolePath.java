@@ -1,27 +1,53 @@
 package lesson33.homeWork;
 
-import lesson33.ReadWriteFile;
+import org.apache.commons.io.IOUtils;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class ReadFileByConsolePath {
 
 
     public void readFileByConsolePath() throws Exception {
-        ReadWriteFile readWriteFile = new ReadWriteFile();
+        ReadFileByConsolePath readFileByConsolePath = new ReadFileByConsolePath();
 
         System.out.println("Please, enter file path to read:");
-        InputStreamReader reader = new InputStreamReader(System.in);
 
-        BufferedReader br = new BufferedReader(reader);
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String text = br.readLine();
 
-        readWriteFile.readFile(text);
+        readFileByConsolePath.readFile(text);
 
         br.close();
-        reader.close();
+
+
+    }
+
+    public void readFile(String path) {
+        FileReader reader;
+        try {
+            reader = new FileReader(path);
+        } catch (FileNotFoundException e) {
+            System.err.println("File not exist");
+            return;
+        }
+
+        BufferedReader br = new BufferedReader(reader);
+
+        try {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+
+            }
+        } catch (IOException e) {
+            System.err.println("Reading from file " + path + " failed");
+        } finally {
+            IOUtils.closeQuietly(br);
+            IOUtils.closeQuietly(reader);
+        }
+
 
     }
 
