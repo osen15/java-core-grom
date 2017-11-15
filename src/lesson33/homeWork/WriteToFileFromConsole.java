@@ -3,13 +3,12 @@ package lesson33.homeWork;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
-import java.util.ArrayList;
 
-public class WriteToFileFromConsole {
-    public void writeToFileFromConsole(String path) throws Exception {
-        WriteToFileFromConsole writeToFileFromConsole = new WriteToFileFromConsole();
+public  class WriteToFileFromConsole {
+    public static void writeToFileFromConsole(String path) throws Exception {
 
-        writeToFileFromConsole.checkFile(path); // перевірка шляху і чи можна записати
+
+        checkFile(path); // перевірка шляху і чи можна записати
 
         PrintWriter printWriter = null;
 
@@ -18,11 +17,8 @@ public class WriteToFileFromConsole {
             printWriter = new PrintWriter(new FileWriter(path, true));
 
 
-            for (String str : writeInConsole()) {  // виводить кожний введений рядок у файл з нового рядка
-                printWriter.println(str);
+            printWriter.println(writeInConsole());
 
-
-            }
 
         } catch (IOException e) {
             System.err.println("Can't write to file");
@@ -34,12 +30,11 @@ public class WriteToFileFromConsole {
     }
 
 
-
-    private void checkFile(String path) throws Exception {
+    private static void checkFile(String path) throws Exception {
 
         File file;
 
-        file = new File("C:/Test.txt");
+        file = new File(path);
         if (!file.canWrite()) {
 
             throw new Exception("Can't write to file with path " + path);
@@ -54,25 +49,25 @@ public class WriteToFileFromConsole {
     }
 
 
+    private static String writeInConsole() throws IOException {
 
-
-    private ArrayList<String> writeInConsole() throws IOException {
-        ArrayList<String> list = new ArrayList<>();
 
         System.out.println("Enter file content to write in the file:");
 
         String text;
+        String result = "";
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
 
 
-            while (!(text = bufferedReader.readLine()).equals("write")) {
-                list.add(text);
+            while (!(text = bufferedReader.readLine()).equals("wr")) {
+                result = result + " " + text;
+
             }
 
         } catch (IOException e) {
             System.err.println("error");
         }
-        return list;
+        return result;
 
     }
 }
