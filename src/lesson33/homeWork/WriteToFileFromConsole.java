@@ -4,7 +4,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 
-public  class WriteToFileFromConsole {
+public class WriteToFileFromConsole {
     public static void writeToFileFromConsole(String path) throws Exception {
 
 
@@ -54,21 +54,19 @@ public  class WriteToFileFromConsole {
 
         System.out.println("Enter file content to write in the file:");
 
-        String result = null;
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
             String text;
-            result = "";
+            StringBuilder result = new StringBuilder();
 
             while (!(text = bufferedReader.readLine()).equals("wr")) {
-                result = result + " " + text;
-
+                result.append(" ").append(text);
             }
+            return result.toString();
 
         } catch (IOException e) {
             System.err.println("error");
+            return null;
         }
-        return result;
-
     }
 }
