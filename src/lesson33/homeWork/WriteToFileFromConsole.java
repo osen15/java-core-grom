@@ -54,10 +54,11 @@ public  class WriteToFileFromConsole {
 
         System.out.println("Enter file content to write in the file:");
 
-        String text;
-        String result = "";
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+        String result = null;
 
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+            String text;
+            result = "";
 
             while (!(text = bufferedReader.readLine()).equals("wr")) {
                 result = result + " " + text;
