@@ -7,6 +7,9 @@ import java.io.*;
 public class WriteToFileFromConsole {
     public static void writeToFileFromConsole(String path) throws Exception {
 
+        if (path == null) {
+            throw new Exception("path can't be null");
+        }
 
         checkFile(path); // перевірка шляху і чи можна записати
 
@@ -21,7 +24,7 @@ public class WriteToFileFromConsole {
 
 
         } catch (IOException e) {
-            System.err.println("Can't write to file");
+            System.err.println("Writing failed");
 
         } finally {
             IOUtils.closeQuietly(printWriter);
@@ -48,7 +51,6 @@ public class WriteToFileFromConsole {
 
     }
 
-
     private static String writeInConsole() throws IOException {
 
 
@@ -65,7 +67,7 @@ public class WriteToFileFromConsole {
             return result.toString();
 
         } catch (IOException e) {
-            System.err.println("error");
+            System.err.println("Reading failed");
             return null;
         }
     }
