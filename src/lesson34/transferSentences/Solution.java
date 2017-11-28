@@ -6,13 +6,21 @@ import java.util.Arrays;
 public class Solution {
 
     public void transferSentences(String pathFromFile, String pathToFile, String word) throws Exception {
-        if (word == null) {
-            throw new Exception("word can not be null");
-        }
-        validate(pathFromFile, pathToFile);
-        writeSentences(pathToFile, resultToFiles(word,pathFromFile)[0] , true); // записуємо в файл нульовий елемент правильних значень по його шляху
-        writeSentences(pathFromFile, resultToFiles(word,pathFromFile)[1] , false); // перезаписуэмо файл неправильними значеннями.
 
+        validate(pathFromFile, pathToFile);
+        StringBuffer oldContentFrom = readFromFile(pathFromFile);
+        StringBuffer oldContentTo = readFromFile(pathToFile);
+        try {
+            if ((resultToFiles(word, pathFromFile))[0].length() != 0)
+                writeSentences(pathToFile, resultToFiles(word, pathFromFile)[0], true); // записуємо в файл нульовий елемент правильних значень по його шляху
+            if ((resultToFiles(word, pathFromFile))[1].length() != 0)
+                writeSentences(pathFromFile, resultToFiles(word, pathFromFile)[1], false); // перезаписуэмо файл неправильними значеннями.
+        } catch (IOException | NullPointerException e) {
+            writeSentences(pathFromFile, oldContentFrom, false);
+            writeSentences(pathToFile, oldContentTo, false);
+            System.err.println("File writing is interrupted");
+
+        }
 
     }
 
@@ -66,11 +74,12 @@ public class Solution {
         StringBuffer bufferFrom = new StringBuffer(); // баффер для неправильних значень
 
         String[] content = readFromFile(pathFromFile).toString().split("\\."); // створюється масив прочитаного контенту
-                                                                                      // розбивається по крапці
+        // розбивається по крапці
         for (String string : content) {
             if (string != null && string.length() > 10 && string.contains(word))      // логіка для правильних слів
                 bufferTo.append(string).append(".");                                  // додаємо до баффера правильні слова
-            else bufferFrom.append(string).append(".");                               // інакше додаємо до bufferFtom неправильні
+            else
+                bufferFrom.append(string).append(".");                               // інакше додаємо до bufferFtom неправильні
         }
         StringBuffer[] res = new StringBuffer[]{bufferTo, bufferFrom};                // створюється результуючий масив бафферів на два елемента
 
@@ -86,4 +95,5 @@ public class Solution {
             System.err.println("Can not written: " + path);
         }
     }
+
 }
