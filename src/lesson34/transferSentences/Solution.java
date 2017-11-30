@@ -1,7 +1,6 @@
 package lesson34.transferSentences;
 
 import java.io.*;
-import java.util.Arrays;
 
 public class Solution {
 
@@ -11,10 +10,7 @@ public class Solution {
         StringBuffer oldContentFrom = readFromFile(pathFromFile);
         StringBuffer oldContentTo = readFromFile(pathToFile);
         try {
-            if ((resultToFiles(word, pathFromFile))[0].length() != 0)
-                writeSentences(pathToFile, resultToFiles(word, pathFromFile)[0], true); // записуємо в файл нульовий елемент правильних значень по його шляху
-            if ((resultToFiles(word, pathFromFile))[1].length() != 0)
-                writeSentences(pathFromFile, resultToFiles(word, pathFromFile)[1], false); // перезаписуэмо файл неправильними значеннями.
+            resultToFiles(word, pathFromFile, pathToFile);
         } catch (IOException | NullPointerException e) {
             writeSentences(pathFromFile, oldContentFrom, false);
             writeSentences(pathToFile, oldContentTo, false);
@@ -68,7 +64,7 @@ public class Solution {
         }
     }
 
-    private StringBuffer[] resultToFiles(String word, String pathFromFile) throws Exception {
+    private void resultToFiles(String word, String pathFromFile, String pathToFile) throws Exception {
 
         StringBuffer bufferTo = new StringBuffer();   // баффер для правильних значень
         StringBuffer bufferFrom = new StringBuffer(); // баффер для неправильних значень
@@ -81,10 +77,9 @@ public class Solution {
             else
                 bufferFrom.append(string).append(".");                               // інакше додаємо до bufferFtom неправильні
         }
-        StringBuffer[] res = new StringBuffer[]{bufferTo, bufferFrom};                // створюється результуючий масив бафферів на два елемента
+        writeSentences(pathFromFile, bufferFrom, false);
+        writeSentences(pathToFile, bufferTo, true);
 
-        System.out.println(Arrays.toString(res));
-        return res;
     }
 
     private void writeSentences(String path, StringBuffer content, boolean append) throws Exception {
