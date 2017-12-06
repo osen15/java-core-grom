@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 public class UserService {
     private UserDAO userDAO = new UserDAO();
-    private boolean online;
+    private static boolean online;
 
     public User registerUser(User user) throws Exception {
         user.setId(generateID());
@@ -53,12 +53,12 @@ public class UserService {
 
 
     public void login(String userName, String password) throws Exception {
-        if (!isOnline()) {
+        if (isOnline()) {
             throw new Exception("Other user is online");
         }
         for (User user : userDAO.readFromFile()) {
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
-                online = false;
+                setOnline(true);
                 System.out.println(user.toString() + ": is login");
                 System.out.println("online: " + online);
                 return;
@@ -70,16 +70,17 @@ public class UserService {
 
 
 
+
     private long generateID() {
         return (long) (Math.random() * 2147483647);
     }
 
-    public boolean isOnline() {
-        return online;
+    public static boolean isOnline() {
+        return online = false;
     }
 
     public void setOnline(boolean online) {
-        this.online = online;
+        UserService.online = online;
     }
 
 }

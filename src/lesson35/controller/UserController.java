@@ -14,8 +14,7 @@ public class UserController {
         userService.login(userName, password);
     }
 
-    public void logout(){
-        userService.setOnline(true);
-        System.out.println(userService.isOnline());
+    public void logout() {
+        userService.setOnline(false);
     }
 }

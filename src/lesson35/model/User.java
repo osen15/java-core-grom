@@ -76,11 +76,9 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
-        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (country != null ? !country.equals(user.country) : user.country != null) return false;
-        return userType == user.userType;
+        return id == user.id && (userName != null ? userName.equals(user.userName) : user.userName == null)
+                && (password != null ? password.equals(user.password) : user.password == null)
+                && (country != null ? country.equals(user.country) : user.country == null) && userType == user.userType;
     }
 
     @Override
@@ -93,8 +91,4 @@ public class User {
         return result;
     }
 
-    public static User stringToUser(String lineUser) {
-        String[] arrayUser = lineUser.split("\\, ");
-        return new User(Long.parseLong(arrayUser[0]), arrayUser[1], arrayUser[2], arrayUser[3], UserType.valueOf(arrayUser[4]));
-    }
 }

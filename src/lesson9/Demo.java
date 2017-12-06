@@ -16,7 +16,7 @@ public class Demo {
     public static void main(String[] args) {
         User user = new User(1001,"Oleg", "www");
         User user1 = new User(1001,"'Oleg","'www");
-      //  Sys.out.println(getInstanceUser().save(user));
+      //  Sys.out.println(getInstanceUser().Save(user));
      //   Sys.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
      //   Sys.out.println(getInstanceUser().update(user));
       //  Sys.out.println(Arrays.deepToString(getInstanceUser().getUsers()));
