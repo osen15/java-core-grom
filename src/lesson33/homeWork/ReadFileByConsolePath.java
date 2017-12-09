@@ -10,7 +10,7 @@ public class ReadFileByConsolePath {
     public void readFileByConsolePath() throws Exception {
         ReadFileByConsolePath readFileByConsolePath = new ReadFileByConsolePath();
 
-        System.out.println("Please, enter file path to read:");
+        System.out.println("Please, enter fileDB path to read:");
 
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -42,7 +42,7 @@ public class ReadFileByConsolePath {
 
             }
         } catch (IOException e) {
-            System.err.println("Reading from file " + path + " failed");
+            System.err.println("Reading from fileDB " + path + " failed");
         } finally {
             IOUtils.closeQuietly(br);
             IOUtils.closeQuietly(reader);

@@ -32,7 +32,7 @@ public class Solution {
         } catch (FileNotFoundException e) {
             System.err.println("File not exist");
         } catch (IOException e) {
-            System.err.println("Reading from file " + fileFromPath + " failed");
+            System.err.println("Reading from fileDB " + fileFromPath + " failed");
 
         }
         return res;
@@ -45,7 +45,7 @@ public class Solution {
             bw.newLine();
 
         } catch (IOException e) {
-            System.err.println("Can't write to file");
+            System.err.println("Can't write to fileDB");
 
         }
     }
@@ -76,7 +76,7 @@ public class Solution {
             res.write("");
 
         } catch (IOException e) {
-            System.err.println("Can not clean a file: " + pathFromFile);
+            System.err.println("Can not clean a fileDB: " + pathFromFile);
         }
     }
 }

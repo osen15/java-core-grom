@@ -1,5 +1,6 @@
 package lesson35.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Room {
@@ -13,6 +14,10 @@ public class Room {
 
 
     public Room() {
+    }
+
+    public Room(long id) {
+        this.id = id;
     }
 
     public Room(long id, int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom, Hotel hotel) {
@@ -120,7 +125,8 @@ public class Room {
                 ", " + price +
                 ", " + breakfastIncluded +
                 ", " + petsAllowed +
-                ", " + dateAvailableFrom +
+                ", " + new SimpleDateFormat("dd-MM-yyyy").format(dateAvailableFrom) +
                 ", " + hotel.getId();
     }
+
 }

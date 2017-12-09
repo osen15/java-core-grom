@@ -25,7 +25,7 @@ public class TransactionDAO {
         }
 
 
-        throw new InternalServerException("Not enough space to save transaction " + transaction.getId());
+        throw new InternalServerException("Not enough space to Save transaction " + transaction.getId());
     }
 
 
@@ -117,7 +117,7 @@ public class TransactionDAO {
             throw new BadRequestException("array is null");
         }
         if (transaction == null) {
-            throw new BadRequestException("Can't save null transaction");
+            throw new BadRequestException("Can't Save null transaction");
         }
         if (transaction.getAmount() < 0) {
             throw new BadRequestException(transaction.getId() + " :invalid value");

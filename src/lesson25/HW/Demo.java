@@ -24,7 +24,7 @@ public class Demo {
 
       //  Order order = new Order(2);                                    //Object from other directory
       //  GeneralDAO<Order> orderGeneralDAO = new GeneralDAO<>();
-      //  orderGeneralDAO.save(order);
+      //  orderGeneralDAO.Save(order);
       //  System.out.println(Arrays.toString(orderGeneralDAO.getAll()));
 
         GeneralDAO<Short> shortGeneralDAO = new GeneralDAO<>();

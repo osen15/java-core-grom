@@ -9,7 +9,7 @@ public class UserRepository {
     public User save(User user) throws Exception {
 
         if (user == null)
-            throw new BadRequestException("Can't save null user");
+            throw new BadRequestException("Can't Save null user");
         try {
 
             findById(user.getId());
@@ -28,13 +28,13 @@ public class UserRepository {
             }
             index++;
         }
-        throw new InternalServelException("Not enough space to save user with id: " + user.getId());
+        throw new InternalServelException("Not enough space to Save user with id: " + user.getId());
 
     }
 
     public User update(User user) throws Exception {
         if (user == null)
-            throw new BadRequestException("Can't save null user");
+            throw new BadRequestException("Can't Save null user");
         findById(user.getId());
 
 

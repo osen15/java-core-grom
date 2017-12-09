@@ -18,7 +18,7 @@ public class Demo {
 
           System.out.println(userRepository.getUsers());
 
-      //  userRepository.save(user);
+      //  userRepository.Save(user);
       //  System.out.println(userRepository.getUsers());
 
         System.out.println(userRepository.update(user4));

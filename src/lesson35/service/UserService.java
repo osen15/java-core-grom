@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static lesson35.service.utils.IDGenerate.generateID;
+
 public class UserService {
     private UserDAO userDAO = new UserDAO();
     private static boolean online;
@@ -15,7 +17,9 @@ public class UserService {
     public User registerUser(User user) throws Exception {
         user.setId(generateID());
         BufferedReader brName = new BufferedReader(new InputStreamReader(System.in));
+
         try {
+
             System.out.println("Enter your name: ");
             user.setUserName(brName.readLine());
         } catch (IOException e) {
@@ -26,7 +30,7 @@ public class UserService {
 
         BufferedReader brPass = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("Enter a password");
+            System.out.println("Enter a password: ");
             user.setPassword(brPass.readLine());
         } catch (IOException e) {
             System.err.println("Can not set value password");
@@ -68,13 +72,6 @@ public class UserService {
     }
 
 
-
-
-
-    private long generateID() {
-        return (long) (Math.random() * 2147483647);
-    }
-
     public static boolean isOnline() {
         return online = false;
     }
@@ -83,4 +80,7 @@ public class UserService {
         UserService.online = online;
     }
 
+
 }
+
+

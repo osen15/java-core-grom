@@ -25,10 +25,10 @@ public class Demo {
         System.out.println(controller.save(transaction9));        // заповнюю масив
         System.out.println(controller.save(transaction8));
         System.out.println(controller.save(transaction7));
-        // Sys.out.println(controller.save(transaction2));
-        //  transactionDAO.save(transaction5);
-        // transactionDAO.save(transaction6);
-        //  transactionDAO.save(transaction7);
+        // Sys.out.println(controller.Save(transaction2));
+        //  transactionDAO.Save(transaction5);
+        // transactionDAO.Save(transaction6);
+        //  transactionDAO.Save(transaction7);
 
         // перевірка коли всі параметри одного об"єкта дорівнюють другому
 

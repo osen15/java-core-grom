@@ -7,7 +7,7 @@ public class Controller {
         if (storage == null)
             throw new Exception("storage is detected");
         if (file == null)
-            throw new Exception("file is null");
+            throw new Exception("fileDB is null");
         if (!(file.getId() > 0))
             throw new Exception("unacceptable ID");
         if (checkId(storage, file.getId()))
@@ -37,7 +37,7 @@ public class Controller {
         if (storage == null)
             throw new Exception("storage is null");
         if (file == null)
-            throw new Exception("file is null");
+            throw new Exception("fileDB is null");
         if (!checkId(storage, file.getId()))
             throw new Exception(storage.getId() + " is not found");
         for (File file1 : storage.getFiles()) {
@@ -70,7 +70,7 @@ public class Controller {
         if (storageFrom == null || storageTo == null)
             throw new Exception("null is detected");
         if (!checkId(storageFrom, id))
-            throw new Exception(storageFrom.getId() + " : file with " + id + " is not found");
+            throw new Exception(storageFrom.getId() + " : fileDB with " + id + " is not found");
         for (File fileFrom : storageFrom.getFiles()) {
             if (fileFrom.getId() == id) {
 

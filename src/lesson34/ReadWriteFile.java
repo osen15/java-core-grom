@@ -16,7 +16,7 @@ public class ReadWriteFile {
         } catch (FileNotFoundException e) {
             System.err.println("File not exist");
         } catch (IOException e) {
-            System.err.println("Reading from file " + path + " failed");
+            System.err.println("Reading from fileDB " + path + " failed");
 
         }
 
@@ -31,7 +31,7 @@ public class ReadWriteFile {
             bw.append(content);
 
         } catch (IOException e) {
-            System.err.println("Can't write to file");
+            System.err.println("Can't write to fileDB");
         }
 
 

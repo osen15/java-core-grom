@@ -11,9 +11,11 @@ User user = new User();
         UserService userService = new UserService();
         UserDAO userDAO = new UserDAO();
         UserController userController = new UserController();
-             //  userService.registerUser(user);
+
+        userService.registerUser(user);
      //   userService.login("Oleg", "1234");
-        userController.logout();
+     //   userController.logout();
+     //   System.out.println(userDAO.readFromFile());
 
 
     }

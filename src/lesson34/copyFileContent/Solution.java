@@ -18,7 +18,7 @@ public class Solution {
             String line;
 
             while ((line = br.readLine()) != null) {
-                res.append(line).append("\n");
+                res.append(line).append("\r\n");
 
             }
             res.replace(res.length() - 1, res.length(), "");
@@ -27,7 +27,7 @@ public class Solution {
         } catch (FileNotFoundException e) {
             System.err.println("File not exist");
         } catch (IOException e) {
-            System.err.println("Reading from file " + fileFromPath + " failed");
+            System.err.println("Reading from fileDB " + fileFromPath + " failed");
 
         }
         return res;
@@ -40,7 +40,7 @@ public class Solution {
             bw.append(contentToWrite);
 
         } catch (IOException e) {
-            System.err.println("Can't write to file");
+            System.err.println("Can't write to fileDB");
 
         }
     }

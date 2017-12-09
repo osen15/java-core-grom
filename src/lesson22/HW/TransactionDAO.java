@@ -32,13 +32,13 @@ public class TransactionDAO {
             index++;
         }
 
-        throw new InternalServerException("Not enough space to save " + transaction.getId());
+        throw new InternalServerException("Not enough space to Save " + transaction.getId());
     }
 
 
     public static Transaction checkOnLimitsOfTransaction(Transaction transaction) throws Exception {
         if (transaction == null)
-            throw new BadRequestException("Can't save null transaction");
+            throw new BadRequestException("Can't Save null transaction");
         Transaction[] transactions = getTransactionsPerDay(transaction.getDateCreated());
 
 

@@ -33,12 +33,12 @@ public class File {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        File file = (File) o;
+        File fileDB = (File) o;
 
-        if (size != file.size) return false;
-        if (!path.equals(file.path)) return false;
-        if (!extension.equals(file.extension)) return false;
-        return extension.equals(file.extension);
+        if (size != fileDB.size) return false;
+        if (!path.equals(fileDB.path)) return false;
+        if (!extension.equals(fileDB.extension)) return false;
+        return extension.equals(fileDB.extension);
     }
 
     @Override

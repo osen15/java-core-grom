@@ -7,6 +7,9 @@ public class Hotel {
     private String city;
     private String street;
 
+    public Hotel() {
+    }
+
     public Hotel(long id) {
         this.id = id;
     }

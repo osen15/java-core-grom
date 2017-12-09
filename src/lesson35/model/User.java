@@ -10,6 +10,11 @@ public class User {
     private UserType userType;
 
     public User() {
+
+    }
+
+    public User(long id) {
+        this.id = id;
     }
 
     public User(long id, String userName, String password, String country, UserType userType) {

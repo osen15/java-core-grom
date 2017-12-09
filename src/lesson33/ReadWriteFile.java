@@ -24,7 +24,7 @@ public class ReadWriteFile  {
 
             }
         } catch (IOException e) {
-            System.err.println("Reading from file " + path + " failed");
+            System.err.println("Reading from fileDB " + path + " failed");
         } finally {
             IOUtils.closeQuietly(br);
             IOUtils.closeQuietly(reader);
@@ -48,7 +48,7 @@ public class ReadWriteFile  {
             bufferedWriter.append(content);
 
         } catch (IOException e) {
-            System.err.println("Can't write to file");
+            System.err.println("Can't write to fileDB");
 
         } finally {
             IOUtils.closeQuietly(bufferedWriter);

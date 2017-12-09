@@ -17,9 +17,7 @@ public class RoomController {
 
     }
 
-    void bookRoom(long roomId, long userId, long hotelId) {
 
-    }
 
 
     public Room deleteRoom(Room room) {

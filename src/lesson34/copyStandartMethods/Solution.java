@@ -15,7 +15,7 @@ public class Solution {
             bw.append(readFromFile(fileFromPath));
 
         } catch (IOException e) {
-            System.err.println("Can't write to file: " + fileToPath);
+            System.err.println("Can't write to fileDB: " + fileToPath);
         }
     }
 
@@ -25,7 +25,7 @@ public class Solution {
             FileUtils.writeLines(new File(fileToPath), FileUtils.readLines(new File(fileFromPath), "UTF-8"), true);
 
         } catch (IOException e) {
-            System.err.println("Can't write to file: " + fileToPath);
+            System.err.println("Can't write to fileDB: " + fileToPath);
         }
     }
 
@@ -45,7 +45,7 @@ public class Solution {
         } catch (FileNotFoundException e) {
             System.err.println("File not exist");
         } catch (IOException e) {
-            System.err.println("Reading from file " + fileFromPath + " failed");
+            System.err.println("Reading from fileDB " + fileFromPath + " failed");
 
         }
         return res;

@@ -40,7 +40,7 @@ public class WriteToFileFromConsole {
         file = new File(path);
         if (!file.canWrite()) {
 
-            throw new Exception("Can't write to file with path " + path);
+            throw new Exception("Can't write to fileDB with path " + path);
         }
 
         if (!file.exists()) {
@@ -54,7 +54,7 @@ public class WriteToFileFromConsole {
     private static String writeInConsole() throws IOException {
 
 
-        System.out.println("Enter file content to write in the file:");
+        System.out.println("Enter fileDB content to write in the fileDB:");
 
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {

@@ -1,52 +1,58 @@
 package lesson35.DAO;
 
+import lesson35.DAO.utils.ReWriteFile;
 import lesson35.DAO.utils.ValidateFileDb;
+import lesson35.DAO.utils.WriteToFile;
 import lesson35.model.Hotel;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.util.ArrayList;
 
-public class HotelDAO{
+public class HotelDAO {
     private static int lineCounter = 1;
+    private static final String HotelDB = "C://HotelDB.txt";
+
     public static Hotel addHotel(Hotel hotel) throws Exception {
-        ValidateFileDb.validate("HotelDB.txt");
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("HotelDB.txt", true))) {
-
-            bw.append(hotel.toString());
-            bw.newLine();
-        } catch (IOException e) {
-            System.err.println("Can't write to file");
-        }
-
-        return hotel;
+        ValidateFileDb.validate(HotelDB);
+        return WriteToFile.WriteToFile(hotel, HotelDB);
     }
 
 
     public static ArrayList<Hotel> readFromFile() throws Exception {
-        ArrayList<Hotel> users = new ArrayList<>();
-        Files.lines(Paths.get("HotelDB.txt"), StandardCharsets.UTF_8).forEach(line -> {
-            try {
-                users.add(hotelMapper(line));
-            } catch (Exception e) {
-                lineCounter = 1;
-                e.printStackTrace();
+
+        ArrayList<Hotel> hotels = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(HotelDB))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                hotels.add(hotelMapper(line));
+
             }
-        });
-        lineCounter = 1;
-        return users;
+
+        } catch (FileNotFoundException e) {
+            lineCounter = 0;
+            System.err.println("File not exist");
+        } catch (IOException e) {
+            lineCounter = 0;
+            System.err.println("Reading from fileDB " + HotelDB + " failed");
+
+        }
+        lineCounter = 0;
+        return hotels;
+
+
+    }
+    public static void WriteNewContentInFile(ArrayList<Hotel> hotels) throws Exception {
+        ReWriteFile.reWriteFile(hotels, HotelDB);
+
     }
 
 
-
-    public static Hotel hotelMapper(String line) throws  Exception {
+    public static Hotel hotelMapper(String line) throws Exception {
         String[] arrayHotel = line.split("\\, ");
-        if (arrayHotel.length != 5){
-        throw new Exception("error in file: " + lineCounter );
+        if (arrayHotel.length != 5) {
+            throw new Exception("error in file: " + lineCounter);
         }
         lineCounter++;
         return new Hotel(Long.parseLong(arrayHotel[0]), arrayHotel[1], arrayHotel[2], arrayHotel[3], arrayHotel[4]);

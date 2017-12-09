@@ -1,6 +1,7 @@
 package lesson34.transferSentences;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Solution {
 
@@ -27,7 +28,7 @@ public class Solution {
             String line;
 
             while ((line = br.readLine()) != null) {
-                res.append(line).append("\n");
+                res.append(line).append("\r\n");
 
             }
             res.replace(res.length() - 1, res.length(), "");
@@ -36,7 +37,7 @@ public class Solution {
         } catch (FileNotFoundException e) {
             System.err.println("File not exist");
         } catch (IOException e) {
-            System.err.println("Reading from file " + fileFromPath + " failed");
+            System.err.println("Reading from fileDB " + fileFromPath + " failed");
 
         }
         return res;
@@ -70,6 +71,7 @@ public class Solution {
         StringBuffer bufferFrom = new StringBuffer(); // баффер для неправильних значень
 
         String[] content = readFromFile(pathFromFile).toString().split("\\."); // створюється масив прочитаного контенту
+        System.out.println(Arrays.toString(content));
         // розбивається по крапці
         for (String string : content) {
             if (string != null && string.length() > 10 && string.contains(word))      // логіка для правильних слів

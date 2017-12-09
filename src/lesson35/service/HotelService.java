@@ -1,6 +1,8 @@
 package lesson35.service;
 
 import lesson35.DAO.HotelDAO;
+import lesson35.DAO.utils.ConvertListInStrBuff;
+import lesson35.DAO.utils.WriteOldContentInToFile;
 import lesson35.model.Hotel;
 
 import java.io.BufferedReader;
@@ -8,13 +10,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import static lesson35.service.utils.IDGenerate.generateID;
+
 public class HotelService {
+    private static final String HotelDB = "C://HotelDB.txt";
+
     public static Hotel addHotel(Hotel hotel) throws Exception {
         hotel.setId(generateID());
         BufferedReader brName = new BufferedReader(new InputStreamReader(System.in));
         try {
             System.out.println("Enter name of the hotel: ");
-            hotel.setCountry(brName.readLine());
+            hotel.setHotelName(brName.readLine());
         } catch (IOException e) {
             System.err.println("Can not set value hotel");
         } catch (NullPointerException e) {
@@ -32,7 +38,7 @@ public class HotelService {
 
         BufferedReader brCity = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("Enter the cihty");
+            System.out.println("Enter the city");
             hotel.setCity(brCity.readLine());
         } catch (IOException e) {
             System.err.println("Can not set value city");
@@ -40,10 +46,10 @@ public class HotelService {
 
         BufferedReader brStreet = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("Enter your country");
+            System.out.println("Enter the street");
             hotel.setStreet(brStreet.readLine());
         } catch (IOException e) {
-            System.err.println("Can not set value country");
+            System.err.println("Can not set value street");
         } finally {
             brCountry.close();
             brCity.close();
@@ -86,8 +92,32 @@ public class HotelService {
         return hotels;
     }
 
+    public static void deleteHotel(Hotel hotel) throws Exception {
+        ArrayList<Hotel> hotels = new ArrayList<>();
+        StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(HotelDAO.readFromFile());
+        for (Hotel hotel1 : HotelDAO.readFromFile()) {
+            if (hotel1.getId() != findHotelId(hotel.getId()).getId())
+                hotels.add(hotel1);
+        }
 
-    private static long generateID() {
-        return (long) (Math.random() * 2147483647);
+
+        try {
+            HotelDAO.WriteNewContentInFile(hotels);
+
+        } catch (IOException e) {
+            WriteOldContentInToFile.writeOldContentToFile(oldDatainBuff, HotelDB);
+            System.err.println("Can not delete hotel: " + hotel.getId());
+        }
+
     }
+
+    public static Hotel findHotelId(long id) throws Exception {
+        for (Hotel hotel : HotelDAO.readFromFile()) {
+            if (hotel.getId() == id)
+                return hotel;
+        }
+        throw new Exception("hotel with this id: " + id + " does not exist");
+    }
+
+
 }
