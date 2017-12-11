@@ -31,27 +31,29 @@ public class RoomDAO {
             String line;
 
             while ((line = br.readLine()) != null) {
-                rooms.add(roomMapper(line));
+                if (!line.isEmpty())
+                    rooms.add(roomMapper(line));
 
             }
 
         } catch (FileNotFoundException e) {
-            lineCounter = 0;
+
             System.err.println("File not exist");
         } catch (IOException e) {
-            lineCounter = 0;
+
             System.err.println("Reading from fileDB " + RoomDB + " failed");
 
         }
-        lineCounter = 0;
+
         return rooms;
 
     }
+
     public static void WriteNewContentInFile(ArrayList<Room> rooms) throws Exception {
         ReWriteFile.reWriteFile(rooms, RoomDB);
     }
 
-    public static Room roomMapper(String line) throws Exception {
+    private static Room roomMapper(String line) throws Exception {
         String[] arrayRoom = line.split("\\, ");
         if (arrayRoom.length != 7) {
             throw new Exception("error in file: " + lineCounter);

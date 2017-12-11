@@ -3,6 +3,7 @@ package lesson35.service;
 import lesson35.DAO.RoomDAO;
 import lesson35.DAO.utils.ConvertListInStrBuff;
 import lesson35.DAO.utils.WriteOldContentInToFile;
+import lesson35.model.Filter;
 import lesson35.model.Room;
 
 import java.io.BufferedReader;
@@ -11,6 +12,7 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import static lesson35.service.utils.IDGenerate.generateID;
 
@@ -56,7 +58,7 @@ public class RoomService {
         BufferedReader brPets = new BufferedReader(new InputStreamReader(System.in));
         try {
             System.out.println("Pets allowed: enter (true) or (false)");
-            room.setPetsAllowed(Boolean.parseBoolean(brBrInc.readLine()));
+            room.setPetsAllowed(Boolean.parseBoolean(brPets.readLine()));
         } catch (IOException e) {
             System.err.println("Can not set value ");
         } catch (NullPointerException e) {
@@ -79,7 +81,7 @@ public class RoomService {
         try {
             System.out.println("Enter a hotel ID");
 
-            room.setHotel(HotelService.findHotelId(Long.parseLong(brIDHotel.readLine())));
+            room.setHotel(HotelService.findHotelByID(Long.parseLong(brBrInc.readLine())));
         } catch (IOException e) {
             System.err.println("Can not set value ");
         } catch (NullPointerException e) {
@@ -91,14 +93,17 @@ public class RoomService {
         return RoomDAO.addRoom(room);
     }
 
+
     public static void deleteRoom(Room room) throws Exception {
         ArrayList<Room> rooms = new ArrayList<>();
         StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(RoomDAO.readFromFile());
-             for (Room room1 : RoomDAO.readFromFile()) {
-                 if (room1.getId() != room.getId())
-                     rooms.add(room1);
-             }
-
+        for (Room room1 : RoomDAO.readFromFile()) {
+            if (room1.getId() != room.getId())
+                rooms.add(room1);
+        }
+        if (RoomDAO.readFromFile().size() == rooms.size()) {
+            throw new Exception("room with this " + room.getId() + " not found");
+        }
 
         try {
             RoomDAO.WriteNewContentInFile(rooms);
@@ -108,6 +113,24 @@ public class RoomService {
             System.err.println("Can not delete hotel: " + room.getId());
         }
 
+    }
+
+    public static TreeSet<Room> findRooms(Filter filter) throws Exception {
+        TreeSet<Room> filteredRooms = new TreeSet<>();
+        for (Room room : RoomDAO.readFromFile())
+            if (filter.checkParameters(room))
+                filteredRooms.add(room);
+        return filteredRooms;
+    }
+
+    public static Room findRoomByID(long id) throws Exception {
+        for (Room room : RoomDAO.readFromFile()) {
+            if (room.getId() == id) {
+                return room;
+            }
+        }
+
+        throw new Exception("object with this " + id + " not found");
     }
 
 

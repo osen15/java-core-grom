@@ -19,8 +19,8 @@ public class HotelController {
         return HotelService.findHoteByCity(city);
     }
 
-    public Hotel deleteHotel(Hotel hotel)throws Exception{
-        return null;
+    public void deleteHotel(Hotel hotel)throws Exception{
+        HotelService.deleteHotel(hotel);
     }
 
 

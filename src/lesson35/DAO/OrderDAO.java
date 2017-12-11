@@ -1,5 +1,6 @@
 package lesson35.DAO;
 
+import lesson35.DAO.utils.ReWriteFile;
 import lesson35.DAO.utils.ValidateFileDb;
 import lesson35.DAO.utils.WriteToFile;
 import lesson35.model.Order;
@@ -32,23 +33,29 @@ public class OrderDAO {
             String line;
 
             while ((line = br.readLine()) != null) {
-                orders.add(orderMapper(line));
+                if (!line.isEmpty())
+                    orders.add(orderMapper(line));
 
             }
 
         } catch (FileNotFoundException e) {
-            lineCounter = 0;
-            System.err.println("File not exist");
+
+            System.err.println("File: " + OrderDB + " not exist");
         } catch (IOException e) {
-            lineCounter = 0;
+
             System.err.println("Reading from fileDB " + OrderDB + " failed");
 
         }
-        lineCounter = 0;
+
         return orders;
 
 
     }
+
+    public static void WriteNewContentInFile(ArrayList<Order> orders) throws Exception {
+        ReWriteFile.reWriteFile(orders, OrderDB);
+    }
+
 
     public static Order orderMapper(String line) throws Exception {
         String[] arrayOrder = line.split("\\, ");

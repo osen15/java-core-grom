@@ -17,7 +17,6 @@ public class HotelDAO {
         return WriteToFile.WriteToFile(hotel, HotelDB);
     }
 
-
     public static ArrayList<Hotel> readFromFile() throws Exception {
 
         ArrayList<Hotel> hotels = new ArrayList<>();
@@ -26,23 +25,24 @@ public class HotelDAO {
             String line;
 
             while ((line = br.readLine()) != null) {
-                hotels.add(hotelMapper(line));
-
+                if (!line.isEmpty())
+                    hotels.add(hotelMapper(line));
             }
 
         } catch (FileNotFoundException e) {
-            lineCounter = 0;
+
             System.err.println("File not exist");
         } catch (IOException e) {
-            lineCounter = 0;
+
             System.err.println("Reading from fileDB " + HotelDB + " failed");
 
         }
-        lineCounter = 0;
+
         return hotels;
 
 
     }
+
     public static void WriteNewContentInFile(ArrayList<Hotel> hotels) throws Exception {
         ReWriteFile.reWriteFile(hotels, HotelDB);
 
@@ -52,7 +52,8 @@ public class HotelDAO {
     public static Hotel hotelMapper(String line) throws Exception {
         String[] arrayHotel = line.split("\\, ");
         if (arrayHotel.length != 5) {
-            throw new Exception("error in file: " + lineCounter);
+            throw new Exception("error in file: line " + lineCounter);
+
         }
         lineCounter++;
         return new Hotel(Long.parseLong(arrayHotel[0]), arrayHotel[1], arrayHotel[2], arrayHotel[3], arrayHotel[4]);

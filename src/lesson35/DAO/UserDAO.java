@@ -9,8 +9,8 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class UserDAO {
-    private int lineCounter = 1;
-    private String UserDB = "C://UserDB.txt";
+    private static int lineCounter = 1;
+    private static String UserDB = "C://UserDB.txt";
 
     public User registerUser(User user) throws Exception {
         ValidateFileDb.validate(UserDB);
@@ -18,8 +18,7 @@ public class UserDAO {
     }
 
 
-
-    public ArrayList<User> readFromFile() throws Exception {
+    public static ArrayList<User> readFromFile() throws Exception {
         ArrayList<User> users = new ArrayList<>();
 
 
@@ -27,24 +26,24 @@ public class UserDAO {
             String line;
 
             while ((line = br.readLine()) != null) {
-                users.add(userMapper(line));
+                if (!line.isEmpty())
+                    users.add(userMapper(line));
 
             }
 
         } catch (FileNotFoundException e) {
-            lineCounter = 0;
             System.err.println("File not exist");
         } catch (IOException e) {
-            lineCounter = 0;
+
             System.err.println("Reading from fileDB " + UserDB + " failed");
 
         }
-        lineCounter = 0;
+
         return users;
 
     }
 
-    public User userMapper(String lineUser) throws Exception {
+    public static User userMapper(String lineUser) throws Exception {
         String[] arrayUser = lineUser.split("\\, ");
         if (arrayUser.length != 5) {
             throw new Exception("error in file: " + lineCounter);

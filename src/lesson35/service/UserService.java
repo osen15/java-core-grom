@@ -60,7 +60,7 @@ public class UserService {
         if (isOnline()) {
             throw new Exception("Other user is online");
         }
-        for (User user : userDAO.readFromFile()) {
+        for (User user : UserDAO.readFromFile()) {
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
                 setOnline(true);
                 System.out.println(user.toString() + ": is login");
@@ -69,6 +69,17 @@ public class UserService {
             }
         }
         System.out.println("User with this name does not exist");
+    }
+
+
+    public static User findUserByID(long id) throws Exception {
+        for (User user : UserDAO.readFromFile()) {
+            if (user.getId() == id) {
+                return user;
+            }
+        }
+
+        throw new Exception("object with this " + id + " not found");
     }
 
 

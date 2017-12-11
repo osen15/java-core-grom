@@ -13,6 +13,13 @@ public class Order {
    private Date dateTo;
    private double moneyPaid;
 
+    public Order() {
+    }
+
+    public Order(long id) {
+        this.id = id;
+    }
+
     public Order(long id, User user, Room room, Date dateFrom, Date dateTo, double moneyPaid) {
         this.id = id;
         this.user = user;

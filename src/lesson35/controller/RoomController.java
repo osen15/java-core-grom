@@ -2,6 +2,7 @@ package lesson35.controller;
 
 import lesson35.model.Filter;
 import lesson35.model.Room;
+import lesson35.service.RoomService;
 
 import java.util.TreeSet;
 
@@ -10,18 +11,14 @@ public class RoomController {
         return null;
     }
 
-    public TreeSet<Room> findRooms(Filter filter) {
+    public TreeSet<Room> findRooms(Filter filter) throws Exception {
 
-
-        return null;
+        return RoomService.findRooms(filter);
 
     }
 
-
-
-
-    public Room deleteRoom(Room room) {
-        return null;
+    public static void deleteRoom(Room room) throws  Exception {
+        RoomService.deleteRoom(room);
     }
 
 

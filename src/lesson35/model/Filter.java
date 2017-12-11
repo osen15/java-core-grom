@@ -8,76 +8,34 @@ public class Filter {
     private boolean breakfastIncluded;
     private boolean petsAllowed;
     private Date dateAvailableFrom;
+    private String hotelName;
     private String country;
     private String city;
 
     public Filter() {
     }
 
-    public Filter(int numberOfGuests, double price, boolean breakfastIncluded,
-                  boolean petsAllowed, Date dateAvailableFrom, String country, String city) {
+    public Filter(int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed,
+                  Date dateAvailableFrom, String hotelName, String country, String city) {
         this.numberOfGuests = numberOfGuests;
         this.price = price;
         this.breakfastIncluded = breakfastIncluded;
         this.petsAllowed = petsAllowed;
         this.dateAvailableFrom = dateAvailableFrom;
+        this.hotelName = hotelName;
         this.country = country;
         this.city = city;
     }
 
-    public int getNumberOfGuests() {
-        return numberOfGuests;
-    }
+    public boolean checkParameters(Room room) {
 
-    public void setNumberOfGuests(int numberOfGuests) {
-        this.numberOfGuests = numberOfGuests;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public boolean isBreakfastIncluded() {
-        return breakfastIncluded;
-    }
-
-    public void setBreakfastIncluded(boolean breakfastIncluded) {
-        this.breakfastIncluded = breakfastIncluded;
-    }
-
-    public boolean isPetsAllowed() {
-        return petsAllowed;
-    }
-
-    public void setPetsAllowed(boolean petsAllowed) {
-        this.petsAllowed = petsAllowed;
-    }
-
-    public Date getDateAvailableFrom() {
-        return dateAvailableFrom;
-    }
-
-    public void setDateAvailableFrom(Date dateAvailableFrom) {
-        this.dateAvailableFrom = dateAvailableFrom;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+        return (numberOfGuests != 0 || numberOfGuests == room.getNumberOfGuests())
+                && (!(price != 0) || !(price != room.getPrice()))
+                && breakfastIncluded == room.isBreakfastIncluded()
+                && petsAllowed == room.isPetsAllowed()
+                && (dateAvailableFrom == null || dateAvailableFrom.getTime() >= room.getDateAvailableFrom().getTime())
+                && (hotelName == null || hotelName.equals(room.getHotel().getHotelName()))
+                && (country == null || country.equals(room.getHotel().getCountry()))
+                && (city == null || city.equals(room.getHotel().getCity()));
     }
 }

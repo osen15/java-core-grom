@@ -1,9 +1,11 @@
 package lesson35.service;
 
 import lesson35.DAO.HotelDAO;
+import lesson35.DAO.RoomDAO;
 import lesson35.DAO.utils.ConvertListInStrBuff;
 import lesson35.DAO.utils.WriteOldContentInToFile;
 import lesson35.model.Hotel;
+import lesson35.model.Room;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import static lesson35.service.utils.IDGenerate.generateID;
 
 public class HotelService {
     private static final String HotelDB = "C://HotelDB.txt";
+    private static final String RoomDB = "C://RoomDB.txt";
 
     public static Hotel addHotel(Hotel hotel) throws Exception {
         hotel.setId(generateID());
@@ -93,13 +96,15 @@ public class HotelService {
     }
 
     public static void deleteHotel(Hotel hotel) throws Exception {
+        deleteAllRoomsInHotel(hotel);
         ArrayList<Hotel> hotels = new ArrayList<>();
         StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(HotelDAO.readFromFile());
         for (Hotel hotel1 : HotelDAO.readFromFile()) {
-            if (hotel1.getId() != findHotelId(hotel.getId()).getId())
+            if (hotel1.getId() != hotel.getId())
                 hotels.add(hotel1);
         }
-
+        if (HotelDAO.readFromFile().size() == hotels.size())
+            throw new Exception("hotel with this" + hotel.getId() + " not found");
 
         try {
             HotelDAO.WriteNewContentInFile(hotels);
@@ -111,13 +116,40 @@ public class HotelService {
 
     }
 
-    public static Hotel findHotelId(long id) throws Exception {
-        for (Hotel hotel : HotelDAO.readFromFile()) {
-            if (hotel.getId() == id)
-                return hotel;
+    public static void deleteAllRoomsInHotel(Hotel hotel) throws Exception {
+        ArrayList<Room> rooms = new ArrayList<>();
+        StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(RoomDAO.readFromFile());
+        for (Room room1 : RoomDAO.readFromFile()) {
+            if (room1.getHotel().getId() != hotel.getId())
+                rooms.add(room1);
         }
-        throw new Exception("hotel with this id: " + id + " does not exist");
+        if (RoomDAO.readFromFile().size() == rooms.size()) {
+            throw new Exception("hotel with this " + hotel.getId() + " not found");
+        }
+
+
+        try {
+            RoomDAO.WriteNewContentInFile(rooms);
+
+        } catch (IOException e) {
+            WriteOldContentInToFile.writeOldContentToFile(oldDatainBuff, RoomDB);
+            System.err.println("Can not delete rooms from hotel: " + hotel.getId());
+        }
+
+
     }
 
+    public static Hotel findHotelByID(long id) throws Exception {
+        for (Hotel hotel : HotelDAO.readFromFile()) {
+            if (hotel.getId() == id) {
+                return hotel;
+            }
+        }
 
+        throw new Exception("object with this " + id + " not found");
+    }
 }
+
+
+
+
