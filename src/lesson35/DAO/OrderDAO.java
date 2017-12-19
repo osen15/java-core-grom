@@ -1,16 +1,13 @@
 package lesson35.DAO;
 
 import lesson35.DAO.utils.ReWriteFile;
+import lesson35.DAO.utils.ReadFromFile;
 import lesson35.DAO.utils.ValidateFileDb;
 import lesson35.DAO.utils.WriteToFile;
 import lesson35.model.Order;
 import lesson35.model.Room;
 import lesson35.model.User;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -25,34 +22,19 @@ public class OrderDAO {
     }
 
 
-    public static ArrayList<Order> readFromFile() throws Exception {
-
+    public static ArrayList<Order> getAll() throws Exception {
+        ValidateFileDb.validate(OrderDB);
         ArrayList<Order> orders = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(OrderDB))) {
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (!line.isEmpty())
-                    orders.add(orderMapper(line));
-
-            }
-
-        } catch (FileNotFoundException e) {
-
-            System.err.println("File: " + OrderDB + " not exist");
-        } catch (IOException e) {
-
-            System.err.println("Reading from fileDB " + OrderDB + " failed");
-
+        for (String line : ReadFromFile.readFromFile(OrderDB)) {
+            orders.add(orderMapper(line));
         }
-
         return orders;
 
 
     }
 
-    public static void WriteNewContentInFile(ArrayList<Order> orders) throws Exception {
+    public static void deleteOrder(ArrayList<Order> orders) throws Exception {
         ReWriteFile.reWriteFile(orders, OrderDB);
     }
 

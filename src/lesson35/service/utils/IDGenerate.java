@@ -1,7 +1,9 @@
 package lesson35.service.utils;
 
+import java.util.Random;
+
 public class IDGenerate {
     public static long generateID() {
-        return (long) (Math.random() * 2147483647);
+        return  new Random().nextLong();
     }
 }

@@ -1,11 +1,11 @@
 package lesson35.DAO;
 
 import lesson35.DAO.utils.ReWriteFile;
+import lesson35.DAO.utils.ReadFromFile;
 import lesson35.DAO.utils.ValidateFileDb;
 import lesson35.DAO.utils.WriteToFile;
 import lesson35.model.Hotel;
 
-import java.io.*;
 import java.util.ArrayList;
 
 public class HotelDAO {
@@ -17,33 +17,18 @@ public class HotelDAO {
         return WriteToFile.WriteToFile(hotel, HotelDB);
     }
 
-    public static ArrayList<Hotel> readFromFile() throws Exception {
-
+    public static ArrayList<Hotel> getAll() throws Exception {
+        ValidateFileDb.validate(HotelDB);
         ArrayList<Hotel> hotels = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(HotelDB))) {
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (!line.isEmpty())
-                    hotels.add(hotelMapper(line));
-            }
-
-        } catch (FileNotFoundException e) {
-
-            System.err.println("File not exist");
-        } catch (IOException e) {
-
-            System.err.println("Reading from fileDB " + HotelDB + " failed");
-
+        for (String line : ReadFromFile.readFromFile(HotelDB)) {
+            hotels.add(hotelMapper(line));
         }
-
         return hotels;
 
 
     }
 
-    public static void WriteNewContentInFile(ArrayList<Hotel> hotels) throws Exception {
+    public static void deleteHotel(ArrayList<Hotel> hotels) throws Exception {
         ReWriteFile.reWriteFile(hotels, HotelDB);
 
     }
@@ -58,4 +43,10 @@ public class HotelDAO {
         lineCounter++;
         return new Hotel(Long.parseLong(arrayHotel[0]), arrayHotel[1], arrayHotel[2], arrayHotel[3], arrayHotel[4]);
     }
+
+
 }
+
+
+
+

@@ -1,15 +1,12 @@
 package lesson35.DAO;
 
 import lesson35.DAO.utils.ReWriteFile;
+import lesson35.DAO.utils.ReadFromFile;
 import lesson35.DAO.utils.ValidateFileDb;
 import lesson35.DAO.utils.WriteToFile;
 import lesson35.model.Hotel;
 import lesson35.model.Room;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -23,33 +20,17 @@ public class RoomDAO {
         return WriteToFile.WriteToFile(room, RoomDB);
     }
 
-    public static ArrayList<Room> readFromFile() throws Exception {
+    public static ArrayList<Room> getAll() throws Exception {
+        ValidateFileDb.validate(RoomDB);
         ArrayList<Room> rooms = new ArrayList<>();
-
-
-        try (BufferedReader br = new BufferedReader(new FileReader(RoomDB))) {
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (!line.isEmpty())
-                    rooms.add(roomMapper(line));
-
-            }
-
-        } catch (FileNotFoundException e) {
-
-            System.err.println("File not exist");
-        } catch (IOException e) {
-
-            System.err.println("Reading from fileDB " + RoomDB + " failed");
-
+        for (String line : ReadFromFile.readFromFile(RoomDB)) {
+            rooms.add(roomMapper(line));
         }
-
         return rooms;
 
     }
 
-    public static void WriteNewContentInFile(ArrayList<Room> rooms) throws Exception {
+    public static void deleteRoom(ArrayList<Room> rooms) throws Exception {
         ReWriteFile.reWriteFile(rooms, RoomDB);
     }
 

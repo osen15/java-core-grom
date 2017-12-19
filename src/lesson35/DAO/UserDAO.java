@@ -1,11 +1,11 @@
 package lesson35.DAO;
 
+import lesson35.DAO.utils.ReadFromFile;
 import lesson35.DAO.utils.ValidateFileDb;
 import lesson35.DAO.utils.WriteToFile;
 import lesson35.model.User;
 import lesson35.userType.UserType;
 
-import java.io.*;
 import java.util.ArrayList;
 
 public class UserDAO {
@@ -18,33 +18,19 @@ public class UserDAO {
     }
 
 
-    public static ArrayList<User> readFromFile() throws Exception {
+    public static ArrayList<User> getAll() throws Exception {
+        ValidateFileDb.validate(UserDB);
         ArrayList<User> users = new ArrayList<>();
 
-
-        try (BufferedReader br = new BufferedReader(new FileReader(UserDB))) {
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (!line.isEmpty())
-                    users.add(userMapper(line));
-
-            }
-
-        } catch (FileNotFoundException e) {
-            System.err.println("File not exist");
-        } catch (IOException e) {
-
-            System.err.println("Reading from fileDB " + UserDB + " failed");
-
+        for (String line : ReadFromFile.readFromFile(UserDB)) {
+            users.add(userMapper(line));
         }
 
         return users;
-
     }
 
-    public static User userMapper(String lineUser) throws Exception {
-        String[] arrayUser = lineUser.split("\\, ");
+    public static User userMapper(String line) throws Exception {
+        String[] arrayUser = line.split("\\, ");
         if (arrayUser.length != 5) {
             throw new Exception("error in file: " + lineCounter);
         }

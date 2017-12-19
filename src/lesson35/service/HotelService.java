@@ -7,59 +7,22 @@ import lesson35.DAO.utils.WriteOldContentInToFile;
 import lesson35.model.Hotel;
 import lesson35.model.Room;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import static lesson35.service.utils.IDGenerate.generateID;
 
 public class HotelService {
     private static final String HotelDB = "C://HotelDB.txt";
     private static final String RoomDB = "C://RoomDB.txt";
 
     public static Hotel addHotel(Hotel hotel) throws Exception {
-        hotel.setId(generateID());
-        BufferedReader brName = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            System.out.println("Enter name of the hotel: ");
-            hotel.setHotelName(brName.readLine());
-        } catch (IOException e) {
-            System.err.println("Can not set value hotel");
-        } catch (NullPointerException e) {
-            System.err.println("hotel is null");
+        if (hotel == null) {
+            throw new Exception("hotel is null");
         }
-        BufferedReader brCountry = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            System.out.println("Enter country: ");
-            hotel.setCountry(brCountry.readLine());
-        } catch (IOException e) {
-            System.err.println("Can not set value country");
-        } catch (NullPointerException e) {
-            System.err.println("hotel is null");
+        if (checkHotel(hotel.getId())) {
+            throw new Exception("hotel " + hotel.getId() + "already exists");
         }
-
-        BufferedReader brCity = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            System.out.println("Enter the city");
-            hotel.setCity(brCity.readLine());
-        } catch (IOException e) {
-            System.err.println("Can not set value city");
-        }
-
-        BufferedReader brStreet = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            System.out.println("Enter the street");
-            hotel.setStreet(brStreet.readLine());
-        } catch (IOException e) {
-            System.err.println("Can not set value street");
-        } finally {
-            brCountry.close();
-            brCity.close();
-            brStreet.close();
-        }
-
         return HotelDAO.addHotel(hotel);
+
     }
 
     public static ArrayList<Hotel> findHoteByName(String name) throws Exception {
@@ -68,7 +31,7 @@ public class HotelService {
         }
         ArrayList<Hotel> hotelsByName = new ArrayList<>();
 
-        for (Hotel hotel : HotelDAO.readFromFile()) {
+        for (Hotel hotel : HotelDAO.getAll()) {
             if (hotel.getHotelName().equals(name))
                 hotelsByName.add(hotel);
         }
@@ -85,7 +48,7 @@ public class HotelService {
         }
         ArrayList<Hotel> hotels = new ArrayList<>();
 
-        for (Hotel hotel : HotelDAO.readFromFile()) {
+        for (Hotel hotel : HotelDAO.getAll()) {
             if (hotel.getCity().equals(city))
                 hotels.add(hotel);
         }
@@ -98,16 +61,16 @@ public class HotelService {
     public static void deleteHotel(Hotel hotel) throws Exception {
         deleteAllRoomsInHotel(hotel);
         ArrayList<Hotel> hotels = new ArrayList<>();
-        StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(HotelDAO.readFromFile());
-        for (Hotel hotel1 : HotelDAO.readFromFile()) {
+        StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(HotelDAO.getAll());
+        for (Hotel hotel1 : HotelDAO.getAll()) {
             if (hotel1.getId() != hotel.getId())
                 hotels.add(hotel1);
         }
-        if (HotelDAO.readFromFile().size() == hotels.size())
+        if (HotelDAO.getAll().size() == hotels.size())
             throw new Exception("hotel with this" + hotel.getId() + " not found");
 
         try {
-            HotelDAO.WriteNewContentInFile(hotels);
+            HotelDAO.deleteHotel(hotels);
 
         } catch (IOException e) {
             WriteOldContentInToFile.writeOldContentToFile(oldDatainBuff, HotelDB);
@@ -118,18 +81,18 @@ public class HotelService {
 
     public static void deleteAllRoomsInHotel(Hotel hotel) throws Exception {
         ArrayList<Room> rooms = new ArrayList<>();
-        StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(RoomDAO.readFromFile());
-        for (Room room1 : RoomDAO.readFromFile()) {
+        StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(RoomDAO.getAll());
+        for (Room room1 : RoomDAO.getAll()) {
             if (room1.getHotel().getId() != hotel.getId())
                 rooms.add(room1);
         }
-        if (RoomDAO.readFromFile().size() == rooms.size()) {
+        if (RoomDAO.getAll().size() == rooms.size()) {
             throw new Exception("hotel with this " + hotel.getId() + " not found");
         }
 
 
         try {
-            RoomDAO.WriteNewContentInFile(rooms);
+            RoomDAO.deleteRoom(rooms);
 
         } catch (IOException e) {
             WriteOldContentInToFile.writeOldContentToFile(oldDatainBuff, RoomDB);
@@ -140,14 +103,25 @@ public class HotelService {
     }
 
     public static Hotel findHotelByID(long id) throws Exception {
-        for (Hotel hotel : HotelDAO.readFromFile()) {
+        for (Hotel hotel : HotelDAO.getAll()) {
             if (hotel.getId() == id) {
                 return hotel;
             }
         }
 
-        throw new Exception("object with this " + id + " not found");
+        throw new Exception("Hotel with this " + id + " not found");
     }
+
+    public static boolean checkHotel(long id) throws Exception {
+        for (Hotel hotel : HotelDAO.getAll()) {
+            if (hotel.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 }
 
 
