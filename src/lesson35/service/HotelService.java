@@ -19,7 +19,7 @@ public class HotelService {
             throw new Exception("hotel is null");
         }
         if (checkHotel(hotel.getId())) {
-            throw new Exception("hotel " + hotel.getId() + "already exists");
+            throw new Exception("hotel " + hotel.getId() + " already exists");
         }
         return HotelDAO.addHotel(hotel);
 
@@ -29,11 +29,11 @@ public class HotelService {
         if (name == null) {
             throw new NullPointerException("name is null ");
         }
-        ArrayList<Hotel> hotelsByName = new ArrayList<>();
+        ArrayList<Hotel> hotelsByName = HotelDAO.getAll();
 
-        for (Hotel hotel : HotelDAO.getAll()) {
-            if (hotel.getHotelName().equals(name))
-                hotelsByName.add(hotel);
+        for (Hotel hotel : hotelsByName) {
+            if (!hotel.getHotelName().equals(name))
+                hotelsByName.remove(hotel);
         }
         if (hotelsByName.size() == 0) {
             throw new Exception("hotel with this name was not found");
@@ -46,11 +46,11 @@ public class HotelService {
         if (city == null) {
             throw new NullPointerException("name is null ");
         }
-        ArrayList<Hotel> hotels = new ArrayList<>();
+        ArrayList<Hotel> hotels = HotelDAO.getAll();
 
-        for (Hotel hotel : HotelDAO.getAll()) {
-            if (hotel.getCity().equals(city))
-                hotels.add(hotel);
+        for (Hotel hotel : hotels) {
+            if (!hotel.getCity().equals(city))
+                hotels.remove(hotel);
         }
         if (hotels.size() == 0) {
             throw new Exception("City not found.");
@@ -60,10 +60,10 @@ public class HotelService {
 
     public static void deleteHotel(Hotel hotel) throws Exception {
         deleteAllRoomsInHotel(hotel);
-        ArrayList<Hotel> hotels = new ArrayList<>();
+        ArrayList<Hotel> hotels = HotelDAO.getAll();
         StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(HotelDAO.getAll());
-        for (Hotel hotel1 : HotelDAO.getAll()) {
-            if (hotel1.getId() != hotel.getId())
+        for (Hotel hotel1 : hotels) {
+            if (hotel1.getId() == hotel.getId())
                 hotels.add(hotel1);
         }
         if (HotelDAO.getAll().size() == hotels.size())
@@ -80,11 +80,11 @@ public class HotelService {
     }
 
     public static void deleteAllRoomsInHotel(Hotel hotel) throws Exception {
-        ArrayList<Room> rooms = new ArrayList<>();
+        ArrayList<Room> rooms = RoomDAO.getAll();
         StringBuffer oldDatainBuff = ConvertListInStrBuff.listInStrBuff(RoomDAO.getAll());
         for (Room room1 : RoomDAO.getAll()) {
-            if (room1.getHotel().getId() != hotel.getId())
-                rooms.add(room1);
+            if (room1.getHotel().getId() == hotel.getId())
+                rooms.remove(room1);
         }
         if (RoomDAO.getAll().size() == rooms.size()) {
             throw new Exception("hotel with this " + hotel.getId() + " not found");
