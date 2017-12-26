@@ -18,7 +18,7 @@ public class Demo {
         System.out.println(company.getLicence());
         System.out.println(company1.getLicence());
 
-       // Company.validate();
+       // Company.validateFile();
 
 
         //demo utils

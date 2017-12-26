@@ -3,7 +3,7 @@ package lesson35.DAO;
 import lesson35.DAO.utils.ReWriteFile;
 import lesson35.DAO.utils.ReadFromFile;
 import lesson35.DAO.utils.ValidateFileDb;
-import lesson35.DAO.utils.WriteToFile;
+import lesson35.DAO.utils.UpdateDB;
 import lesson35.model.Hotel;
 
 import java.util.ArrayList;
@@ -13,12 +13,12 @@ public class HotelDAO {
     private static final String HotelDB = "C://HotelDB.txt";
 
     public static Hotel addHotel(Hotel hotel) throws Exception {
-        ValidateFileDb.validate(HotelDB);
-        return WriteToFile.WriteToFile(hotel, HotelDB);
+        ValidateFileDb.validateFile(HotelDB);
+        return UpdateDB.updateDB(hotel, HotelDB);
     }
 
     public static ArrayList<Hotel> getAll() throws Exception {
-        ValidateFileDb.validate(HotelDB);
+        ValidateFileDb.validateFile(HotelDB);
         ArrayList<Hotel> hotels = new ArrayList<>();
         for (String line : ReadFromFile.readFromFile(HotelDB)) {
             hotels.add(hotelMapper(line));

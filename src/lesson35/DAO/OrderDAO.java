@@ -3,7 +3,7 @@ package lesson35.DAO;
 import lesson35.DAO.utils.ReWriteFile;
 import lesson35.DAO.utils.ReadFromFile;
 import lesson35.DAO.utils.ValidateFileDb;
-import lesson35.DAO.utils.WriteToFile;
+import lesson35.DAO.utils.UpdateDB;
 import lesson35.model.Order;
 import lesson35.model.Room;
 import lesson35.model.User;
@@ -17,13 +17,13 @@ public class OrderDAO {
     private static final String OrderDB = "C://OrderDB.txt";
 
     public static Order addOrder(Order order) throws Exception {
-        ValidateFileDb.validate(OrderDB);
-        return WriteToFile.WriteToFile(order, OrderDB);
+        ValidateFileDb.validateFile(OrderDB);
+        return UpdateDB.updateDB(order, OrderDB);
     }
 
 
     public static ArrayList<Order> getAll() throws Exception {
-        ValidateFileDb.validate(OrderDB);
+        ValidateFileDb.validateFile(OrderDB);
         ArrayList<Order> orders = new ArrayList<>();
 
         for (String line : ReadFromFile.readFromFile(OrderDB)) {

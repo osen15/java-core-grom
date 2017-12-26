@@ -4,9 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteToFile {
+public class UpdateDB {
 
-    public static  <T> T  WriteToFile(T t, String fileName) throws Exception {
+    public static  <T> T  updateDB(T t, String fileName) throws Exception {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true))) {
 

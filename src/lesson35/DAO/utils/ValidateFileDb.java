@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class ValidateFileDb {
-    public static void validate(String FileName) throws Exception { // валідація
+    public static void validateFile(String FileName) throws Exception { // валідація
         if (FileName == null) {
             throw new Exception("Path can't be null");
         }

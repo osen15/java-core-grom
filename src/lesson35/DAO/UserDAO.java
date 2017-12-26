@@ -2,7 +2,7 @@ package lesson35.DAO;
 
 import lesson35.DAO.utils.ReadFromFile;
 import lesson35.DAO.utils.ValidateFileDb;
-import lesson35.DAO.utils.WriteToFile;
+import lesson35.DAO.utils.UpdateDB;
 import lesson35.model.User;
 import lesson35.userType.UserType;
 
@@ -13,13 +13,13 @@ public class UserDAO {
     private static String UserDB = "C://UserDB.txt";
 
     public User registerUser(User user) throws Exception {
-        ValidateFileDb.validate(UserDB);
-        return WriteToFile.WriteToFile(user, UserDB);
+        ValidateFileDb.validateFile(UserDB);
+        return UpdateDB.updateDB(user, UserDB);
     }
 
 
     public static ArrayList<User> getAll() throws Exception {
-        ValidateFileDb.validate(UserDB);
+        ValidateFileDb.validateFile(UserDB);
         ArrayList<User> users = new ArrayList<>();
 
         for (String line : ReadFromFile.readFromFile(UserDB)) {
