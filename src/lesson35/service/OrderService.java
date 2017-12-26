@@ -39,8 +39,9 @@ public class OrderService {
 
         for (Order order : orders) {
 
-            if (order.getUser().getId() == UserService.findUserByID(userId).getId()
-                    && order.getRoom().getId() == RoomService.findRoomByID(roomId).getId()) {
+            if (order.getUser().getId() == userId
+                    && order.getRoom().getId() == roomId) {
+                RoomService.findRoomByID(roomId).setDateAvailableFrom(new Date());
 
                 orders.remove(order);
             }
